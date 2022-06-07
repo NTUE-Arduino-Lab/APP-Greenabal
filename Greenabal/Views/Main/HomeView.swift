@@ -1,0 +1,20 @@
+//
+//  HomeView.swift
+//  Greenabal
+//
+//  Created by Pei-yun,Lee on 2022/6/7.
+//
+
+import SwiftUI
+
+struct HomeView: View {
+    var body: some View {
+        Text("HomeView")
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}
