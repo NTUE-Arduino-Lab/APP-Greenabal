@@ -7,48 +7,78 @@
 
 import SwiftUI
 
+struct TabItem: Identifiable{
+    var id = UUID()
+    var name: String
+    var image: String
+    var selectedImage: String
+}
+
+var tabItems = [
+    TabItem(name: "Setting", image: "icon_setting", selectedImage: "icon_setting_active"),
+    TabItem(name: "Action", image: "icon_action", selectedImage: "icon_action_active"),
+    TabItem(name: "Home", image: "icon_home", selectedImage: "icon_home_active"),
+    TabItem(name: "Task", image: "icon_task", selectedImage: "icon_task_active"),
+    TabItem(name: "Achivement", image: "icon_achivement", selectedImage: "icon_achivement_active")
+]
+
 struct TabBar: View {
-    @State private var selectedIndex = 0
+    @State private var selectedTab = "Home"
     
     var body: some View {
-        TabView(selection: $selectedIndex){
-            SettingView()
-                .onTapGesture {
-                    self.selectedIndex = 4
+        ZStack(alignment: .bottom){
+            Group{
+                switch selectedTab {
+                case "Home":
+                    HomeView()
+                case "Action":
+                    ActionView()
+                    .clipped()
+                case "Task":
+                    TaskView()
+                    .clipped()
+                case "Achivement":
+                    AchivementView()
+                    .clipped()
+                case "Setting":
+                    SettingView()
+                    .clipped()
+                default:
+                    HomeView()
                 }
-                .tabItem{
-                    Image("icon_setting")
-                }.tag(1)
-            TaskView()
-                .onTapGesture {
-                    self.selectedIndex = 1
-                }
-                .tabItem{
-                    Image("icon_action")
-                }.tag(1)
-            HomeView()
-                .onTapGesture {
-                    self.selectedIndex = 0
-                }
-                .tabItem{
-                    Image("icon_home")
-                }.tag(0)
-            TaskView()
-                .onTapGesture {
-                    self.selectedIndex = 2
-                }
-                .tabItem{
-                    Image("icon_task")
-                }.tag(2)
-            AchivementView()
-                .onTapGesture {
-                    self.selectedIndex = 3
-                }
-                .tabItem{
-                    Image("icon_achivement")
-                }.tag(3)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             
+            ZStack(alignment: .top){
+                RoundedRectangle(cornerRadius: 12)
+                .fill(Color.white)
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: 94
+                )
+                .shadow(color: Color(#colorLiteral(red: 0.7372549176216125, green: 0.7372549176216125, blue: 0.7372549176216125, alpha: 0.25)), radius:4, x:0, y:-4)
+                
+                HStack{
+                    ForEach(tabItems){ item in
+                        Button{
+                            selectedTab = item.name
+                        } label: {
+                            selectedTab == item.name ?
+                            Image(item.selectedImage) : Image(item.image)
+                        }.frame(maxWidth: .infinity)
+                    }
+                }
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: 60
+                )
+            }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
