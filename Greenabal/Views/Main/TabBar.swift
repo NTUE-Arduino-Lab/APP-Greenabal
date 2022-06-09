@@ -7,21 +7,6 @@
 
 import SwiftUI
 
-struct TabItem: Identifiable{
-    var id = UUID()
-    var name: String
-    var image: String
-    var selectedImage: String
-}
-
-var tabItems = [
-    TabItem(name: "Setting", image: "icon_setting", selectedImage: "icon_setting_active"),
-    TabItem(name: "Action", image: "icon_action", selectedImage: "icon_action_active"),
-    TabItem(name: "Home", image: "icon_home", selectedImage: "icon_home_active"),
-    TabItem(name: "Task", image: "icon_task", selectedImage: "icon_task_active"),
-    TabItem(name: "Achivement", image: "icon_achivement", selectedImage: "icon_achivement_active")
-]
-
 struct TabBar: View {
     @State private var selectedTab = "Home"
     
@@ -61,12 +46,12 @@ struct TabBar: View {
                 .shadow(color: Color(#colorLiteral(red: 0.7372549176216125, green: 0.7372549176216125, blue: 0.7372549176216125, alpha: 0.25)), radius:4, x:0, y:-4)
                 
                 HStack{
-                    ForEach(tabItems){ item in
+                    ForEach(Tab.all){ tab in
                         Button{
-                            selectedTab = item.name
+                            selectedTab = tab.name
                         } label: {
-                            selectedTab == item.name ?
-                            Image(item.selectedImage) : Image(item.image)
+                            selectedTab == tab.name ?
+                            Image(tab.selectedImage) : Image(tab.image)
                         }.frame(maxWidth: .infinity)
                     }
                 }
