@@ -9,9 +9,13 @@ import SwiftUI
 
 struct SettingView: View {
     @EnvironmentObject var background: BackgroundViewModel
-    
+    private let title = "設定"
+    private let name = "Setting"
+
     var body: some View {
-        ZStack{
+        ZStack(alignment: .top){
+            Header(title: title, name: name)
+        
             VStack{
                 Text("SettingView")
             }

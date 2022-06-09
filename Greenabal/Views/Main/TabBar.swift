@@ -18,16 +18,12 @@ struct TabBar: View {
                     HomeView()
                 case "Action":
                     ActionView()
-                    .clipped()
                 case "Task":
                     TaskView()
-                    .clipped()
                 case "Achivement":
                     AchivementView()
-                    .clipped()
                 case "Setting":
                     SettingView()
-                    .clipped()
                 default:
                     HomeView()
                 }

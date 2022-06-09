@@ -9,9 +9,13 @@ import SwiftUI
 
 struct ActionView: View {
     @EnvironmentObject var background: BackgroundViewModel
+    private let title = "環保行動"
+    private let name = "Action"
     
     var body: some View {
-        ZStack{
+        ZStack(alignment: .top){
+            Header(title: title, name: name)
+        
             VStack{
                 Text("ActionView")
             }
@@ -20,6 +24,7 @@ struct ActionView: View {
                    alignment: .center)
         }
         .background(background.color)
+        .clipped()
     }
 }
 

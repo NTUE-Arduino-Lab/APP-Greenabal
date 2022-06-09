@@ -9,9 +9,13 @@ import SwiftUI
 
 struct TaskView: View {
     @EnvironmentObject var background: BackgroundViewModel
-    
+    private let title = "每日任務"
+    private let name = "Task"
+
     var body: some View {
-        ZStack{
+        ZStack(alignment: .top){
+            Header(title: title, name: name)
+        
             VStack{
                 Text("TaskView")
             }

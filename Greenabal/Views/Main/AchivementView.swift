@@ -9,9 +9,13 @@ import SwiftUI
 
 struct AchivementView: View {
     @EnvironmentObject var background: BackgroundViewModel
-    
+    private let title = "成就"
+    private let name = "Achivement"
+
     var body: some View {
-        ZStack{
+        ZStack(alignment: .top){
+            Header(title: title, name: name)
+        
             VStack{
                 Text("AchivementView")
             }
