@@ -13,7 +13,7 @@ struct HomeView: View {
     private let name = "Home"
     
     var body: some View {
-        ZStack(alignment: .top){
+        VStack{
             Header(title: title, name: name)
         
             VStack{

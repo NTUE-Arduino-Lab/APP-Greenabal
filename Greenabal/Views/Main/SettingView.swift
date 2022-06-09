@@ -13,7 +13,7 @@ struct SettingView: View {
     private let name = "Setting"
 
     var body: some View {
-        ZStack(alignment: .top){
+        VStack{
             Header(title: title, name: name)
         
             VStack{

@@ -13,7 +13,7 @@ struct ActionView: View {
     private let name = "Action"
     
     var body: some View {
-        ZStack(alignment: .top){
+        VStack{
             Header(title: title, name: name)
         
             VStack{

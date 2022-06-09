@@ -13,7 +13,7 @@ struct TaskView: View {
     private let name = "Task"
 
     var body: some View {
-        ZStack(alignment: .top){
+        VStack{
             Header(title: title, name: name)
         
             VStack{

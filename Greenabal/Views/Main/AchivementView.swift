@@ -13,7 +13,7 @@ struct AchivementView: View {
     private let name = "Achivement"
 
     var body: some View {
-        ZStack(alignment: .top){
+        VStack{
             Header(title: title, name: name)
         
             VStack{
