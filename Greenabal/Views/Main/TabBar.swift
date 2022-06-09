@@ -31,7 +31,7 @@ struct TabBar: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             ZStack(alignment: .top){
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 24)
                 .fill(Color.white)
                 .frame(
                     minWidth: 0,
