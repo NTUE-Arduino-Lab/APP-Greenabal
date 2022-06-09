@@ -8,13 +8,30 @@
 import SwiftUI
 
 struct ActionView: View {
+    @EnvironmentObject var background: BackgroundViewModel
+    private let title = "環保行動"
+    private let name = "Action"
+    
     var body: some View {
-        Text("ActionView")
+        ZStack(alignment: .top){
+            Header(title: title, name: name)
+        
+            VStack{
+                Text("ActionView")
+            }
+            .frame(maxWidth: .infinity,
+                   maxHeight: .infinity,
+                   alignment: .center)
+        }
+        .background(background.color)
+        .clipped()
     }
 }
 
 struct ActionView_Previews: PreviewProvider {
+    static let background = BackgroundViewModel()
+    
     static var previews: some View {
-        ActionView()
+        TabBar().environmentObject(background)
     }
 }

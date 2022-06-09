@@ -8,52 +8,65 @@
 import SwiftUI
 
 struct TabBar: View {
-    @State private var selectedIndex = 0
+    @State private var selectedTab = "Home"
     
     var body: some View {
-        TabView(selection: $selectedIndex){
-            SettingView()
-                .onTapGesture {
-                    self.selectedIndex = 4
+        ZStack(alignment: .bottom){
+            Group{
+                switch selectedTab {
+                case "Home":
+                    HomeView()
+                case "Action":
+                    ActionView()
+                case "Task":
+                    TaskView()
+                case "Achivement":
+                    AchivementView()
+                case "Setting":
+                    SettingView()
+                default:
+                    HomeView()
                 }
-                .tabItem{
-                    Image("icon_setting")
-                }.tag(1)
-            TaskView()
-                .onTapGesture {
-                    self.selectedIndex = 1
-                }
-                .tabItem{
-                    Image("icon_action")
-                }.tag(1)
-            HomeView()
-                .onTapGesture {
-                    self.selectedIndex = 0
-                }
-                .tabItem{
-                    Image("icon_home")
-                }.tag(0)
-            TaskView()
-                .onTapGesture {
-                    self.selectedIndex = 2
-                }
-                .tabItem{
-                    Image("icon_task")
-                }.tag(2)
-            AchivementView()
-                .onTapGesture {
-                    self.selectedIndex = 3
-                }
-                .tabItem{
-                    Image("icon_achivement")
-                }.tag(3)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             
+            ZStack(alignment: .top){
+                RoundedRectangle(cornerRadius: 12)
+                .fill(Color.white)
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: 94
+                )
+                .shadow(color: Color(#colorLiteral(red: 0.7372549176216125, green: 0.7372549176216125, blue: 0.7372549176216125, alpha: 0.25)), radius:4, x:0, y:-4)
+                
+                HStack{
+                    ForEach(Tab.all){ tab in
+                        Button{
+                            selectedTab = tab.name
+                        } label: {
+                            selectedTab == tab.name ?
+                            Image(tab.selectedImage) : Image(tab.image)
+                        }.frame(maxWidth: .infinity)
+                    }
+                }
+                .frame(
+                    minWidth: 0,
+                    maxWidth: .infinity,
+                    minHeight: 0,
+                    maxHeight: 60
+                )
+            }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 struct TabBar_Previews: PreviewProvider {
+    static let background = BackgroundViewModel()
+    
     static var previews: some View {
-        TabBar()
+        TabBar().environmentObject(background)
     }
 }

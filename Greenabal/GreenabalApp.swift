@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct GreenabalApp: App {
+    @StateObject private var background = BackgroundViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            TabBar()
+            ContentView()
+                .environmentObject(background)
         }
     }
 }

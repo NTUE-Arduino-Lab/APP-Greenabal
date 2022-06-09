@@ -8,13 +8,29 @@
 import SwiftUI
 
 struct SettingView: View {
+    @EnvironmentObject var background: BackgroundViewModel
+    private let title = "設定"
+    private let name = "Setting"
+
     var body: some View {
-        Text("SettingView")
+        ZStack(alignment: .top){
+            Header(title: title, name: name)
+        
+            VStack{
+                Text("SettingView")
+            }
+            .frame(maxWidth: .infinity,
+                   maxHeight: .infinity,
+                   alignment: .center)
+        }
+        .background(background.color)
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
+    static let background = BackgroundViewModel()
+    
     static var previews: some View {
-        SettingView()
+        TabBar().environmentObject(background)
     }
 }

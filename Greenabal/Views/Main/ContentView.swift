@@ -9,14 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack(alignment: .topLeading){
-            TabBar()
-        }
+        TabBar()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static let background = BackgroundViewModel()
+    
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(background)
     }
 }
