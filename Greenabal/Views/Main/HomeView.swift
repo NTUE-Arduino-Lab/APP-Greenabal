@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var background: BackgroundViewModel
+    
     var body: some View {
-        Text("HomeView")
+        ZStack{
+            VStack{
+                Text("HomeView")
+            }
+            .frame(maxWidth: .infinity,
+                   maxHeight: .infinity,
+                   alignment: .center)
+        }
+        .background(background.color)
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
+    static let background = BackgroundViewModel()
+    
     static var previews: some View {
-        HomeView()
+        TabBar().environmentObject(background)
     }
 }

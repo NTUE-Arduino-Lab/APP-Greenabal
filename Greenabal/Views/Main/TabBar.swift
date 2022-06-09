@@ -68,7 +68,9 @@ struct TabBar: View {
 }
 
 struct TabBar_Previews: PreviewProvider {
+    static let background = BackgroundViewModel()
+    
     static var previews: some View {
-        TabBar()
+        TabBar().environmentObject(background)
     }
 }

@@ -13,7 +13,7 @@ struct GreenabalApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabBar()
+            ContentView()
                 .environmentObject(background)
         }
     }
