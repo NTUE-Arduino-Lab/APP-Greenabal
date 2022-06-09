@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct ActionView: View {
+    @EnvironmentObject var background: BackgroundViewModel
+    
     var body: some View {
-        Text("ActionView")
+        ZStack{
+            VStack{
+                Text("ActionView")
+            }
+            .frame(maxWidth: .infinity,
+                   maxHeight: .infinity,
+                   alignment: .center)
+        }
+        .background(background.color)
     }
 }
 
