@@ -21,6 +21,7 @@ struct Header: View {
                maxHeight: 48,
                alignment: .center)
         .background(name == "Home" ? Color.clear : Color.white)
+        .shadow(color: name == "Home" ? Color.clear:Color(#colorLiteral(red: 0.7572221755981445, green: 0.903833270072937, blue: 0.966666579246521, alpha: 0.25)), radius:4, x:0, y:4)
     }
 }
 
