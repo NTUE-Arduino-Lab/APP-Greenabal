@@ -29,6 +29,7 @@
 		6CA49D8528533D53009A155F /* SubTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA49D8428533D53009A155F /* SubTabBar.swift */; };
 		6CD2E06B28570A89006F42D5 /* LeafRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2E06A28570A89006F42D5 /* LeafRecordModel.swift */; };
 		6CD2E06D28570A9A006F42D5 /* LeafViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2E06C28570A9A006F42D5 /* LeafViewModel.swift */; };
+		6CD2E06F28574F26006F42D5 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2E06E28574F26006F42D5 /* DateViewModel.swift */; };
 		6CE0A314284FC44100231F82 /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0A313284FC44100231F82 /* ActionView.swift */; };
 		6CE0A317284FC47100231F82 /* AchivementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0A316284FC47100231F82 /* AchivementView.swift */; };
 /* End PBXBuildFile section */
@@ -77,6 +78,7 @@
 		6CA49D8428533D53009A155F /* SubTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTabBar.swift; sourceTree = "<group>"; };
 		6CD2E06A28570A89006F42D5 /* LeafRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafRecordModel.swift; sourceTree = "<group>"; };
 		6CD2E06C28570A9A006F42D5 /* LeafViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafViewModel.swift; sourceTree = "<group>"; };
+		6CD2E06E28574F26006F42D5 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
 		6CE0A313284FC44100231F82 /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
 		6CE0A316284FC47100231F82 /* AchivementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivementView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				6C6696482851CAA200ED62CA /* BackgroundViewModel.swift */,
+				6CD2E06E28574F26006F42D5 /* DateViewModel.swift */,
 				6CD2E06C28570A9A006F42D5 /* LeafViewModel.swift */,
 			);
 			path = ViewModels;
@@ -378,6 +381,7 @@
 				6C6696462851C3E500ED62CA /* TabModel.swift in Sources */,
 				6CD2E06B28570A89006F42D5 /* LeafRecordModel.swift in Sources */,
 				6CA49D8528533D53009A155F /* SubTabBar.swift in Sources */,
+				6CD2E06F28574F26006F42D5 /* DateViewModel.swift in Sources */,
 				6C144951284F364200E8B933 /* GreenabalApp.swift in Sources */,
 				6CA49D802851D694009A155F /* Header.swift in Sources */,
 				6C144989284F47E700E8B933 /* TabBar.swift in Sources */,
