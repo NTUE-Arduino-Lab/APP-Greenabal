@@ -14,9 +14,9 @@ struct Header: View {
     var body: some View {
         ZStack{
             Text(title)
-                .kerning(0.4)
+                .font(.custom("Roboto Bold", size: 16))
+                .tracking(0.64)
                 .fontWeight(.bold)
-                .font(.system(size: 16))
         }
         .frame(maxWidth: .infinity,
                maxHeight: 48,
