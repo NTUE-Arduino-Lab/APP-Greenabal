@@ -28,9 +28,9 @@ struct AchivementView: View {
 }
 
 struct AchivementView_Previews: PreviewProvider {
-    static let background = BackgroundViewModel()
+    static let backgroundViewModel = BackgroundViewModel()
     
     static var previews: some View {
-        TabBar().environmentObject(background)
+        TabBar(initSelectedTab: "Achivement").environmentObject(backgroundViewModel)
     }
 }

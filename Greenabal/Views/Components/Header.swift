@@ -14,8 +14,8 @@ struct Header: View {
     var body: some View {
         ZStack{
             Text(title)
-                .kerning(0.4)
-                .fontWeight(.bold)
+                .font(.custom("Roboto Bold", size: 16))
+                .tracking(0.64)
         }
         .frame(maxWidth: .infinity,
                maxHeight: 48,
@@ -26,9 +26,11 @@ struct Header: View {
 }
 
 struct Header_Previews: PreviewProvider {
-    static let background = BackgroundViewModel()
+    static let backgroundViewModel = BackgroundViewModel()
+    static let leafViewModel = LeafViewModel()
     
     static var previews: some View {
-        TabBar().environmentObject(background)
+        TabBar(initSelectedTab: "Action")
+            .environmentObject(backgroundViewModel).environmentObject(leafViewModel)
     }
 }
