@@ -16,6 +16,7 @@ struct Header: View {
             Text(title)
                 .kerning(0.4)
                 .fontWeight(.bold)
+                .font(.system(size: 16))
         }
         .frame(maxWidth: .infinity,
                maxHeight: 48,
