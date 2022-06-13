@@ -125,9 +125,6 @@
 		6C14494F284F364200E8B933 /* Greenabal */ = {
 			isa = PBXGroup;
 			children = (
-				6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */,
-				6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */,
-				6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */,
 				6C3811452854B49800E2C614 /* Fonts */,
 				6C3811442854B47A00E2C614 /* Info.plist */,
 				6C6696472851C59400ED62CA /* Models */,
@@ -199,6 +196,9 @@
 		6C3811452854B49800E2C614 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */,
+				6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */,
+				6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
