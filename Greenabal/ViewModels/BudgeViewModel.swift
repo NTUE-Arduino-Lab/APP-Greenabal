@@ -9,17 +9,14 @@ import Foundation
 
 class BudgeViewModel: ObservableObject{
     @Published var budgelist: [BudgeModel]
+    var budgeType: [String] = ["YouBike 王","知識小達人","環保小達人","省電小達人"]
     
     init(){
         budgelist = [
-            BudgeModel(title: "YouBike 王", goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50],currentStar: 3),
-            BudgeModel(title: "test1", goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
-            BudgeModel(title: "test2", goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
-            BudgeModel(title: "test3", goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
-            BudgeModel(title: "test4", goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
-            BudgeModel(title: "test5", goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
-            BudgeModel(title: "test6", goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
-            BudgeModel(title: "test7", goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
+            BudgeModel(title: budgeType[0], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50],currentStar: 3),
+            BudgeModel(title: budgeType[1], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
+            BudgeModel(title: budgeType[2], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
+            BudgeModel(title: budgeType[3], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
         ]
         
 //        RefreshBudge(index:0)

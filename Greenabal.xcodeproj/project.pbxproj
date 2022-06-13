@@ -18,6 +18,8 @@
 		6C144989284F47E700E8B933 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C144988284F47E700E8B933 /* TabBar.swift */; };
 		6C14498B284F561300E8B933 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C14498A284F561300E8B933 /* TaskView.swift */; };
 		6C14498D284F563900E8B933 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C14498C284F563900E8B933 /* SettingView.swift */; };
+		6C25277A2857AFFA001D4A5B /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2527792857AFFA001D4A5B /* TaskModel.swift */; };
+		6C25277C2857B607001D4A5B /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25277B2857B607001D4A5B /* TaskListViewModel.swift */; };
 		6C3811492854B4B500E2C614 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */; };
 		6C38114A2854B4B500E2C614 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */; };
 		6C38114B2854B4B500E2C614 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */; };
@@ -68,6 +70,8 @@
 		6C144988284F47E700E8B933 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		6C14498A284F561300E8B933 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		6C14498C284F563900E8B933 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		6C2527792857AFFA001D4A5B /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		6C25277B2857B607001D4A5B /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		6C3811442854B47A00E2C614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 				6CD2E06E28574F26006F42D5 /* DateViewModel.swift */,
 				6CD2E06C28570A9A006F42D5 /* LeafViewModel.swift */,
 				6CD2E0722857A1A7006F42D5 /* BudgeViewModel.swift */,
+				6C25277B2857B607001D4A5B /* TaskListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 				6C6696452851C3E500ED62CA /* TabModel.swift */,
 				6CD2E06A28570A89006F42D5 /* LeafRecordModel.swift */,
 				6CD2E07028578308006F42D5 /* BudgeModel.swift */,
+				6C2527792857AFFA001D4A5B /* TaskModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 			files = (
 				6C144953284F364200E8B933 /* ContentView.swift in Sources */,
 				6CD2E0732857A1A7006F42D5 /* BudgeViewModel.swift in Sources */,
+				6C25277A2857AFFA001D4A5B /* TaskModel.swift in Sources */,
 				6C38115128550F2800E2C614 /* BarcodeView.swift in Sources */,
 				6CD2E06D28570A9A006F42D5 /* LeafViewModel.swift in Sources */,
 				6C14498B284F561300E8B933 /* TaskView.swift in Sources */,
@@ -391,6 +398,7 @@
 				6CD2E06F28574F26006F42D5 /* DateViewModel.swift in Sources */,
 				6C144951284F364200E8B933 /* GreenabalApp.swift in Sources */,
 				6CA49D802851D694009A155F /* Header.swift in Sources */,
+				6C25277C2857B607001D4A5B /* TaskListViewModel.swift in Sources */,
 				6C144989284F47E700E8B933 /* TabBar.swift in Sources */,
 				6C14498D284F563900E8B933 /* SettingView.swift in Sources */,
 				6C144985284F462500E8B933 /* HomeView.swift in Sources */,

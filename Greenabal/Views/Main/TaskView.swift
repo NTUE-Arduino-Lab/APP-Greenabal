@@ -277,8 +277,10 @@ struct EachTaskView: View {
 
 struct TaskView_Previews: PreviewProvider {
     static let backgroundViewModel = BackgroundViewModel()
+    static let taskListViewModel = TaskListViewModel()
     
     static var previews: some View {
         TabBar(initSelectedTab: "Task").environmentObject(backgroundViewModel)
+            .environmentObject(taskListViewModel)
     }
 }
