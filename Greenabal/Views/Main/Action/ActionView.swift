@@ -64,9 +64,9 @@ struct ActionView: View {
 }
 
 struct ActionView_Previews: PreviewProvider {
-    static let background = BackgroundViewModel()
+    static let backgroundViewModel = BackgroundViewModel()
     
     static var previews: some View {
-        ActionView().environmentObject(background)
+        TabBar(initSelectedTab: "Action").environmentObject(backgroundViewModel)
     }
 }
