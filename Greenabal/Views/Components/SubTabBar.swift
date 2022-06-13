@@ -21,8 +21,8 @@ struct SubTabBar: View {
                 }, label: {
                     Text(tab)
                         .foregroundColor(Color.black)
-                        .kerning(0.4)
-                        .fontWeight(.medium)
+                        .font(.custom("Roboto Medium", size: 16))
+                        .tracking(0.64)
                 })
                 .buttonStyle(.borderless)
                 .frame(width: 142, height: 36)

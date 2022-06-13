@@ -16,7 +16,6 @@ struct Header: View {
             Text(title)
                 .font(.custom("Roboto Bold", size: 16))
                 .tracking(0.64)
-                .fontWeight(.bold)
         }
         .frame(maxWidth: .infinity,
                maxHeight: 48,
