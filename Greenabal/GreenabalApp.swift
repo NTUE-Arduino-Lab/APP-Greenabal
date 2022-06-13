@@ -11,12 +11,14 @@ import SwiftUI
 struct GreenabalApp: App {
     @StateObject private var backgroundViewModel = BackgroundViewModel()
     @StateObject private var leafViewModel:LeafViewModel = LeafViewModel()
+    @StateObject private var budgeViewModel:BudgeViewModel = BudgeViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(backgroundViewModel)
                 .environmentObject(leafViewModel)
+                .environmentObject(budgeViewModel)
         }
     }
 }
