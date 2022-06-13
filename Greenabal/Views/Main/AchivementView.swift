@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct AchivementView: View {
-    @EnvironmentObject var background: BackgroundViewModel
+    @EnvironmentObject var backgroundViewModel: BackgroundViewModel
+    @EnvironmentObject var leafViewModel: LeafViewModel
+    @EnvironmentObject var budgeViewModel: BudgeViewModel
     private let title = "成就"
     private let name = "Achivement"
 
@@ -23,14 +25,16 @@ struct AchivementView: View {
                    maxHeight: .infinity,
                    alignment: .center)
         }
-        .background(background.color)
+        .background(backgroundViewModel.color)
     }
 }
 
 struct AchivementView_Previews: PreviewProvider {
     static let backgroundViewModel = BackgroundViewModel()
+    static let leafViewModel = LeafViewModel()
+    static let budgeViewModel = BudgeViewModel()
     
     static var previews: some View {
-        TabBar(initSelectedTab: "Achivement").environmentObject(backgroundViewModel)
+        TabBar(initSelectedTab: "Achivement").environmentObject(backgroundViewModel).environmentObject(leafViewModel).environmentObject(budgeViewModel)
     }
 }
