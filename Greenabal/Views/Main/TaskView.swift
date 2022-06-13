@@ -142,15 +142,13 @@ struct TaskView: View {
     var body: some View {
         VStack(){
             Header(title: title, name: name)
-            
             VStack{
-                
-                
-                    
+
                 VStack(spacing:13){
                     HStack(alignment:.center ){
                         Spacer()
-                        Text("完成\(taskListDataArray.filter{$0.finish==true}.count)/\(taskListDataArray.count)")
+                        Text("完成\(taskListDataArray.filter{$0.finish==true}.count)/\(taskListDataArray.count)").font(.custom("Roboto Medium", size: 14)).tracking(0.56)
+                            
                     }.padding(EdgeInsets(top: 10, leading: 0, bottom: 5, trailing: 0))
                    
                    
@@ -200,7 +198,7 @@ struct EachTaskView: View {
                     Image("play-circle").frame(width: 48,
                                                height: 48)
                 }
-                Text(taskListDataArray[item].taskDetail).font(.system(size: 14))
+                Text(taskListDataArray[item].taskDetail).font(.custom("Roboto Medium", size: 14))
                 Spacer()
                 
                 Text("\(taskListDataArray[item].taskReward)").font(.system(size: 14))
@@ -246,7 +244,7 @@ struct EachTaskView: View {
                         
                     }
                 }
-                Text(taskListDataArray[item].taskDetail).font(.system(size: 14))
+                Text(taskListDataArray[item].taskDetail).font(.custom("Roboto Medium", size: 14))
                 Spacer()
                 
                 Text("\(taskListDataArray[item].taskReward)").font(.system(size: 14))
