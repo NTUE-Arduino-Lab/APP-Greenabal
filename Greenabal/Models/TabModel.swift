@@ -8,11 +8,11 @@
 import Foundation
 
 struct Tab: Identifiable{
-    var id = UUID()
-    var name: String
-    var image: String
-    var selectedImage: String
-    var title: String
+    let id = UUID()
+    let name: String
+    let image: String
+    let selectedImage: String
+    let title: String
 }
 
 extension Tab {
