@@ -18,9 +18,17 @@
 		6C144989284F47E700E8B933 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C144988284F47E700E8B933 /* TabBar.swift */; };
 		6C14498B284F561300E8B933 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C14498A284F561300E8B933 /* TaskView.swift */; };
 		6C14498D284F563900E8B933 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C14498C284F563900E8B933 /* SettingView.swift */; };
+		6C3811492854B4B500E2C614 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */; };
+		6C38114A2854B4B500E2C614 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */; };
+		6C38114B2854B4B500E2C614 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */; };
+		6C38114E28550EB700E2C614 /* ETicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C38114D28550EB700E2C614 /* ETicketView.swift */; };
+		6C38115128550F2800E2C614 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C38115028550F2800E2C614 /* BarcodeView.swift */; };
 		6C6696462851C3E500ED62CA /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6696452851C3E500ED62CA /* TabModel.swift */; };
 		6C6696492851CAA200ED62CA /* BackgroundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6696482851CAA200ED62CA /* BackgroundViewModel.swift */; };
 		6CA49D802851D694009A155F /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA49D7F2851D694009A155F /* Header.swift */; };
+		6CA49D8528533D53009A155F /* SubTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA49D8428533D53009A155F /* SubTabBar.swift */; };
+		6CD2E06B28570A89006F42D5 /* LeafRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2E06A28570A89006F42D5 /* LeafRecordModel.swift */; };
+		6CD2E06D28570A9A006F42D5 /* LeafViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2E06C28570A9A006F42D5 /* LeafViewModel.swift */; };
 		6CE0A314284FC44100231F82 /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0A313284FC44100231F82 /* ActionView.swift */; };
 		6CE0A317284FC47100231F82 /* AchivementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0A316284FC47100231F82 /* AchivementView.swift */; };
 /* End PBXBuildFile section */
@@ -57,9 +65,18 @@
 		6C144988284F47E700E8B933 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		6C14498A284F561300E8B933 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		6C14498C284F563900E8B933 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		6C3811442854B47A00E2C614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		6C38114D28550EB700E2C614 /* ETicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETicketView.swift; sourceTree = "<group>"; };
+		6C38115028550F2800E2C614 /* BarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
 		6C6696452851C3E500ED62CA /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		6C6696482851CAA200ED62CA /* BackgroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewModel.swift; sourceTree = "<group>"; };
 		6CA49D7F2851D694009A155F /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		6CA49D8428533D53009A155F /* SubTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTabBar.swift; sourceTree = "<group>"; };
+		6CD2E06A28570A89006F42D5 /* LeafRecordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafRecordModel.swift; sourceTree = "<group>"; };
+		6CD2E06C28570A9A006F42D5 /* LeafViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafViewModel.swift; sourceTree = "<group>"; };
 		6CE0A313284FC44100231F82 /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
 		6CE0A316284FC47100231F82 /* AchivementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivementView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +129,8 @@
 		6C14494F284F364200E8B933 /* Greenabal */ = {
 			isa = PBXGroup;
 			children = (
+				6C3811452854B49800E2C614 /* Fonts */,
+				6C3811442854B47A00E2C614 /* Info.plist */,
 				6C6696472851C59400ED62CA /* Models */,
 				6C14497A284F399E00E8B933 /* ViewModels */,
 				6C144950284F364200E8B933 /* GreenabalApp.swift */,
@@ -151,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				6C6696482851CAA200ED62CA /* BackgroundViewModel.swift */,
+				6CD2E06C28570A9A006F42D5 /* LeafViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -167,21 +187,42 @@
 		6C144987284F464B00E8B933 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				6C38114C28550E8500E2C614 /* Action */,
 				6C144952284F364200E8B933 /* ContentView.swift */,
 				6C144984284F462500E8B933 /* HomeView.swift */,
 				6C14498A284F561300E8B933 /* TaskView.swift */,
 				6C144988284F47E700E8B933 /* TabBar.swift */,
 				6C14498C284F563900E8B933 /* SettingView.swift */,
-				6CE0A313284FC44100231F82 /* ActionView.swift */,
 				6CE0A316284FC47100231F82 /* AchivementView.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		6C3811452854B49800E2C614 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */,
+				6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */,
+				6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		6C38114C28550E8500E2C614 /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				6CE0A313284FC44100231F82 /* ActionView.swift */,
+				6C38114D28550EB700E2C614 /* ETicketView.swift */,
+				6C38115028550F2800E2C614 /* BarcodeView.swift */,
+			);
+			path = Action;
 			sourceTree = "<group>";
 		};
 		6C6696472851C59400ED62CA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				6C6696452851C3E500ED62CA /* TabModel.swift */,
+				6CD2E06A28570A89006F42D5 /* LeafRecordModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				6CA49D7F2851D694009A155F /* Header.swift */,
+				6CA49D8428533D53009A155F /* SubTabBar.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -298,6 +340,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C38114A2854B4B500E2C614 /* Roboto-Medium.ttf in Resources */,
+				6C3811492854B4B500E2C614 /* Roboto-Regular.ttf in Resources */,
+				6C38114B2854B4B500E2C614 /* Roboto-Bold.ttf in Resources */,
 				6C144958284F364300E8B933 /* Preview Assets.xcassets in Resources */,
 				6C144955284F364300E8B933 /* Assets.xcassets in Resources */,
 			);
@@ -325,9 +370,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C144953284F364200E8B933 /* ContentView.swift in Sources */,
+				6C38115128550F2800E2C614 /* BarcodeView.swift in Sources */,
+				6CD2E06D28570A9A006F42D5 /* LeafViewModel.swift in Sources */,
 				6C14498B284F561300E8B933 /* TaskView.swift in Sources */,
+				6C38114E28550EB700E2C614 /* ETicketView.swift in Sources */,
 				6CE0A314284FC44100231F82 /* ActionView.swift in Sources */,
 				6C6696462851C3E500ED62CA /* TabModel.swift in Sources */,
+				6CD2E06B28570A89006F42D5 /* LeafRecordModel.swift in Sources */,
+				6CA49D8528533D53009A155F /* SubTabBar.swift in Sources */,
 				6C144951284F364200E8B933 /* GreenabalApp.swift in Sources */,
 				6CA49D802851D694009A155F /* Header.swift in Sources */,
 				6C144989284F47E700E8B933 /* TabBar.swift in Sources */,
@@ -496,6 +546,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Greenabal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -526,6 +577,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Greenabal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

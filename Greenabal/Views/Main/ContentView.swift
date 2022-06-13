@@ -14,9 +14,11 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static let background = BackgroundViewModel()
+    static let backgroundViewModel = BackgroundViewModel()
+    static let leafViewModel = LeafViewModel()
     
     static var previews: some View {
-        ContentView().environmentObject(background)
+        ContentView()
+            .environmentObject(backgroundViewModel).environmentObject(leafViewModel)
     }
 }

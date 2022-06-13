@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct TabBar: View {
-    @State private var selectedTab = "Home"
+    @State private var selectedTab: String = "Home"
+    
+    init(initSelectedTab: String = "Home"){
+        if initSelectedTab != "Home" {
+            _selectedTab = State(initialValue: initSelectedTab)
+        }
+    }
     
     var body: some View {
         ZStack(alignment: .bottom){
@@ -31,7 +37,7 @@ struct TabBar: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             ZStack(alignment: .top){
-                RoundedRectangle(cornerRadius: 12)
+                RoundedRectangle(cornerRadius: 24)
                 .fill(Color.white)
                 .frame(
                     minWidth: 0,
@@ -64,9 +70,12 @@ struct TabBar: View {
 }
 
 struct TabBar_Previews: PreviewProvider {
-    static let background = BackgroundViewModel()
+    static let backgroundViewModel = BackgroundViewModel()
+    static let leafViewModel = BackgroundViewModel()
     
     static var previews: some View {
-        TabBar().environmentObject(background)
+        TabBar()
+            .environmentObject(backgroundViewModel)
+            .environmentObject(leafViewModel)
     }
 }

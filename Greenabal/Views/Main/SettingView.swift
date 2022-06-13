@@ -13,7 +13,7 @@ struct SettingView: View {
     private let name = "Setting"
 
     var body: some View {
-        ZStack(alignment: .top){
+        VStack{
             Header(title: title, name: name)
         
             VStack{
@@ -28,9 +28,9 @@ struct SettingView: View {
 }
 
 struct SettingView_Previews: PreviewProvider {
-    static let background = BackgroundViewModel()
+    static let backgroundViewModel = BackgroundViewModel()
     
     static var previews: some View {
-        TabBar().environmentObject(background)
+        TabBar(initSelectedTab: "Setting").environmentObject(backgroundViewModel)
     }
 }

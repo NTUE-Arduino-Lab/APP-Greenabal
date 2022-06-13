@@ -8,30 +8,36 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var background: BackgroundViewModel
+    @EnvironmentObject var backgroundViewModel: BackgroundViewModel
+    @EnvironmentObject var leafViewModel: LeafViewModel
     private let title = "No.168 初來乍島 Lv.3"
     private let name = "Home"
     
     var body: some View {
-        ZStack(alignment: .top){
+        VStack{
             Header(title: title, name: name)
         
             VStack{
                 Text("HomeView")
+                Text("leaf \(leafViewModel.count)")
+                Text("autoleaf \(leafViewModel.autoIncreseCount)/hr")
             }
             .frame(maxWidth: .infinity,
                    maxHeight: .infinity,
                    alignment: .center)
         }
-        .background(background.color)
+        .background(backgroundViewModel.color)
         .foregroundColor(.white)
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
-    static let background = BackgroundViewModel()
+    static let backgroundViewModel = BackgroundViewModel()
+    static let leafViewModel = LeafViewModel()
     
     static var previews: some View {
-        TabBar().environmentObject(background)
+        TabBar()
+            .environmentObject(leafViewModel)
+            .environmentObject(backgroundViewModel)
     }
 }
