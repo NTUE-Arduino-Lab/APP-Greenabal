@@ -20,11 +20,11 @@ class ETicketListViewModel: ObservableObject{
         
         transportList = testList
         
-        print(getList(year: 2022, startMonth: 5,endMonth: 6))
+        print(GetList(year: 2022, startMonth: 5,endMonth: 6))
         
     }
     
-    func getList(year: Int,startMonth: Int,endMonth: Int) -> [TransportItem] {
+    func GetList(year: Int,startMonth: Int,endMonth: Int) -> [TransportItem] {
         //        取得列表
         var result: [TransportItem] = []
         transportList.forEach { item in
@@ -36,7 +36,7 @@ class ETicketListViewModel: ObservableObject{
             }
         }
         result = result.sorted(by: {
-            $0.time < $1.time
+            $0.date > $1.date
         })
         return result
     }

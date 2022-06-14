@@ -13,7 +13,8 @@ struct GreenabalApp: App {
     @StateObject private var leafViewModel:LeafViewModel = LeafViewModel()
     @StateObject private var budgeViewModel:BudgeViewModel = BudgeViewModel()
     @StateObject private var taskListViewModel:TaskListViewModel = TaskListViewModel()
-    @StateObject private var eTicketViewModel:ETicketViewModel = ETicketViewModel()
+    @StateObject private var eTicketListViewModel:ETicketListViewModel = ETicketListViewModel()
+    @StateObject private var barcodeListViewModel:BarcodeListViewModel = BarcodeListViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -22,7 +23,8 @@ struct GreenabalApp: App {
                 .environmentObject(leafViewModel)
                 .environmentObject(budgeViewModel)
                 .environmentObject(taskListViewModel)
-                .environmentObject(eTicketViewModel)
+                .environmentObject(eTicketListViewModel)
+                .environmentObject(barcodeListViewModel)
         }
     }
 }

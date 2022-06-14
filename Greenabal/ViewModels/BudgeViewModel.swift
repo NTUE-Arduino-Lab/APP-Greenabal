@@ -7,14 +7,6 @@
 
 import Foundation
 
-enum BudgeType: String {
-case youbike = "YouBike 王"
-case knowledge = "知識小達人"
-case electricity = "省電小達人"
-case plastic = "省塑小達人"
-    
-}
-
 class BudgeViewModel: ObservableObject{
     @Published var budgelist: [BudgeModel]
     
