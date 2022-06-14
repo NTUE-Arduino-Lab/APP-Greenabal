@@ -12,7 +12,7 @@ struct GreenabalApp: App {
     @StateObject private var backgroundViewModel = BackgroundViewModel()
     @StateObject private var leafViewModel:LeafViewModel
     @StateObject private var badgeViewModel:BadgeViewModel
-    @StateObject private var taskListViewModel:TaskListViewModel = TaskListViewModel()
+    @StateObject private var taskListViewModel:TaskListViewModel
     @StateObject private var eTicketListViewModel:ETicketListViewModel
     @StateObject private var barcodeListViewModel:BarcodeListViewModel
     
@@ -21,6 +21,7 @@ struct GreenabalApp: App {
         let bvm = BadgeViewModel()
         _leafViewModel = StateObject(wrappedValue: lvm)
         _badgeViewModel = StateObject(wrappedValue: bvm)
+        _taskListViewModel = StateObject(wrappedValue: TaskListViewModel(leafViewModel: lvm, badgeViewModel: bvm))
         _barcodeListViewModel = StateObject(wrappedValue: BarcodeListViewModel(leafViewModel: lvm, badgeViewModel: bvm))
         _eTicketListViewModel = StateObject(wrappedValue: ETicketListViewModel(leafViewModel: lvm, badgeViewModel: bvm))
     }
