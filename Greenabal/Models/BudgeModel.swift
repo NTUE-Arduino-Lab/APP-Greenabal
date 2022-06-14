@@ -6,16 +6,6 @@
 //
 
 import Foundation
-
-enum BudgeType: String {
-case youbike = "YouBike 王"
-case knowledge = "知識小達人"
-case electricity = "省電小達人"
-case plastic = "省塑小達人"
-case seal_環保 = "環保標章小達人"
-case seal_有機 = "有機標章小達人"
-}
-
 class BudgeModel: Identifiable{
     //    徽章
     let id = UUID()

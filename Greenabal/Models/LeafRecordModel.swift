@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LeafRecordModel: Identifiable{
+struct LeafRecordModel: Identifiable{
 //    葉子獲取紀錄
     let id = UUID()
     let date: String
@@ -18,7 +18,7 @@ class LeafRecordModel: Identifiable{
         self.count = count
     }
     
-    func addCount(num: Int){
+    mutating func addCount(num: Int){
         count = count + num
     }
 }

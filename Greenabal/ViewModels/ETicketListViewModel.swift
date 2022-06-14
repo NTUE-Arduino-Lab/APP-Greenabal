@@ -18,6 +18,9 @@ class ETicketListViewModel: ObservableObject{
         ]
         
         transportList = testList
+        
+        print("--------------transport init-----------------")
+        print(transportList)
     }
     
     func GetList(year: Int,startMonth: Int,endMonth: Int) -> [TransportList] {
@@ -34,6 +37,10 @@ class ETicketListViewModel: ObservableObject{
         result = result.sorted(by: {
             $0.date > $1.date
         })
+        
+        print("--------------get transport list-----------------")
+        print(result)
+        
         return result
     }
     
@@ -41,6 +48,9 @@ class ETicketListViewModel: ObservableObject{
         if let index = transportList.firstIndex(where: { $0.date == date }){
             transportList[index].AddItem(title: title, time: time, leaf: leaf, badge: badge)
         }
+        
+        print("--------------add transport list 's item-----------------")
+        print(transportList)
     }
 }
 

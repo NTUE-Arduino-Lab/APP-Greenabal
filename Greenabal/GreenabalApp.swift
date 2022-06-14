@@ -10,11 +10,19 @@ import SwiftUI
 @main
 struct GreenabalApp: App {
     @StateObject private var backgroundViewModel = BackgroundViewModel()
-    @StateObject private var leafViewModel:LeafViewModel = LeafViewModel()
-    @StateObject private var budgeViewModel:BudgeViewModel = BudgeViewModel()
+    @StateObject private var leafViewModel:LeafViewModel
+    @StateObject private var budgeViewModel:BudgeViewModel
     @StateObject private var taskListViewModel:TaskListViewModel = TaskListViewModel()
     @StateObject private var eTicketListViewModel:ETicketListViewModel = ETicketListViewModel()
-    @StateObject private var barcodeListViewModel:BarcodeListViewModel = BarcodeListViewModel()
+    @StateObject private var barcodeListViewModel:BarcodeListViewModel
+    
+    init(){
+        let lvm = LeafViewModel()
+        let bvm = BudgeViewModel()
+        _leafViewModel = StateObject(wrappedValue: lvm)
+        _budgeViewModel = StateObject(wrappedValue: bvm)
+        _barcodeListViewModel = StateObject(wrappedValue: BarcodeListViewModel(leafViewModel: lvm, budgeViewModel: bvm))
+    }
     
     var body: some Scene {
         WindowGroup {

@@ -9,23 +9,34 @@ import Foundation
 
 class BarcodeListViewModel: ObservableObject{
     @Published var buyList: [BuyList]
+    let leafViewModel: LeafViewModel
+    let budgeViewModel: BudgeViewModel
     
-    init(){
+    init(leafViewModel: LeafViewModel,budgeViewModel: BudgeViewModel){
+        self.leafViewModel = leafViewModel
+        self.budgeViewModel = budgeViewModel
+        
         let testList: [BuyList] = [
             BuyList(date: "2022/05/05", shop: "全聯實業", items: [
                 BuyItem(name: "蒲公英環保抽取衛生紙", gift: GiftLeaf(leaf: 3), seal: Seal.環保標章.rawValue, badge: BudgeType.seal_環保.rawValue)
-                ]
-            ),
+            ]
+                   ),
             BuyList(date: "2022/05/19", shop: "全聯實業", items: [
                 BuyItem(name: "蒲公英環保抽取衛生紙", gift: GiftLeaf(leaf: 3), seal: Seal.環保標章.rawValue, badge: BudgeType.seal_環保.rawValue),
                 BuyItem(name: "部落小農系列高麗菜", gift: GiftLeaf(leaf: 3), seal: Seal.有機農產品標章.rawValue, badge: BudgeType.seal_有機.rawValue)
-                ]
-            ),
+            ]
+                   )
         ]
         
-        buyList = testList
+        self.buyList = testList
         
-        print(GetList(year: 2022, startMonth: 5,endMonth: 6))
+//        AddItem(date: "2022/06/19", shop: "全聯實業", items: [
+//            BuyItem(name: "蒲公英環保抽取衛生紙", gift: GiftLeaf(leaf: 3), seal: Seal.環保標章.rawValue, badge: BudgeType.seal_環保.rawValue),
+//            BuyItem(name: "部落小農系列高麗菜", gift: GiftLeaf(leaf: 3), seal: Seal.有機農產品標章.rawValue, badge: BudgeType.seal_有機.rawValue)
+//        ])
+        
+        print("--------------barcode list init-----------------")
+        print(buyList)
     }
     
     func GetList(year: Int, startMonth: Int,endMonth: Int) -> [BuyList]{
@@ -42,7 +53,31 @@ class BarcodeListViewModel: ObservableObject{
         result = result.sorted(by: {
             $0.date > $1.date
         })
+        
+        print("--------------get barcode list-----------------")
+        print(result)
+        
         return result
+    }
+    
+    func AddItem(date: String, shop: String, items: [BuyItem]){
+        buyList.append(BuyList(date: date, shop: shop, items: items))
+        
+        print("--------------add barcode item-----------------")
+        print(buyList)
+        
+        
+        items.forEach { item in
+            switch item.gift {
+            case is GiftLeaf:
+                let gift: GiftLeaf = item.gift as! GiftLeaf
+                leafViewModel.AddRecord(num: gift.leaf)
+            default:
+                break
+            }
+            
+            budgeViewModel.RefreshBudge(title: item.badge)
+        }
     }
 }
 
