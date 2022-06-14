@@ -47,7 +47,7 @@ struct BarcodeItemView: View {
                     .font(.custom("Roboto-Regular", size: 14))
                     .tracking(0.56)
                     .frame(maxWidth: .infinity, alignment:.topLeading)
-                Text(String(data.date.suffix(from: data.date.index(data.date.endIndex, offsetBy: -5))))
+                Text(data.date.suffix(from: data.date.index(data.date.endIndex, offsetBy: -5)))
                     .font(.custom("Roboto-Regular", size: 14))
                     .tracking(0.56)
             }
