@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct TransportItem{
+struct TransportItem: Identifiable{
     //    電子票證搭乘紀錄
+    let id = UUID()
     let date: String
     let leaf: Int
     let title: String

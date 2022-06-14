@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ByItem: View {
+struct TransportItemView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 32){
@@ -48,7 +48,7 @@ struct ByItem: View {
     }
 }
 
-struct ETicketItem: View {
+struct ETicketItemView: View {
     
     var body: some View {
         VStack(alignment:.leading, spacing: 0){
@@ -68,13 +68,13 @@ struct ETicketItem: View {
                 .frame(width: 320, height: 1)
             
             VStack(spacing:0){
-                ByItem()
+                TransportItemView()
                 
                 Rectangle()
                     .fill(Color("gray-100"))
                     .frame(width:320, height: 1)
                 
-                ByItem()
+                TransportItemView()
             }
         }
         .background(
@@ -90,7 +90,7 @@ struct ETicketView: View {
             MonthSelector()
             
             VStack(spacing:20){
-                ETicketItem()
+                ETicketItemView()
             }
             .frame(width: 320)
             .padding(.bottom,80)

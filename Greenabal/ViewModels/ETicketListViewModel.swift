@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ETicketViewModel: ObservableObject{
+class ETicketListViewModel: ObservableObject{
     @Published var transportList: [TransportItem]
     
     init(){

@@ -6,8 +6,9 @@
 //
 import Foundation
 
-struct Task{
+struct Task: Identifiable{
     //    任務
+    let id = UUID()
     let task: TaskData
     var isComplete: Bool
     

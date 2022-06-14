@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BuyItem: View {
+struct BuyItemView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 14){
@@ -35,7 +35,7 @@ struct BuyItem: View {
     }
 }
 
-struct BarcodeItem: View {
+struct BarcodeItemView: View {
     
     var body: some View {
         VStack(alignment:.leading, spacing: 0){
@@ -58,13 +58,13 @@ struct BarcodeItem: View {
                 .frame(width: 320, height: 1)
             
             VStack(spacing:0){
-                BuyItem()
+                BuyItemView()
                 
                 Rectangle()
                     .fill(Color("gray-100"))
                     .frame(width:320, height: 1)
                 
-                BuyItem()
+                BuyItemView()
             }
         }
         .background(
@@ -80,12 +80,12 @@ struct BarcodeView: View {
             MonthSelector()
             
             VStack(spacing:20){
-                BarcodeItem()
-                BarcodeItem()
-                BarcodeItem()
-                BarcodeItem()
-                BarcodeItem()
-                BarcodeItem()
+                BarcodeItemView()
+                BarcodeItemView()
+                BarcodeItemView()
+                BarcodeItemView()
+                BarcodeItemView()
+                BarcodeItemView()
             }
             .frame(width: 320)
             .padding(.bottom,80)
