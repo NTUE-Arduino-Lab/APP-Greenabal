@@ -20,7 +20,7 @@ class ETicketViewModel: ObservableObject{
         
         transportList = testList
         
-//        getList(year: 2022, startMonth: 5,endMonth: 6)
+        print(getList(year: 2022, startMonth: 5,endMonth: 6))
         
     }
     
@@ -35,6 +35,9 @@ class ETicketViewModel: ObservableObject{
                 result.append(item)
             }
         }
+        result = result.sorted(by: {
+            $0.time < $1.time
+        })
         return result
     }
 }
