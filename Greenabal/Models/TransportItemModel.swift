@@ -7,17 +7,31 @@
 
 import Foundation
 
-struct TransportItem: Identifiable{
+struct TransportList: Identifiable{
     //    電子票證搭乘紀錄
     let id = UUID()
     let date: String
+    var items: [TransportItem]
+    
+    init(date: String,items: [TransportItem]){
+        self.date = date
+        self.items = items
+    }
+    
+    mutating func AddItem(title: String,time: String, leaf: Int, badge: String){
+        self.items.append(TransportItem(title: title, time: time,leaf: leaf,badge: badge))
+    }
+}
+
+struct TransportItem: Identifiable{
+    //    電子票證搭乘紀錄
+    let id = UUID()
     let leaf: Int
     let title: String
     let time: String
     let badge: String
     
-    init(date: String, title: String, time: String, leaf: Int = 3, badge: String = BudgeType.youbike.rawValue){
-        self.date = date
+    init(title: String, time: String, leaf: Int = 3, badge: String = BudgeType.youbike.rawValue){
         self.title = title
         self.time = time
         self.badge = badge
