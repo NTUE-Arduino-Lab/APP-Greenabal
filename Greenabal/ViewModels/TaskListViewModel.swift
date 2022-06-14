@@ -10,8 +10,13 @@ import Foundation
 class TaskListViewModel: ObservableObject{
     @Published var taskList: [Task]
     @Published var completeCount: Int
+    let leafViewModel: LeafViewModel
+    let badgeViewModel: BadgeViewModel
     
-    init(){
+    init(leafViewModel: LeafViewModel,badgeViewModel: BadgeViewModel){
+        self.leafViewModel = leafViewModel
+        self.badgeViewModel = badgeViewModel
+        
         var testList:[Task] = []
         TaskData.all.forEach { item in
             testList.append(Task(task: item))
@@ -31,6 +36,10 @@ class TaskListViewModel: ObservableObject{
         
         print("--------------complete task-----------------")
         print(taskList)
+        
+        
+        leafViewModel.AddRecord(num: taskList[index].task.leaf)
+        badgeViewModel.RefreshBadge(title: taskList[index].task.bagdge)
     }
     
     func refreshTask(index: Int){
