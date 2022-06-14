@@ -19,7 +19,9 @@ struct TransportList: Identifiable{
     }
     
     mutating func AddItem(title: String,time: String, leaf: Int, badge: String){
-        self.items.append(TransportItem(title: title, time: time,leaf: leaf,badge: badge))
+        var temp = self.items
+        temp.append(TransportItem(title: title, time: time,leaf: leaf,badge: badge))
+        self.items = temp
     }
 }
 

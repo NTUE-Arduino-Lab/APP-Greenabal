@@ -52,6 +52,14 @@ class ETicketListViewModel: ObservableObject{
     func AddItem(date: String, title: String, time: String, leaf: Int = 3, badge: String = BadgeType.youbike.rawValue){
         if let index = transportList.firstIndex(where: { $0.date == date }){
             transportList[index].AddItem(title: title, time: time, leaf: leaf, badge: badge)
+            //
+            //            var temp = transportList[index].items
+            //            temp.append(TransportItem(title: title, time: time,leaf: leaf,badge: badge))
+            //            print(temp)
+            //            transportList[index].items = temp
+        }
+        else{
+            transportList.append(TransportList(date: date, items: [(TransportItem(title: title, time: time, leaf: leaf, badge: badge))]))
         }
         
         print("--------------add transport list 's item-----------------")
