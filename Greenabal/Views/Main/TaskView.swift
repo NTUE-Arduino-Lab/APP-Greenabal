@@ -185,7 +185,7 @@ struct EachTaskView: View {
         case TaskType.knowledge:
             HStack{
                 Button{
-                    completeTask(index)
+//                    completeTask(index)
                 }label:{
                     Image("play-circle").frame(width: 48,
                                                height: 48)
@@ -213,7 +213,7 @@ struct EachTaskView: View {
             HStack{
                 
                 Button{
-                    self.completeTask(index)
+                    completeTask(index)
                 }label:{
                     
                     ZStack {

@@ -31,15 +31,17 @@ class TaskListViewModel: ObservableObject{
     
     func completeTask(index: Int){
         //        完成任務
-        taskList[index].updateCompletion()
-        completeCount+=1
-        
-        print("--------------complete task-----------------")
-        print(taskList)
-        
-        
-        leafViewModel.AddRecord(num: taskList[index].task.leaf)
-        badgeViewModel.RefreshBadge(title: taskList[index].task.bagdge)
+        if !taskList[index].isComplete{
+            taskList[index].updateCompletion()
+            completeCount+=1
+            
+            print("--------------complete task-----------------")
+            print(taskList)
+            
+            
+            leafViewModel.AddRecord(num: taskList[index].task.leaf)
+            badgeViewModel.RefreshBadge(title: taskList[index].task.bagdge)
+        }
     }
     
     func refreshTask(index: Int){
