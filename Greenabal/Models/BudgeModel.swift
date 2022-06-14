@@ -1,12 +1,12 @@
 //
-//  BudgeModel.swift
+//  BadgeModel.swift
 //  Greenabal
 //
 //  Created by Pei-yun,Lee on 2022/6/13.
 //
 
 import Foundation
-class BudgeModel: Identifiable{
+class BadgeModel: Identifiable{
     //    徽章
     let id = UUID()
     let title: String

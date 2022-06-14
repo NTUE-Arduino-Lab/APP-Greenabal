@@ -22,7 +22,7 @@ struct BuyItem: Identifiable{
     let gift: Any
     let badge: String
     
-    init(name: String, gift: Any, seal: String = Seal.環保標章.rawValue , badge: String = BudgeType.youbike.rawValue){
+    init(name: String, gift: Any, seal: String = Seal.環保標章.rawValue , badge: String = BadgeType.youbike.rawValue){
         self.name = name
         self.seal = seal
         self.badge = badge

@@ -31,7 +31,7 @@ struct TransportItem: Identifiable{
     let time: String
     let badge: String
     
-    init(title: String, time: String, leaf: Int = 3, badge: String = BudgeType.youbike.rawValue){
+    init(title: String, time: String, leaf: Int = 3, badge: String = BadgeType.youbike.rawValue){
         self.title = title
         self.time = time
         self.badge = badge

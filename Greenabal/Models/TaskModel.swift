@@ -37,11 +37,11 @@ struct TaskData{
 
 extension TaskData {
     static let all: [TaskData] = [
-        TaskData(name: "閱讀環保知識", leaf: 2, type: .knowledge, bagdge: BudgeType.knowledge.rawValue),
-        TaskData(name: "自備環保餐具無拿取免洗餐具", leaf: 3, type: .normal, bagdge: BudgeType.plastic.rawValue),
-        TaskData(name: "落實資源回收", leaf: 2, type: .normal, bagdge: BudgeType.plastic.rawValue),
-        TaskData(name: "自備購物袋", leaf: 2, type: .normal, bagdge: BudgeType.plastic.rawValue),
-        TaskData(name: "檢查並拔掉無使用的插頭", leaf: 2, type: .normal, bagdge: BudgeType.electricity.rawValue),
+        TaskData(name: "閱讀環保知識", leaf: 2, type: .knowledge, bagdge: BadgeType.knowledge.rawValue),
+        TaskData(name: "自備環保餐具無拿取免洗餐具", leaf: 3, type: .normal, bagdge: BadgeType.plastic.rawValue),
+        TaskData(name: "落實資源回收", leaf: 2, type: .normal, bagdge: BadgeType.plastic.rawValue),
+        TaskData(name: "自備購物袋", leaf: 2, type: .normal, bagdge: BadgeType.plastic.rawValue),
+        TaskData(name: "檢查並拔掉無使用的插頭", leaf: 2, type: .normal, bagdge: BadgeType.electricity.rawValue),
     ]
 }
 
