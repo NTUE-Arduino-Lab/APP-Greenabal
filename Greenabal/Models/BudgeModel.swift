@@ -29,12 +29,14 @@ class BadgeModel: Identifiable{
     
     func AddCount(){
         currentCount += 1
-        if currentCount >= goalCounts[currentStar]{
+        if currentCount >= goalCounts[currentStar-1]{
             AddStar()
         }
     }
     
     func AddStar(){
-        currentStar += 1
+        if currentStar < totalStar{
+            currentStar += 1
+        }
     }
 }
