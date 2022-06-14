@@ -35,7 +35,8 @@ struct MonthSelector: View{
 }
 
 struct ActionView: View {
-    @EnvironmentObject var background: BackgroundViewModel
+    @EnvironmentObject var backgroundViewModel: BackgroundViewModel
+    
     private let title = "環保行動"
     private let name = "Action"
     private var tabs = ["手機載具","電子票證"]
@@ -58,15 +59,19 @@ struct ActionView: View {
             }
             .padding([.bottom],93)
         }
-        .background(background.color)
+        .background(backgroundViewModel.color)
         .clipped()
     }
 }
 
 struct ActionView_Previews: PreviewProvider {
     static let backgroundViewModel = BackgroundViewModel()
+    static var leafViewModel:LeafViewModel = LeafViewModel()
+    static var badgeViewModel:BadgeViewModel = BadgeViewModel()
+    static var barcodeListViewModel:BarcodeListViewModel = BarcodeListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
     
     static var previews: some View {
         TabBar(initSelectedTab: "Action").environmentObject(backgroundViewModel)
+            .environmentObject(barcodeListViewModel)
     }
 }
