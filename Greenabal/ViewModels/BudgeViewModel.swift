@@ -7,16 +7,23 @@
 
 import Foundation
 
+enum BudgeType: String {
+case youbike = "YouBike 王"
+case knowledge = "知識小達人"
+case electricity = "省電小達人"
+case plastic = "省塑小達人"
+    
+}
+
 class BudgeViewModel: ObservableObject{
     @Published var budgelist: [BudgeModel]
-    var budgeType: [String] = ["YouBike 王","知識小達人","環保小達人","省電小達人"]
     
     init(){
         budgelist = [
-            BudgeModel(title: budgeType[0], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50],currentStar: 3),
-            BudgeModel(title: budgeType[1], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
-            BudgeModel(title: budgeType[2], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
-            BudgeModel(title: budgeType[3], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
+            BudgeModel(title: BudgeType.youbike.rawValue, goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50],currentStar: 3),
+            BudgeModel(title: BudgeType.knowledge.rawValue, goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
+            BudgeModel(title: BudgeType.electricity.rawValue, goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
+            BudgeModel(title: BudgeType.plastic.rawValue, goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "budge_bicycle", goalCounts: [10,20,50]),
         ]
         
 //        RefreshBudge(index:0)
