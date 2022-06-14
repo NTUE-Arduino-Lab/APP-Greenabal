@@ -13,6 +13,7 @@ struct GreenabalApp: App {
     @StateObject private var leafViewModel:LeafViewModel = LeafViewModel()
     @StateObject private var budgeViewModel:BudgeViewModel = BudgeViewModel()
     @StateObject private var taskListViewModel:TaskListViewModel = TaskListViewModel()
+    @StateObject private var eTicketViewModel:ETicketViewModel = ETicketViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -21,6 +22,7 @@ struct GreenabalApp: App {
                 .environmentObject(leafViewModel)
                 .environmentObject(budgeViewModel)
                 .environmentObject(taskListViewModel)
+                .environmentObject(eTicketViewModel)
         }
     }
 }
