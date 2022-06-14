@@ -24,9 +24,15 @@
 		6C27DAF628585CDF00B58FE3 /* TransportItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27DAF528585CDF00B58FE3 /* TransportItemModel.swift */; };
 		6C27DAF82858653700B58FE3 /* BarcodeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27DAF72858653700B58FE3 /* BarcodeListViewModel.swift */; };
 		6C27DAFA285865B300B58FE3 /* BuyItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27DAF9285865B300B58FE3 /* BuyItemModel.swift */; };
-		6C3811492854B4B500E2C614 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */; };
-		6C38114A2854B4B500E2C614 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */; };
-		6C38114B2854B4B500E2C614 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */; };
+		6C27DB042858D66000B58FE3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB012858D66000B58FE3 /* Roboto-Medium.ttf */; };
+		6C27DB052858D66000B58FE3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB012858D66000B58FE3 /* Roboto-Medium.ttf */; };
+		6C27DB062858D66000B58FE3 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB012858D66000B58FE3 /* Roboto-Medium.ttf */; };
+		6C27DB072858D66000B58FE3 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB022858D66000B58FE3 /* Roboto-Bold.ttf */; };
+		6C27DB082858D66000B58FE3 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB022858D66000B58FE3 /* Roboto-Bold.ttf */; };
+		6C27DB092858D66000B58FE3 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB022858D66000B58FE3 /* Roboto-Bold.ttf */; };
+		6C27DB0A2858D66000B58FE3 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB032858D66000B58FE3 /* Roboto-Regular.ttf */; };
+		6C27DB0B2858D66000B58FE3 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB032858D66000B58FE3 /* Roboto-Regular.ttf */; };
+		6C27DB0C2858D66000B58FE3 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C27DB032858D66000B58FE3 /* Roboto-Regular.ttf */; };
 		6C38114E28550EB700E2C614 /* ETicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C38114D28550EB700E2C614 /* ETicketView.swift */; };
 		6C38115128550F2800E2C614 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C38115028550F2800E2C614 /* BarcodeView.swift */; };
 		6C6696462851C3E500ED62CA /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6696452851C3E500ED62CA /* TabModel.swift */; };
@@ -80,10 +86,10 @@
 		6C27DAF528585CDF00B58FE3 /* TransportItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportItemModel.swift; sourceTree = "<group>"; };
 		6C27DAF72858653700B58FE3 /* BarcodeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeListViewModel.swift; sourceTree = "<group>"; };
 		6C27DAF9285865B300B58FE3 /* BuyItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyItemModel.swift; sourceTree = "<group>"; };
+		6C27DB012858D66000B58FE3 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		6C27DB022858D66000B58FE3 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		6C27DB032858D66000B58FE3 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		6C3811442854B47A00E2C614 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		6C38114D28550EB700E2C614 /* ETicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETicketView.swift; sourceTree = "<group>"; };
 		6C38115028550F2800E2C614 /* BarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
 		6C6696452851C3E500ED62CA /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
@@ -224,9 +230,9 @@
 		6C3811452854B49800E2C614 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */,
-				6C3811472854B4B500E2C614 /* Roboto-Medium.ttf */,
-				6C3811462854B4B500E2C614 /* Roboto-Regular.ttf */,
+				6C27DB022858D66000B58FE3 /* Roboto-Bold.ttf */,
+				6C27DB012858D66000B58FE3 /* Roboto-Medium.ttf */,
+				6C27DB032858D66000B58FE3 /* Roboto-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -367,11 +373,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C38114A2854B4B500E2C614 /* Roboto-Medium.ttf in Resources */,
-				6C3811492854B4B500E2C614 /* Roboto-Regular.ttf in Resources */,
-				6C38114B2854B4B500E2C614 /* Roboto-Bold.ttf in Resources */,
 				6C144958284F364300E8B933 /* Preview Assets.xcassets in Resources */,
 				6C144955284F364300E8B933 /* Assets.xcassets in Resources */,
+				6C27DB0A2858D66000B58FE3 /* Roboto-Regular.ttf in Resources */,
+				6C27DB072858D66000B58FE3 /* Roboto-Bold.ttf in Resources */,
+				6C27DB042858D66000B58FE3 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +385,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C27DB0B2858D66000B58FE3 /* Roboto-Regular.ttf in Resources */,
+				6C27DB082858D66000B58FE3 /* Roboto-Bold.ttf in Resources */,
+				6C27DB052858D66000B58FE3 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +395,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C27DB0C2858D66000B58FE3 /* Roboto-Regular.ttf in Resources */,
+				6C27DB092858D66000B58FE3 /* Roboto-Bold.ttf in Resources */,
+				6C27DB062858D66000B58FE3 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,10 +588,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Greenabal/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6AJA426WA8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Greenabal/Info.plist;
@@ -593,9 +606,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pikachu.greenabal.Greenabal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenabal.Greenabal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = greenabal;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -607,10 +620,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Greenabal/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6AJA426WA8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Greenabal/Info.plist;
@@ -624,9 +638,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pikachu.greenabal.Greenabal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.greenabal.Greenabal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = greenabal;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
