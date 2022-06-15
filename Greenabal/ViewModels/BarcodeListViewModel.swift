@@ -71,7 +71,7 @@ class BarcodeListViewModel: ObservableObject{
             switch item.gift {
             case is GiftLeaf:
                 let gift: GiftLeaf = item.gift as! GiftLeaf
-                leafViewModel.AddRecord(num: gift.leaf)
+                leafViewModel.AddCount(num: gift.leaf, record: true)
             default:
                 break
             }

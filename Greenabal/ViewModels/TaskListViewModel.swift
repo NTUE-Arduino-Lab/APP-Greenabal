@@ -39,7 +39,7 @@ class TaskListViewModel: ObservableObject{
             print(taskList)
             
             
-            leafViewModel.AddRecord(num: taskList[index].task.leaf)
+            leafViewModel.AddCount(num: taskList[index].task.leaf, record: true)
             badgeViewModel.RefreshBadge(title: taskList[index].task.bagdge)
         }
     }
