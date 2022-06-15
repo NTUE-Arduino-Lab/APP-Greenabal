@@ -34,7 +34,7 @@ class LeafViewModel: ObservableObject{
         print("left count:\(count)")
     }
     
-    func AddRecord(num:Int){
+    private func AddRecord(num:Int){
         //        葉子獲得紀錄
         
         let dateViewModel: DateViewModel = DateViewModel()
@@ -64,7 +64,7 @@ class LeafViewModel: ObservableObject{
         }
     }
     
-    private func AddCount(num:Int,record:Bool){
+    func AddCount(num:Int,record:Bool){
         if record{
             AddRecord(num: num)
         }
