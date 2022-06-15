@@ -120,8 +120,6 @@ struct DraggableModifier : ViewModifier {
     
 }
 struct TaskView: View {
-    
-    @EnvironmentObject var backgroundViewModel: BackgroundViewModel
     @EnvironmentObject var taskListViewModel: TaskListViewModel
     
     //    @State private var taskCount:Int = taskListDataArray.count
@@ -160,7 +158,13 @@ struct TaskView: View {
                    maxHeight: .infinity,
                    alignment: .center)
         }
-        .background(backgroundViewModel.color)
+//        .background(LinearGradient(
+//            gradient: Gradient(stops: [
+//                .init(color: Color(#colorLiteral(red: 0.6102343797683716, green: 0.7855484485626221, blue: 0.9125000238418579, alpha: 1)), location: 0),
+//                .init(color: Color(#colorLiteral(red: 0.915928840637207, green: 0.9526067972183228, blue: 0.9791666865348816, alpha: 1)), location: 1)]),
+//            startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
+//            endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
+//        )
     }
 }
 
@@ -185,7 +189,7 @@ struct EachTaskView: View {
         case TaskType.knowledge:
             HStack{
                 Button{
-//                    completeTask(index)
+                    //                    completeTask(index)
                 }label:{
                     Image("play-circle").frame(width: 48,
                                                height: 48)
@@ -264,13 +268,12 @@ struct EachTaskView: View {
 }
 
 struct TaskView_Previews: PreviewProvider {
-    static let backgroundViewModel = BackgroundViewModel()
     static var leafViewModel:LeafViewModel = LeafViewModel()
     static var badgeViewModel:BadgeViewModel = BadgeViewModel()
     static var taskListViewModel:TaskListViewModel = TaskListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
     
     static var previews: some View {
-        TabBar(initSelectedTab: "Task").environmentObject(backgroundViewModel)
+        TabBar(initSelectedTab: "Task")
             .environmentObject(taskListViewModel)
     }
 }
