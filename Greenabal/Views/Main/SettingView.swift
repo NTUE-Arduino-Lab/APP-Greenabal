@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SettingView: View {
-    @EnvironmentObject var background: BackgroundViewModel
     private let title = "設定"
     private let name = "Setting"
 
@@ -23,14 +22,18 @@ struct SettingView: View {
                    maxHeight: .infinity,
                    alignment: .center)
         }
-        .background(background.color)
+//        .background(LinearGradient(
+//            gradient: Gradient(stops: [
+//                .init(color: Color(#colorLiteral(red: 0.6102343797683716, green: 0.7855484485626221, blue: 0.9125000238418579, alpha: 1)), location: 0),
+//                .init(color: Color(#colorLiteral(red: 0.915928840637207, green: 0.9526067972183228, blue: 0.9791666865348816, alpha: 1)), location: 1)]),
+//            startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
+//            endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
+//        )
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
-    static let backgroundViewModel = BackgroundViewModel()
-    
     static var previews: some View {
-        TabBar(initSelectedTab: "Setting").environmentObject(backgroundViewModel)
+        TabBar(initSelectedTab: "Setting")
     }
 }

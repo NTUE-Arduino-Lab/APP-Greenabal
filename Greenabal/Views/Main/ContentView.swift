@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var backgroundVM : BackgroundViewModel
+    
     var body: some View {
-        TabBar()
+        ZStack(alignment:.bottom){
+            Rectangle()
+                .animatableGradient(fromGradient: backgroundVM.gradients.0, toGradient: backgroundVM.gradients.1, progress: backgroundVM.progress, animateState: backgroundVM.animateState,canAnimate: backgroundVM.canAnimate, SetAnimate: backgroundVM.SetAnimate)
+                .ignoresSafeArea()
+                .onAppear {
+                    withAnimation(.linear(duration: 5.0).repeatForever(autoreverses: false)) {
+                        backgroundVM.progress = 1
+                    }
+                }
+            
+            TabBar()
+        }
     }
 }
 
