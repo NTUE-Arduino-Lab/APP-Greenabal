@@ -1,22 +1,25 @@
 //
-//  SettingView.swift
+//  AchivementView.swift
 //  Greenabal
 //
-//  Created by Pei-yun,Lee on 2022/6/7.
+//  Created by Pei-yun,Lee on 2022/6/8.
 //
 
 import SwiftUI
 
-struct SettingView: View {
-    private let title = "設定"
-    private let name = "Setting"
+struct AchivementView: View {
+    @EnvironmentObject var backgroundViewModel: BackgroundViewModel
+    @EnvironmentObject var leafViewModel: LeafViewModel
+    @EnvironmentObject var badgeViewModel: BadgeViewModel
+    private let title = "成就"
+    private let name = "Achivement"
 
     var body: some View {
         VStack{
             Header(title: title, name: name)
         
             VStack{
-                Text("SettingView")
+                Text("AchivementView")
             }
             .frame(maxWidth: .infinity,
                    maxHeight: .infinity,
@@ -32,8 +35,11 @@ struct SettingView: View {
     }
 }
 
-struct SettingView_Previews: PreviewProvider {
+struct AchivementView_Previews: PreviewProvider {
+    static let leafViewModel = LeafViewModel()
+    static let badgeViewModel = BadgeViewModel()
+    
     static var previews: some View {
-        TabBar(initSelectedTab: "Setting")
+        TabBar(initSelectedTab: "Achivement").environmentObject(leafViewModel).environmentObject(badgeViewModel)
     }
 }

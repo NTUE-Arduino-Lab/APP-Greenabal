@@ -7,22 +7,23 @@
 
 import SwiftUI
 
-struct ByItem: View {
+struct TransportItemView: View {
+    let data: TransportItem
     
     var body: some View {
         HStack(alignment: .center, spacing: 32){
-            Text("台北捷運")
+            Text(data.title)
                 .font(.custom("Roboto-Regular", size: 14))
                 .tracking(0.56)
                 .frame(maxWidth: .infinity, alignment:.leading)
             
-            Text("19:43")
+            Text(data.time)
                 .font(.custom("Roboto-Regular", size: 14))
                 .tracking(0.56)
             
             HStack(alignment:.center, spacing:4){
-                
-                Text("1")
+
+                Text(String(data.leaf))
                     .font(.custom("Roboto-Bold", size: 14))
                     .tracking(0.56)
                     .overlay(
@@ -33,7 +34,7 @@ struct ByItem: View {
                             startPoint: UnitPoint(x: -1.3877787807814457e-15, y: -1.3877787807814457e-15),
                             endPoint: UnitPoint(x: 1.000000029802322, y: 1.000000029802322))
                         .mask(
-                            Text("1")
+                            Text(String(data.leaf))
                                 .font(.custom("Roboto-Bold", size: 14))
                                 .tracking(0.56)
                         )
@@ -48,13 +49,14 @@ struct ByItem: View {
     }
 }
 
-struct ETicketItem: View {
+struct ETicketItemView: View {
+    let data: TransportList
     
     var body: some View {
         VStack(alignment:.leading, spacing: 0){
             HStack(alignment:.center, spacing: 16){
                 Image("icon_ticket")
-                Text("5/19")
+                Text(data.date.suffix(from: data.date.index(data.date.endIndex, offsetBy: -5)))
                     .font(.custom("Roboto-Regular", size: 14))
                     .tracking(0.56)
                     .frame(maxWidth: .infinity, alignment:.topLeading)
@@ -68,13 +70,15 @@ struct ETicketItem: View {
                 .frame(width: 320, height: 1)
             
             VStack(spacing:0){
-                ByItem()
-                
-                Rectangle()
-                    .fill(Color("gray-100"))
-                    .frame(width:320, height: 1)
-                
-                ByItem()
+                ForEach(data.items.indices, id: \.self)  { index in
+                    TransportItemView(data: data.items[index])
+                    
+                    if index != data.items.count-1 {
+                        Rectangle()
+                            .fill(Color("gray-100"))
+                            .frame(width:320, height: 1)
+                    }
+                }
             }
         }
         .background(
@@ -84,22 +88,34 @@ struct ETicketItem: View {
 }
 
 struct ETicketView: View {
+    @EnvironmentObject var eTicketListViewModel: ETicketListViewModel
+    @State var list: [TransportList] = []
     
     var body: some View {
         ScrollView(showsIndicators:false){
             MonthSelector()
             
             VStack(spacing:20){
-                ETicketItem()
+                ForEach(list.indices, id: \.self)  { index in
+                    ETicketItemView(data: list[index])
+                }
             }
             .frame(width: 320)
             .padding(.bottom,80)
+        }
+        .onAppear {
+            list = eTicketListViewModel.GetList(year: 2022, startMonth: 5, endMonth: 6)
         }
     }
 }
 
 struct ETicketView_Previews: PreviewProvider {
+    static var leafViewModel:LeafViewModel = LeafViewModel()
+    static var badgeViewModel:BadgeViewModel = BadgeViewModel()
+    static var eTicketListViewModel:ETicketListViewModel = ETicketListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
+    
     static var previews: some View {
         ETicketView()
+            .environmentObject(eTicketListViewModel)
     }
 }

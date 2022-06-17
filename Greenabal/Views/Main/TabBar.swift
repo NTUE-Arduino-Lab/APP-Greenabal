@@ -70,12 +70,10 @@ struct TabBar: View {
 }
 
 struct TabBar_Previews: PreviewProvider {
-    static let backgroundViewModel = BackgroundViewModel()
-    static let leafViewModel = BackgroundViewModel()
+    static let leafViewModel = LeafViewModel()
     
     static var previews: some View {
         TabBar()
-            .environmentObject(backgroundViewModel)
             .environmentObject(leafViewModel)
     }
 }
