@@ -193,7 +193,7 @@
 		6C144987284F464B00E8B933 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				EA9635E32859E7E2009512C1 /* Achivement */,
+				EA9635E32859E7E2009512C1 /* Achivementnew */,
 				6C38114C28550E8500E2C614 /* Action */,
 				6C144952284F364200E8B933 /* ContentView.swift */,
 				6C144984284F462500E8B933 /* HomeView.swift */,
@@ -242,7 +242,7 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		EA9635E32859E7E2009512C1 /* Achivement */ = {
+		EA9635E32859E7E2009512C1 /* Achivementnew */ = {
 			isa = PBXGroup;
 			children = (
 				6CE0A316284FC47100231F82 /* AchivementView.swift */,
@@ -250,7 +250,7 @@
 				EA9635E6285B0A84009512C1 /* Achivement.swift */,
 				EA9635E8285BB827009512C1 /* IslandCollection.swift */,
 			);
-			path = Achivement;
+			path = Achivementnew;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
