@@ -28,6 +28,19 @@ struct AchivementView: View {
         MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
         MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
         MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:3,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:3,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:3,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
+        MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次")
         
     ]
     private let title = "成就"
