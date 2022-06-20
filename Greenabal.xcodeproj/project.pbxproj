@@ -45,7 +45,10 @@
 		6CD2E07128578308006F42D5 /* BudgeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2E07028578308006F42D5 /* BudgeModel.swift */; };
 		6CD2E0732857A1A7006F42D5 /* BudgeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CD2E0722857A1A7006F42D5 /* BudgeViewModel.swift */; };
 		6CE0A314284FC44100231F82 /* ActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0A313284FC44100231F82 /* ActionView.swift */; };
-		6CE0A317284FC47100231F82 /* AchivementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0A316284FC47100231F82 /* AchivementView.swift */; };
+		EAAC84CE285C790D0043F8C8 /* Achivement.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC84CD285C790D0043F8C8 /* Achivement.swift */; };
+		EAAC84D0285C79220043F8C8 /* AchivementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC84CF285C79220043F8C8 /* AchivementView.swift */; };
+		EAAC84D2285C793C0043F8C8 /* IslandCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC84D1285C793C0043F8C8 /* IslandCollection.swift */; };
+		EAAC84D4285C794D0043F8C8 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC84D3285C794D0043F8C8 /* Record.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +105,10 @@
 		6CD2E07028578308006F42D5 /* BudgeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgeModel.swift; sourceTree = "<group>"; };
 		6CD2E0722857A1A7006F42D5 /* BudgeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgeViewModel.swift; sourceTree = "<group>"; };
 		6CE0A313284FC44100231F82 /* ActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionView.swift; sourceTree = "<group>"; };
-		6CE0A316284FC47100231F82 /* AchivementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivementView.swift; sourceTree = "<group>"; };
+		EAAC84CD285C790D0043F8C8 /* Achivement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achivement.swift; sourceTree = "<group>"; };
+		EAAC84CF285C79220043F8C8 /* AchivementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivementView.swift; sourceTree = "<group>"; };
+		EAAC84D1285C793C0043F8C8 /* IslandCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandCollection.swift; sourceTree = "<group>"; };
+		EAAC84D3285C794D0043F8C8 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,13 +222,13 @@
 		6C144987284F464B00E8B933 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				EAAC84CC285C78CE0043F8C8 /* AchivementView */,
 				6C38114C28550E8500E2C614 /* Action */,
 				6C144952284F364200E8B933 /* ContentView.swift */,
 				6C144984284F462500E8B933 /* HomeView.swift */,
 				6C14498A284F561300E8B933 /* TaskView.swift */,
 				6C144988284F47E700E8B933 /* TabBar.swift */,
 				6C14498C284F563900E8B933 /* SettingView.swift */,
-				6CE0A316284FC47100231F82 /* AchivementView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -267,6 +273,17 @@
 				6CA49D8428533D53009A155F /* SubTabBar.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		EAAC84CC285C78CE0043F8C8 /* AchivementView */ = {
+			isa = PBXGroup;
+			children = (
+				EAAC84CD285C790D0043F8C8 /* Achivement.swift */,
+				EAAC84CF285C79220043F8C8 /* AchivementView.swift */,
+				EAAC84D1285C793C0043F8C8 /* IslandCollection.swift */,
+				EAAC84D3285C794D0043F8C8 /* Record.swift */,
+			);
+			path = AchivementView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,6 +429,7 @@
 				6CD2E0732857A1A7006F42D5 /* BudgeViewModel.swift in Sources */,
 				6C25277A2857AFFA001D4A5B /* TaskModel.swift in Sources */,
 				6C38115128550F2800E2C614 /* BarcodeView.swift in Sources */,
+				EAAC84D4285C794D0043F8C8 /* Record.swift in Sources */,
 				6CD2E06D28570A9A006F42D5 /* LeafViewModel.swift in Sources */,
 				6C14498B284F561300E8B933 /* TaskView.swift in Sources */,
 				6C38114E28550EB700E2C614 /* ETicketView.swift in Sources */,
@@ -419,8 +437,10 @@
 				6C6696462851C3E500ED62CA /* TabModel.swift in Sources */,
 				6CD2E06B28570A89006F42D5 /* LeafRecordModel.swift in Sources */,
 				6C27DAFA285865B300B58FE3 /* BuyItemModel.swift in Sources */,
+				EAAC84CE285C790D0043F8C8 /* Achivement.swift in Sources */,
 				6CA49D8528533D53009A155F /* SubTabBar.swift in Sources */,
 				6CD2E06F28574F26006F42D5 /* DateViewModel.swift in Sources */,
+				EAAC84D0285C79220043F8C8 /* AchivementView.swift in Sources */,
 				6C144951284F364200E8B933 /* GreenabalApp.swift in Sources */,
 				6CA49D802851D694009A155F /* Header.swift in Sources */,
 				6C25277C2857B607001D4A5B /* TaskListViewModel.swift in Sources */,
@@ -429,7 +449,7 @@
 				6C14498D284F563900E8B933 /* SettingView.swift in Sources */,
 				6C27DAF628585CDF00B58FE3 /* TransportItemModel.swift in Sources */,
 				6C144985284F462500E8B933 /* HomeView.swift in Sources */,
-				6CE0A317284FC47100231F82 /* AchivementView.swift in Sources */,
+				EAAC84D2285C793C0043F8C8 /* IslandCollection.swift in Sources */,
 				6C6696492851CAA200ED62CA /* BackgroundViewModel.swift in Sources */,
 				6CD2E07128578308006F42D5 /* BudgeModel.swift in Sources */,
 				6C27DAF428585CA800B58FE3 /* ETicketListViewModel.swift in Sources */,
