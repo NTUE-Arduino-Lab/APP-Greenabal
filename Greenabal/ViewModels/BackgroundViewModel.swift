@@ -14,6 +14,8 @@ class BackgroundViewModel: ObservableObject {
     @Published var gradients: (Gradient,Gradient)
     @Published var canAnimate: Bool
     @Published var animateState: Bool
+    @Published var maskColors: (Color,Color)
+    @Published var duration: CGFloat
     
     var timer: Timer?
     var state: BackgroundState
@@ -37,6 +39,21 @@ class BackgroundViewModel: ObservableObject {
                 gradient2 = GetGradient(rawValue: self.rawValue + 1)
             }
             return (gradient1,gradient2)
+        }
+        
+        func GetMasks() -> (Color,Color){
+            let mask1: Color
+            let mask2: Color
+            
+            switch self {
+            case .night:
+                mask1 = GetMask(rawValue: self.rawValue)
+                mask2 = GetMask(rawValue: 0)
+            default:
+                mask1 = GetMask(rawValue: self.rawValue)
+                mask2 = GetMask(rawValue: self.rawValue + 1)
+            }
+            return (mask1,mask2)
         }
         
         func GetGradient(rawValue: Int) -> Gradient{
@@ -67,6 +84,21 @@ class BackgroundViewModel: ObservableObject {
             }
         }
         
+        func GetMask(rawValue: Int) -> Color{
+            switch rawValue {
+            case BackgroundState.morning.rawValue:
+                return Color(#colorLiteral(red: 1, green: 0.8745099306106567, blue: 0.6745098233222961, alpha: 0.2))
+            case BackgroundState.afternoon.rawValue:
+                return Color.white
+            case BackgroundState.evening.rawValue:
+                return Color(#colorLiteral(red: 0.7208333611488342, green: 0.32893115282058716, blue: 0.20123261213302612, alpha: 0.3))
+            case BackgroundState.night.rawValue:
+                return Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2))
+            default:
+                return Color.white
+            }
+        }
+        
         func GetNextState() -> BackgroundState{
             switch self {
             case .morning:
@@ -82,17 +114,19 @@ class BackgroundViewModel: ObservableObject {
     }
     
     init(){
-        
         color = LinearGradient(
             gradient: BackgroundState.afternoon.GetGradient(type: .afternoon),
             startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
             endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
         
-        state = BackgroundState.morning
+        state = BackgroundState.afternoon
         gradients = state.GetGradients()
         progress = 0
         canAnimate = false
         animateState = false
+        duration = 5.0
+        
+        maskColors = state.GetMasks()
         
         timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(SetAnimateState), userInfo: nil, repeats: true)
     }
@@ -100,7 +134,7 @@ class BackgroundViewModel: ObservableObject {
     func SetBackground(){
         state = state.GetNextState()
         gradients = state.GetGradients()
-        
+        maskColors = state.GetMasks()
     }
     
     func SetAnimate(canA: Bool, stateA: Bool){
@@ -114,12 +148,12 @@ class BackgroundViewModel: ObservableObject {
     
     func SetCanAnimate(){
         canAnimate = !canAnimate
-//        print("Switch CanAnimate \(canAnimate)")
+        //        print("Switch CanAnimate \(canAnimate)")
     }
     
     @objc func SetAnimateState(){
         animateState = !animateState
-//        print("Switch AnimateState \(animateState)")
+        //        print("Switch AnimateState \(animateState)")
     }
 }
 
@@ -158,16 +192,7 @@ struct AnimatableGradientModifier: AnimatableModifier {
             SetAnimate(!canAnimate,animateState)
         }
         
-        return LinearGradient(gradient: fromGradient, startPoint: .topLeading, endPoint: .bottomTrailing)
-        
-        
-        
-        //        LinearGradient(
-        //            gradient: Gradient(stops: [
-        //                .init(color: Color(#colorLiteral(red: 0.6102343797683716, green: 0.7855484485626221, blue: 0.9125000238418579, alpha: 1)), location: 0),
-        //                .init(color: Color(#colorLiteral(red: 0.915928840637207, green: 0.9526067972183228, blue: 0.9791666865348816, alpha: 1)), location: 1)]),
-        //            startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
-        //            endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
+        return LinearGradient(gradient: fromGradient, startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17), endPoint: UnitPoint(x: 0.5, y: 1.0))
     }
     
     func colorMixer(fromColor: UIColor, toColor: UIColor, progress: CGFloat) -> Color {
@@ -181,7 +206,6 @@ struct AnimatableGradientModifier: AnimatableModifier {
         return Color(red: Double(red), green: Double(green), blue: Double(blue))
     }
 }
-
 
 extension View {
     func animatableGradient(fromGradient: Gradient, toGradient: Gradient, progress: CGFloat,animateState: Bool,canAnimate: Bool, SetAnimate: @escaping (Bool,Bool) -> Void) -> some View {
