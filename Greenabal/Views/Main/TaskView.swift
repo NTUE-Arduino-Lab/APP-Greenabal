@@ -31,19 +31,28 @@ struct DraggableModifier : ViewModifier {
     @State private var isShowIcon:Bool = false
     @State private var IconOpacity:Double = 0
     @State private var frameOpacity:Double = 0
+     var finished:Bool
     //    @State private var frameCornerR:Double = 0
     
     func body(content: Content) -> some View {
         HStack{
             content
                 .offset(
+                    finished == true ?
+                        CGSize(width: 0,height:   0 )
+                    :
                     CGSize(width: direction == .vertical ? 0 : draggedOffset.width,
                            height: direction == .horizontal ? 0 : draggedOffset.height)
+                    
                 )
                 .gesture(
                     DragGesture()
                         .onChanged { value in
                             //               if self.draggedOffset.width > CGFloat(-40) && self.draggedOffset.width <= CGFloat(0){
+                            print(finished)
+                            guard !finished else{
+                                return
+                            }
                             if self.BreakPoint.width == CGFloat(0){
                                 if value.translation.width >= CGFloat(-52) && value.translation.width <= CGFloat(0){
                                     self.draggedOffset = CGSize(width:self.BreakPoint.width + value.translation.width,height:self.BreakPoint.height + value.translation.height)
@@ -85,11 +94,19 @@ struct DraggableModifier : ViewModifier {
                             //                }
                         }
                         .onEnded { value in
+                            guard !finished else{
+                                self.draggedOffset = .zero
+                                self.BreakPoint = .zero
+                                self.reLoadWidth=CGFloat(0)
+                                self.IconOpacity=0
+                                self.frameOpacity = 0
+                                return
+                            }
                             if value.translation.width < -30{
                                 self.draggedOffset = CGSize(width:-50 , height:0 )
                                 self.BreakPoint = CGSize(width:-50 , height:0 )
                                 self.reLoadWidth=CGFloat(48)
-                                self.IconOpacity=1
+                                self.IconOpacity=0.8
                                 self.frameOpacity = 1
                                 //                    isShowIcon.toggle()
                             }else{
@@ -103,16 +120,14 @@ struct DraggableModifier : ViewModifier {
                             
                         }
                 ).overlay(HStack{Spacer()
+                    if(finished){}else{
                     ZStack{Text("").frame(width: self.reLoadWidth, height: 48 ).background(.white).cornerRadius(10).opacity(self.frameOpacity)
                         Button{
                             print("reload!")
                         } label: {
                             Image("reLoad").resizable().frame(width: 16, height: 16).opacity(self.IconOpacity)
                         }
-                        
-                        
-                        
-                    }
+                    }}
                 },alignment: .top)
             
         }
@@ -189,14 +204,30 @@ struct EachTaskView: View {
         case TaskType.knowledge:
             HStack{
                 Button{
-                    //                    completeTask(index)
+                                       completeTask(index)
                 }label:{
-                    Image("play-circle").frame(width: 48,
-                                               height: 48)
+                    
+                    if data.isComplete{
+                        ZStack {
+                            Text("").frame(width: 48,
+                                           height: 48).background(Color.clear)
+                        Text("").frame(width: 16, height: 16).background(LinearGradient(
+                            colors: [Color(red: 18/255, green: 235/255,blue: 195/255),Color(red: 7/255, green: 215/255,blue: 66/255) ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )).cornerRadius(8)
+                        }
+                    }else{
+                        Image("play-circle").frame(width: 48,
+                                                   height: 48)
+                    }
                 }
                 Text(data.task.name).font(.custom("Roboto Medium", size: 14))
                 Spacer()
+                if data.isComplete{
+                    Text("已領取").font(.custom("Roboto Medium", size: 14)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1))).tracking(0.56)
                 
+                }else{
                 Text("\(data.task.leaf)").font(.system(size: 14))
                     .overlay {
                         LinearGradient(
@@ -210,6 +241,7 @@ struct EachTaskView: View {
                         )
                     }
                 Image("leaf")
+                }
                 Spacer().frame(width: 15, height: 40)
             }.background(.white).cornerRadius(10)
         case TaskType.normal:
@@ -232,32 +264,42 @@ struct EachTaskView: View {
                         }else{
                             Text("").frame(width: 14, height: 14).background(Color.clear).overlay(
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(red: 230/255, green: 230/255,blue: 230/255), lineWidth: 2)
+                                    .stroke(Color(red: 210/255, green: 210/255,blue: 210/255), lineWidth: 2)
                                 
                             )
                         }
                         
                     }
                 }
-                Text(data.task.name).font(.custom("Roboto Medium", size: 14))
-                Spacer()
+                if data.isComplete{
+                    Text(data.task.name).font(.custom("Roboto Medium", size: 14)).strikethrough().foregroundColor(Color(#colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.6))).tracking(0.56)
+                }else{
+                    Text(data.task.name).font(.custom("Roboto Medium", size: 14))
+                }
                 
-                Text("\(data.task.leaf)").font(.system(size: 14))
-                    .overlay {
-                        LinearGradient(
-                            colors: [Color(red: 18/255, green: 235/255,blue: 195/255),Color(red: 7/255, green: 215/255,blue: 66/255) ],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        ) .mask(
-                            Text("\(data.task.leaf)")
-                                .font(Font.system(size: 14))
-                                .multilineTextAlignment(.center)
-                        )
-                    }
-                Image("leaf")
+                Spacer()
+                if data.isComplete{
+                    Text("已領取").font(.custom("Roboto Medium", size: 14)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1))).tracking(0.56)
+                
+                }else{
+                    Text("\(data.task.leaf)").font(.system(size: 14))
+                        .overlay {
+                            LinearGradient(
+                                colors: [Color(red: 18/255, green: 235/255,blue: 195/255),Color(red: 7/255, green: 215/255,blue: 66/255) ],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            ) .mask(
+                                Text("\(data.task.leaf)")
+                                    .font(Font.system(size: 14))
+                                    .multilineTextAlignment(.center)
+                            )
+                        }
+                    Image("leaf")
+                    
+                }
                 Spacer().frame(width: 15, height: 40)
             }.background(.white).cornerRadius(10)
-                .modifier(DraggableModifier(direction: .horizontal))
+                .modifier(DraggableModifier(direction: .horizontal,finished:data.isComplete))
             //                    .gesture(
             //                                    simpleDrag
             //                                )
