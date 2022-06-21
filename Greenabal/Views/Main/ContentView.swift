@@ -16,7 +16,7 @@ struct ContentView: View {
                 .animatableGradient(fromGradient: backgroundVM.gradients.0, toGradient: backgroundVM.gradients.1, progress: backgroundVM.progress, animateState: backgroundVM.animateState,canAnimate: backgroundVM.canAnimate, SetAnimate: backgroundVM.SetAnimate)
                 .ignoresSafeArea()
                 .onAppear {
-                    withAnimation(.linear(duration: 5.0).repeatForever(autoreverses: false)) {
+                    withAnimation(.linear(duration: backgroundVM.duration).repeatForever(autoreverses: false)) {
                         backgroundVM.progress = 1
                     }
                 }

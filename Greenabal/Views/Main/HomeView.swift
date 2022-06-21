@@ -66,10 +66,11 @@ class GameScene: SKScene, ObservableObject {
 }
 
 struct HomeView: View {
-    @EnvironmentObject var backgroundViewModel: BackgroundViewModel
+    @EnvironmentObject var backgroundVM: BackgroundViewModel
     @EnvironmentObject var leafViewModel: LeafViewModel
     private let title = "No.168 初來乍島 Lv.3"
     private let name = "Home"
+    @State private var islandColor: Color = Color.red
     
     @StateObject private var scene: GameScene =  {
         let scene = GameScene()
@@ -86,7 +87,17 @@ struct HomeView: View {
             
             ZStack{
                 SpriteView(scene: self.scene , options: [.allowsTransparency])
-                    .colorMultiply(Color.red)
+                    .colorMultiply(islandColor)
+                    .onAppear{
+                        islandColor = backgroundVM.maskColors.0
+                    }
+                    .onChange(of: backgroundVM.canAnimate, perform: { newValue in
+                        if backgroundVM.canAnimate {
+                            withAnimation(.linear(duration: backgroundVM.duration)) {
+                                islandColor = backgroundVM.maskColors.1
+                            }
+                        }
+                    })
                 
                 VStack{
                     HStack(alignment: .center){
@@ -160,9 +171,11 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static let leafViewModel = LeafViewModel()
+    static let backgroundVM = BackgroundViewModel()
     
     static var previews: some View {
         TabBar()
             .environmentObject(leafViewModel)
+            .environmentObject(backgroundVM)
     }
 }
