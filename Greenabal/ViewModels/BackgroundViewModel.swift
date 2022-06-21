@@ -119,7 +119,7 @@ class BackgroundViewModel: ObservableObject {
             startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
             endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
         
-        state = BackgroundState.morning
+        state = BackgroundState.afternoon
         gradients = state.GetGradients()
         progress = 0
         canAnimate = false

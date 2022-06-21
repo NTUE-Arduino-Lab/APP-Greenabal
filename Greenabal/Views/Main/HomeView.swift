@@ -71,6 +71,7 @@ struct HomeView: View {
     private let title = "No.168 初來乍島 Lv.3"
     private let name = "Home"
     @State private var islandColor: Color = Color.red
+    @State private var maskColor: Color = Color.white
     
     @StateObject private var scene: GameScene =  {
         let scene = GameScene()
@@ -84,6 +85,7 @@ struct HomeView: View {
         
         VStack{
             Header(title: title, name: name)
+                .foregroundColor(backgroundVM.state == .morning ? Color("black-font") : Color.white)
             
             ZStack{
                 SpriteView(scene: self.scene , options: [.allowsTransparency])
@@ -101,19 +103,20 @@ struct HomeView: View {
                 
                 VStack{
                     HStack(alignment: .center){
-                        Image("LeafCountBG")
+                        Image(backgroundVM.state == .morning ? "leaf_count_bg_black" : "leaf_count_bg_white")
                             .overlay(
                                 Text("\(leafViewModel.count)")
                                     .font(.custom("Roboto Bold", size: 14))
                                     .tracking(1.2)
                                     .position(x: 60, y: 25)
                                     .multilineTextAlignment(.center)
+                                    .foregroundColor(backgroundVM.state == .morning ? Color("black-font") : Color.white)
                             )
                         
                         Rectangle()
                             .fill(Color.clear)
                         
-                        Image("icon_shot")
+                        Image(backgroundVM.state == .morning ? "icon_shot_black" : "icon_shot")
                     }
                     .frame(height: 45)
                     .frame(maxWidth: .infinity)
@@ -127,12 +130,13 @@ struct HomeView: View {
                             Text("\(leafViewModel.autoIncreseCount)")
                                 .font(.custom("Roboto Medium", size: 14))
                                 .tracking(0.56)
-                            Image("icon_leaf_white")
+                            Image(backgroundVM.state == .morning ? "icon_leaf_black" : "icon_leaf_white")
                             Text(" / hr")
                                 .font(.custom("Roboto Medium", size: 14))
                                 .tracking(0.56)
                         }
-                        
+                        .foregroundColor(backgroundVM.state == .morning ? Color("black-font") : Color.white)
+
                         Button(action: {
                             scene.updateLevel()
                         }, label: {
@@ -146,7 +150,7 @@ struct HomeView: View {
                         })
                         .buttonStyle(.borderless)
                         .frame(width: 143, height: 36)
-                        .background(RoundedRectangle(cornerRadius: 26).fill(Color.white))
+                        .background(RoundedRectangle(cornerRadius: 26).fill(Color("gray-200")))
                     }
                     .padding(.bottom, 210)
                 }
