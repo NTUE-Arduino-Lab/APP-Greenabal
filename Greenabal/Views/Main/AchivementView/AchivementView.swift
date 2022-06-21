@@ -54,7 +54,7 @@ struct AchivementView: View {
     let axisColor: Color = Color.blue
     let showGrid: Bool = true
     let gridColor: Color = Color(red: 204/255, green: 204/255,blue: 204/255)
-    let spacing: CGFloat = 15
+    let spacing: CGFloat = 15 //條狀圖間隔 15 以下基本上不會跑版 再更大要測試
     var body: some View {
         VStack{
             Header(title: title, name: name)
@@ -62,7 +62,7 @@ struct AchivementView: View {
             ZStack(alignment: .bottom){
                 if tabTarget == 0 {
                     ScrollView(.vertical,showsIndicators:false){
-                        VStack(spacing: 20){
+                        VStack(spacing: 18){
                         
                         RecordBlock(data:$data,labels: $labels,accentColor1: accentColor1,accentColor2: accentColor2,axisColor: axisColor,showGrid: showGrid,gridColor: gridColor,spacing: spacing)
                         AchivementBlock(pageNum:medalDataArray.count,medalDataArray:$medalDataArray)
