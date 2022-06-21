@@ -42,7 +42,7 @@ struct AchivementView: View {
         MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次")
         
     ]
-    private let title = "成就"
+    @State private var title = "成就"
     private let name = "Achivement"
     @State var data: [Double] = [0,12,1,2,15,13,22]
     @State var labels: [String] = ["0","6","12","18","24"]
@@ -56,7 +56,7 @@ struct AchivementView: View {
     let spacing: CGFloat = 15 //條狀圖間隔 15 以下基本上不會跑版 再更大要測試
     var body: some View {
         VStack{
-            Header(title: title, name: name)
+            Header(title: $title, name: name)
             VStack{
             ZStack(alignment: .bottom){
                 if tabTarget == 0 {

@@ -139,7 +139,7 @@ struct TaskView: View {
     
     //    @State private var taskCount:Int = taskListDataArray.count
     //    @State private var finishedTaskCount:Int = taskListDataArray.filter{$0.finish==true}.count
-    private let title = "每日任務"
+    @State private var title = "每日任務"
     private let name = "Task"
     init() {
         UITableView.appearance().separatorStyle = .none
@@ -148,7 +148,7 @@ struct TaskView: View {
     }
     var body: some View {
         VStack(){
-            Header(title: title, name: name)
+            Header(title: $title, name: name)
             VStack{
                 
                 VStack(spacing:13){

@@ -56,12 +56,10 @@ class GameScene: SKScene, ObservableObject {
         startIdleAnimation()
     }
     
-    func updateLevel(){
-        if level <= 4 {
-            level += 1
-            setupIsland()
-            startIdleAnimation()
-        }
+    func setLevel(level: Int){
+        self.level = level
+        setupIsland()
+        startIdleAnimation()
     }
 }
 
@@ -69,7 +67,7 @@ struct HomeView: View {
     @EnvironmentObject var backgroundVM: BackgroundViewModel
     @EnvironmentObject var leafVM: LeafViewModel
     @EnvironmentObject var islandVM: IslandViewModel
-    private let title = "No.168 初來乍島 Lv.3"
+    @State private var title = "No.168 初來乍島 Lv.3"
     private let name = "Home"
     @State private var islandColor: Color = Color.red
     @State private var maskColor: Color = Color.white
@@ -85,7 +83,7 @@ struct HomeView: View {
     var body: some View {
         
         VStack{
-            Header(title: title, name: name)
+            Header(title: $title, name: name)
                 .foregroundColor(backgroundVM.state == .morning ? Color("black-font") : Color.white)
             
             ZStack{
@@ -137,18 +135,21 @@ struct HomeView: View {
                                 .tracking(0.56)
                         }
                         .foregroundColor(backgroundVM.state == .morning ? Color("black-font") : Color.white)
-
+                        
                         Button(action: {
-                            scene.updateLevel()
+                            islandVM.updateIsland()
+                            changeTitle()
+                            scene.setLevel(level: islandVM.currentIsland.currentLevel)
                         }, label: {
                             HStack(alignment:.center, spacing: 2){
-                                Text("升級島嶼 500")
+                                Text("升級島嶼 \( islandVM.currentIsland.getLevelLeaf())")
                                     .foregroundColor(Color("gray-300"))
                                     .font(.custom("Roboto Medium", size: 14))
                                     .tracking(0.64)
                                 Image("icon_leaf_gray")
                             }
                         })
+                        .disabled(leafVM.count >= islandVM.currentIsland.getLevelLeaf() ? false : true)
                         .buttonStyle(.borderless)
                         .frame(width: 143, height: 36)
                         .background(RoundedRectangle(cornerRadius: 26).fill(Color("gray-200")))
@@ -164,13 +165,15 @@ struct HomeView: View {
                    maxHeight: .infinity,
                    alignment: .center)
         }
-        //        .background(LinearGradient(
-        //                gradient: Gradient(stops: [
-        //                    .init(color: Color(#colorLiteral(red: 0.6102343797683716, green: 0.7855484485626221, blue: 0.9125000238418579, alpha: 1)), location: 0),
-        //                    .init(color: Color(#colorLiteral(red: 0.915928840637207, green: 0.9526067972183228, blue: 0.9791666865348816, alpha: 1)), location: 1)]),
-        //                startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
-        //                endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999)))
         .foregroundColor(.white)
+        .onAppear(){
+            scene.setLevel(level: islandVM.currentIsland.currentLevel)
+            changeTitle()
+        }
+    }
+    
+    func changeTitle(){
+        title = "No.\(islandVM.currentIsland.number) 初來乍島 Lv.\(islandVM.currentIsland.currentLevel)"
     }
 }
 

@@ -36,14 +36,14 @@ struct MonthSelector: View{
 
 struct ActionView: View {
     
-    private let title = "環保行動"
+    @State private var title = "環保行動"
     private let name = "Action"
     private var tabs = ["手機載具","電子票證"]
     @State var tabTarget: Int = 1
     
     var body: some View {
         VStack(spacing:0){
-            Header(title: title, name: name)
+            Header(title: $title, name: name)
             
             ZStack(alignment: .bottom){
                 if tabTarget == 0 {

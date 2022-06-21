@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SettingView: View {
-    private let title = "設定"
+    @State private var title = "設定"
     private let name = "Setting"
 
     var body: some View {
         VStack{
-            Header(title: title, name: name)
+            Header(title: $title, name: name)
         
             VStack{
                 Text("SettingView")

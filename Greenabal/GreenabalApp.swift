@@ -37,6 +37,7 @@ struct GreenabalApp: App {
                 .environmentObject(taskListVM)
                 .environmentObject(eTicketListVM)
                 .environmentObject(barcodeListVM)
+                .environmentObject(islandVM)
         }
     }
 }

@@ -9,14 +9,27 @@ import Foundation
 
 class IslandViewModel: ObservableObject{
     @Published var islandList: [IslandModel] = []
-    @Published var currentIslandIndex: Int = 0
+    @Published var currentIsland: IslandModel
+    @Published var currentIslandIndex: Int
     let leafVM: LeafViewModel
     
     init(leafVM: LeafViewModel){
         self.leafVM = leafVM
         
-        islandList = [
-            IslandModel(name: "初來乍島", number: 168, leafs: [10,50,100,250,500])
+        let newList = [
+            IslandModel(name: "初來乍島",image: "Island_L", number: 168, leafs: [10,50,75,100,200])
         ]
+        
+        islandList = newList
+        
+        currentIslandIndex = 0
+        currentIsland = newList[0]
+    }
+    
+    func updateIsland(){
+        if currentIsland.currentLevel <= currentIsland.totalLevel - 1 {
+            leafVM.ReduceCount(num: currentIsland.getLevelLeaf())
+            currentIsland.updateLevel()
+        }
     }
 }

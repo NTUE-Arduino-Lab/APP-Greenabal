@@ -21,7 +21,7 @@ class LeafViewModel: ObservableObject{
             LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date()), count: 5)
         ]
         
-        count = 5
+        count = 500
         recordList = testRecordList
         autoIncreseCount = 3
         
@@ -72,7 +72,7 @@ class LeafViewModel: ObservableObject{
         count += num
     }
     
-    private func ReduceCount(num:Int){
+    func ReduceCount(num:Int){
         count -= num
     }
     
