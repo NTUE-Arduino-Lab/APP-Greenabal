@@ -88,7 +88,7 @@ struct ETicketItemView: View {
 }
 
 struct ETicketView: View {
-    @EnvironmentObject var eTicketListViewModel: ETicketListViewModel
+    @EnvironmentObject var eTicketListVM: ETicketListViewModel
     @State var list: [TransportList] = []
     
     var body: some View {
@@ -118,18 +118,18 @@ struct ETicketView: View {
             }
         }
         .onAppear {
-            list = eTicketListViewModel.GetList(year: 2022, startMonth: 5, endMonth: 6)
+            list = eTicketListVM.GetList(year: 2022, startMonth: 5, endMonth: 6)
         }
     }
 }
 
 struct ETicketView_Previews: PreviewProvider {
-    static var leafViewModel:LeafViewModel = LeafViewModel()
-    static var badgeViewModel:BadgeViewModel = BadgeViewModel()
-    static var eTicketListViewModel:ETicketListViewModel = ETicketListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
+    static var leafVM:LeafViewModel = LeafViewModel()
+    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var eTicketListVM:ETicketListViewModel = ETicketListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     
     static var previews: some View {
         ETicketView()
-            .environmentObject(eTicketListViewModel)
+            .environmentObject(eTicketListVM)
     }
 }

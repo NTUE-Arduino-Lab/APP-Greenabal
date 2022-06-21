@@ -78,7 +78,7 @@ struct BarcodeItemView: View {
 }
 
 struct BarcodeView: View {
-    @EnvironmentObject var barcodeListViewModel: BarcodeListViewModel
+    @EnvironmentObject var barcodeListVM: BarcodeListViewModel
     @State var list: [BuyList] = []
     
     var body: some View {
@@ -105,18 +105,18 @@ struct BarcodeView: View {
 
         }
         .onAppear {
-            list = barcodeListViewModel.GetList(year: 2022, startMonth: 5, endMonth: 6)
+            list = barcodeListVM.GetList(year: 2022, startMonth: 5, endMonth: 6)
         }
     }
 }
 
 struct BarcodeView_Previews: PreviewProvider {
-    static var leafViewModel:LeafViewModel = LeafViewModel()
-    static var badgeViewModel:BadgeViewModel = BadgeViewModel()
-    static var barcodeListViewModel:BarcodeListViewModel = BarcodeListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
+    static var leafVM:LeafViewModel = LeafViewModel()
+    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var barcodeListVM:BarcodeListViewModel = BarcodeListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     
     static var previews: some View {
         BarcodeView()
-            .environmentObject(barcodeListViewModel)
+            .environmentObject(barcodeListVM)
     }
 }

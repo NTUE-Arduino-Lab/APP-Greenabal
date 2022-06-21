@@ -10,12 +10,12 @@ import SwiftUI
 
 class ETicketListViewModel: ObservableObject{
     @Published var transportList: [TransportList]
-    let leafViewModel: LeafViewModel
-    let badgeViewModel: BadgeViewModel
+    let leafVM: LeafViewModel
+    let badgeVM: BadgeViewModel
     
-    init(leafViewModel: LeafViewModel,badgeViewModel: BadgeViewModel){
-        self.leafViewModel = leafViewModel
-        self.badgeViewModel = badgeViewModel
+    init(leafVM: LeafViewModel,badgeVM: BadgeViewModel){
+        self.leafVM = leafVM
+        self.badgeVM = badgeVM
         
         let testList: [TransportList] = [
             TransportList(date: "2022/05/18", items: [TransportItem(title: "台北捷運", time: "20:00"),TransportItem(title: "Youbike", time: "20:20")]),
@@ -65,8 +65,8 @@ class ETicketListViewModel: ObservableObject{
         print("--------------add transport list 's item-----------------")
         print(transportList)
         
-        leafViewModel.AddCount(num: leaf, record: true)
-        badgeViewModel.RefreshBadge(title: badge)
+        leafVM.AddCount(num: leaf, record: true)
+        badgeVM.RefreshBadge(title: badge)
     }
 }
 

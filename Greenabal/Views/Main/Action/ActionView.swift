@@ -36,14 +36,14 @@ struct MonthSelector: View{
 
 struct ActionView: View {
     
-    private let title = "環保行動"
+    @State private var title = "環保行動"
     private let name = "Action"
     private var tabs = ["手機載具","電子票證"]
     @State var tabTarget: Int = 1
     
     var body: some View {
         VStack(spacing:0){
-            Header(title: title, name: name)
+            Header(title: $title, name: name)
             
             ZStack(alignment: .bottom){
                 if tabTarget == 0 {
@@ -69,14 +69,14 @@ struct ActionView: View {
 }
 
 struct ActionView_Previews: PreviewProvider {
-    static var leafViewModel:LeafViewModel = LeafViewModel()
-    static var badgeViewModel:BadgeViewModel = BadgeViewModel()
-    static var barcodeListViewModel:BarcodeListViewModel = BarcodeListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
-    static var eTicketListViewModel: ETicketListViewModel = ETicketListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
+    static var leafVM:LeafViewModel = LeafViewModel()
+    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var barcodeListVM:BarcodeListViewModel = BarcodeListViewModel(leafVM: leafVM, badgeVM: badgeVM)
+    static var eTicketListVM: ETicketListViewModel = ETicketListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     
     static var previews: some View {
         TabBar(initSelectedTab: "Action")
-            .environmentObject(barcodeListViewModel)
-            .environmentObject(eTicketListViewModel)
+            .environmentObject(barcodeListVM)
+            .environmentObject(eTicketListVM)
     }
 }

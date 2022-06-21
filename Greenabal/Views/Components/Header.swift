@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Header: View {
-    let title: String
+    @Binding var title: String
     let name: String
     
     var body: some View {
@@ -26,7 +26,9 @@ struct Header: View {
 }
 
 struct Header_Previews: PreviewProvider {
+    @State static var title = "Home"
+    
     static var previews: some View {
-        Header(title: "Home", name: "Home")
+        Header(title: $title, name: "Home")
     }
 }
