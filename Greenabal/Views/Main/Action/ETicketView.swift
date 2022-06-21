@@ -105,13 +105,13 @@ struct ETicketView: View {
             
             HStack(spacing: 20){
                 Button(action: {
-                    eTicketListViewModel.AddItem(date: "2022/05/18", title: "youbike hihi", time: "20:22", leaf: 4, badge: BadgeType.youbike.rawValue)
+                    eTicketListVM.AddItem(date: "2022/05/18", title: "youbike hihi", time: "20:22", leaf: 4, badge: BadgeType.youbike.rawValue)
                 }, label: {
                     Text("Add Same Date ETicket")
                 })
                 
                 Button(action: {
-                    eTicketListViewModel.AddItem(date: "2022/06/22", title: "youbike hihi", time: "20:22", leaf: 4, badge: BadgeType.youbike.rawValue)
+                    eTicketListVM.AddItem(date: "2022/06/22", title: "youbike hihi", time: "20:22", leaf: 4, badge: BadgeType.youbike.rawValue)
                 }, label: {
                     Text("Add New Date ETicket")
                 })

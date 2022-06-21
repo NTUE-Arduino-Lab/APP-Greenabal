@@ -95,7 +95,7 @@ struct BarcodeView: View {
             
             HStack(spacing: 20){
                 Button(action: {
-                    barcodeListViewModel.AddItem(date: "2022/05/20", shop: "gggg", items: [
+                    barcodeListVM.AddItem(date: "2022/05/20", shop: "gggg", items: [
                         BuyItem(name: "冰箱", gift: GiftLeaf(leaf: 4), seal: Seal.省電標章.rawValue, badge: BadgeType.seal_環保.rawValue)
                     ])
                 }, label: {
