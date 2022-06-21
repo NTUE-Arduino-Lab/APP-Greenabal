@@ -67,7 +67,8 @@ class GameScene: SKScene, ObservableObject {
 
 struct HomeView: View {
     @EnvironmentObject var backgroundVM: BackgroundViewModel
-    @EnvironmentObject var leafViewModel: LeafViewModel
+    @EnvironmentObject var leafVM: LeafViewModel
+    @EnvironmentObject var islandVM: IslandViewModel
     private let title = "No.168 初來乍島 Lv.3"
     private let name = "Home"
     @State private var islandColor: Color = Color.red
@@ -105,7 +106,7 @@ struct HomeView: View {
                     HStack(alignment: .center){
                         Image(backgroundVM.state == .morning ? "leaf_count_bg_black" : "leaf_count_bg_white")
                             .overlay(
-                                Text("\(leafViewModel.count)")
+                                Text("\(leafVM.count)")
                                     .font(.custom("Roboto Bold", size: 14))
                                     .tracking(1.2)
                                     .position(x: 60, y: 25)
@@ -127,7 +128,7 @@ struct HomeView: View {
                     
                     VStack(spacing: 12){
                         HStack(spacing: 3){
-                            Text("\(leafViewModel.autoIncreseCount)")
+                            Text("\(leafVM.autoIncreseCount)")
                                 .font(.custom("Roboto Medium", size: 14))
                                 .tracking(0.56)
                             Image(backgroundVM.state == .morning ? "icon_leaf_black" : "icon_leaf_white")
@@ -174,12 +175,14 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
-    static let leafViewModel = LeafViewModel()
+    static let leafVM = LeafViewModel()
     static let backgroundVM = BackgroundViewModel()
+    static var islandVM = IslandViewModel(leafVM: leafVM)
     
     static var previews: some View {
         TabBar()
-            .environmentObject(leafViewModel)
+            .environmentObject(leafVM)
             .environmentObject(backgroundVM)
+            .environmentObject(islandVM)
     }
 }

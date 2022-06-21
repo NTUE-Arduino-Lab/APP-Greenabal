@@ -20,7 +20,6 @@ struct MedalListData:Identifiable
 
 struct AchivementView: View {
     //圖表作法參考自 https://www.appcoda.com.tw/swiftui-bar-chart/
-    @EnvironmentObject var background: BackgroundViewModel
     @State var medalDataArray:[MedalListData]=[
         MedalListData(rank:3,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
         MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
@@ -88,15 +87,12 @@ struct AchivementView: View {
                  maxHeight: .infinity,
                  alignment: .center)
         }
-        .background(background.color)
     }
 }
 
 struct AchivementView_Previews: PreviewProvider {
-    static let backgroundViewModel = BackgroundViewModel()
-    
     static var previews: some View {
-        TabBar(initSelectedTab: "Achivement").environmentObject(backgroundViewModel)
+        TabBar(initSelectedTab: "Achivement")
     }
 }
 

@@ -10,12 +10,12 @@ import Foundation
 class TaskListViewModel: ObservableObject{
     @Published var taskList: [Task]
     @Published var completeCount: Int
-    let leafViewModel: LeafViewModel
-    let badgeViewModel: BadgeViewModel
+    let leafVM: LeafViewModel
+    let badgeVM: BadgeViewModel
     
-    init(leafViewModel: LeafViewModel,badgeViewModel: BadgeViewModel){
-        self.leafViewModel = leafViewModel
-        self.badgeViewModel = badgeViewModel
+    init(leafVM: LeafViewModel,badgeVM: BadgeViewModel){
+        self.leafVM = leafVM
+        self.badgeVM = badgeVM
         
         var testList:[Task] = []
         TaskData.all.forEach { item in
@@ -39,8 +39,8 @@ class TaskListViewModel: ObservableObject{
             print(taskList)
             
             
-            leafViewModel.AddCount(num: taskList[index].task.leaf, record: true)
-            badgeViewModel.RefreshBadge(title: taskList[index].task.bagdge)
+            leafVM.AddCount(num: taskList[index].task.leaf, record: true)
+            badgeVM.RefreshBadge(title: taskList[index].task.bagdge)
         }
     }
     

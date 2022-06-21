@@ -135,7 +135,7 @@ struct DraggableModifier : ViewModifier {
     
 }
 struct TaskView: View {
-    @EnvironmentObject var taskListViewModel: TaskListViewModel
+    @EnvironmentObject var taskListVM: TaskListViewModel
     
     //    @State private var taskCount:Int = taskListDataArray.count
     //    @State private var finishedTaskCount:Int = taskListDataArray.filter{$0.finish==true}.count
@@ -154,14 +154,14 @@ struct TaskView: View {
                 VStack(spacing:13){
                     HStack(alignment:.center ){
                         Spacer()
-                        Text("完成\(taskListViewModel.completeCount)/5")
+                        Text("完成\(taskListVM.completeCount)/5")
                             .font(.custom("Roboto Medium", size: 14))
                             .tracking(0.56)
                         
                     }.padding(EdgeInsets(top: 10, leading: 0, bottom: 5, trailing: 0))
                     
-                    ForEach(taskListViewModel.taskList.indices, id: \.self)  { index in
-                        EachTaskView(index: index, data: taskListViewModel.taskList[index], completeTask: taskListViewModel.completeTask)
+                    ForEach(taskListVM.taskList.indices, id: \.self)  { index in
+                        EachTaskView(index: index, data: taskListVM.taskList[index], completeTask: taskListVM.completeTask)
                         
                     }.listRowSeparator(.hidden)
                 }.padding(.horizontal,27)
@@ -310,12 +310,12 @@ struct EachTaskView: View {
 }
 
 struct TaskView_Previews: PreviewProvider {
-    static var leafViewModel:LeafViewModel = LeafViewModel()
-    static var badgeViewModel:BadgeViewModel = BadgeViewModel()
-    static var taskListViewModel:TaskListViewModel = TaskListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
+    static var leafVM:LeafViewModel = LeafViewModel()
+    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var taskListVM:TaskListViewModel = TaskListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     
     static var previews: some View {
         TabBar(initSelectedTab: "Task")
-            .environmentObject(taskListViewModel)
+            .environmentObject(taskListVM)
     }
 }

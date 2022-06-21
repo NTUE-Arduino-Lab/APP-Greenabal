@@ -69,14 +69,14 @@ struct ActionView: View {
 }
 
 struct ActionView_Previews: PreviewProvider {
-    static var leafViewModel:LeafViewModel = LeafViewModel()
-    static var badgeViewModel:BadgeViewModel = BadgeViewModel()
-    static var barcodeListViewModel:BarcodeListViewModel = BarcodeListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
-    static var eTicketListViewModel: ETicketListViewModel = ETicketListViewModel(leafViewModel: leafViewModel, badgeViewModel: badgeViewModel)
+    static var leafVM:LeafViewModel = LeafViewModel()
+    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var barcodeListVM:BarcodeListViewModel = BarcodeListViewModel(leafVM: leafVM, badgeVM: badgeVM)
+    static var eTicketListVM: ETicketListViewModel = ETicketListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     
     static var previews: some View {
         TabBar(initSelectedTab: "Action")
-            .environmentObject(barcodeListViewModel)
-            .environmentObject(eTicketListViewModel)
+            .environmentObject(barcodeListVM)
+            .environmentObject(eTicketListVM)
     }
 }
