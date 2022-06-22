@@ -41,6 +41,10 @@ class GameScene: SKScene, ObservableObject {
         addChild(island)
     }
     
+    private func updateIsland() {
+        island.texture = islandTexture
+    }
+    
     func startIdleAnimation() {
         let idleAnimation = SKAction.animate(with: islandIdleTextures, timePerFrame: 0.05)
         
@@ -56,9 +60,9 @@ class GameScene: SKScene, ObservableObject {
         startIdleAnimation()
     }
     
-    func setLevel(level: Int){
+    func updateLevel(level: Int){
         self.level = level
-        setupIsland()
+        updateIsland()
         startIdleAnimation()
     }
 }
@@ -139,7 +143,7 @@ struct HomeView: View {
                         Button(action: {
                             islandVM.updateIsland()
                             changeTitle()
-                            scene.setLevel(level: islandVM.currentIsland.currentLevel)
+                            scene.updateLevel(level: islandVM.currentIsland.currentLevel)
                         }, label: {
                             HStack(alignment:.center, spacing: 2){
                                 Text("升級島嶼 \( islandVM.currentIsland.getLevelLeaf())")
@@ -167,7 +171,7 @@ struct HomeView: View {
         }
         .foregroundColor(.white)
         .onAppear(){
-            scene.setLevel(level: islandVM.currentIsland.currentLevel)
+            scene.level = islandVM.currentIsland.currentLevel
             changeTitle()
         }
     }
