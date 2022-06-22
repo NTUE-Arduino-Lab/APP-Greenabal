@@ -87,13 +87,13 @@ class BackgroundViewModel: ObservableObject {
         func GetMask(rawValue: Int) -> Color{
             switch rawValue {
             case BackgroundState.morning.rawValue:
-                return Color(#colorLiteral(red: 1, green: 0.8745099306106567, blue: 0.6745098233222961, alpha: 0.2))
+                return Color(#colorLiteral(red: 1, green: 0.8745099306106567, blue: 0.6745098233222961, alpha: 0.5))
             case BackgroundState.afternoon.rawValue:
                 return Color.white
             case BackgroundState.evening.rawValue:
-                return Color(#colorLiteral(red: 0.7208333611488342, green: 0.32893115282058716, blue: 0.20123261213302612, alpha: 0.3))
+                return Color(#colorLiteral(red: 0.7208333611488342, green: 0.32893115282058716, blue: 0.20123261213302612, alpha: 0.5))
             case BackgroundState.night.rawValue:
-                return Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2))
+                return Color(#colorLiteral(red: 0.17499999701976776, green: 0.17499999701976776, blue: 0.17499999701976776, alpha: 0.699999988079071))
             default:
                 return Color.white
             }
