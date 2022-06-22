@@ -30,66 +30,66 @@ struct RecordBlock: View {
                     HStack(alignment:.center,spacing:0){Text("葉子數量統計").font(.custom("Roboto Bold", size: 14))
                         Spacer()
                         Button{
-//                            print("bbb")
+                            //                            print("bbb")
                         }label: {
                             Image("icon_polygon_left").frame(width: 30, height: 30)
                         }
                         Text("2022/5/1 - 5/7 ").font(.custom("Roboto Medium", size: 12)).tracking(0.72).multilineTextAlignment(.center)
                         Button{
-//                            print("aaa")
+                            //                            print("aaa")
                         }label: {
                             Image("icon_polygon_right").frame(width: 30, height: 30)
                         }
-                    
+                        
                     }
                     HStack(spacing:0){
                         GeometryReader { geo in
                             WeekLabelStack(spacing: (geo.size.height - 123)/7)//高度扣掉字體高度98和label高度20+padding:5再除以7
                         }.frame(width: 16)
                         VStack(spacing:0){
-                        ZStack {
-                            if showGrid {
-                                BarChartGrid(divisionsH: 7,divisionsY: 4)
-                                    .stroke(gridColor, style: StrokeStyle(lineWidth: 0.5 , dash: [6,3]))
-                            }
-                            //因為條狀圖的bar無法只有右半設圓角 所以先放沒有圓角的 再疊一個有圓角的上去
-                            GeometryReader { geo in
-                            BarStack(data: $data,
-                                     labels: $labels,
-                                     accentColor1: accentColor1,
-                                     accentColor2: accentColor2,
-                                     gridColor: gridColor,
-                                     showGrid: showGrid,
-                                     min: minimum,
-                                     max: maximum,
-                                     spacing: (geo.size.height-118)/2.5,
-                                     rounded: false
-                            )
-                            
-                            BarStack(data: $data,
-                                     labels: $labels,
-                                     accentColor1: accentColor1,
-                                     accentColor2: accentColor2,
-                                     gridColor: gridColor,
-                                     showGrid: showGrid,
-                                     min: minimum,
-                                     max: maximum,
-                                     spacing: (geo.size.height-118)/2.5,
-                                     rounded: true
-                            )
-                            }
-                            
-                            //                        BarChartAxes()
-                            //                          .stroke(Color.black, lineWidth: 2)
-                            NumberStack(data: $data,
-                                        min: minimum,
-                                        max: maximum,
-                                        spacing: spacing
-                            )
-                        }.padding(.horizontal,10)
+                            ZStack {
+                                if showGrid {
+                                    BarChartGrid(divisionsH: 7,divisionsY: 4)
+                                        .stroke(gridColor, style: StrokeStyle(lineWidth: 0.5 , dash: [6,3]))
+                                }
+                                //因為條狀圖的bar無法只有右半設圓角 所以先放沒有圓角的 再疊一個有圓角的上去
+                                GeometryReader { geo in
+                                    BarStack(data: $data,
+                                             labels: $labels,
+                                             accentColor1: accentColor1,
+                                             accentColor2: accentColor2,
+                                             gridColor: gridColor,
+                                             showGrid: showGrid,
+                                             min: minimum,
+                                             max: maximum,
+                                             spacing: (geo.size.height-118)/2.5,
+                                             rounded: false
+                                    )
+                                    
+                                    BarStack(data: $data,
+                                             labels: $labels,
+                                             accentColor1: accentColor1,
+                                             accentColor2: accentColor2,
+                                             gridColor: gridColor,
+                                             showGrid: showGrid,
+                                             min: minimum,
+                                             max: maximum,
+                                             spacing: (geo.size.height-118)/2.5,
+                                             rounded: true
+                                    )
+                                }
+                                
+                                //                        BarChartAxes()
+                                //                          .stroke(Color.black, lineWidth: 2)
+                                NumberStack(data: $data,
+                                            min: minimum,
+                                            max: maximum,
+                                            spacing: spacing
+                                )
+                            }.padding(.horizontal,10)
                             LabelStack(labels: $labels, spacing: spacing).frame( height: 20 ).padding(.top,5)
                             //因為每個label寬度是20 padding 0 剛好會對準padding 10的表格
-                          .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing:0 ) )
+                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing:0 ) )
                         }
                     }.padding(0)
                     
@@ -153,7 +153,7 @@ struct BarStack: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
-            ForEach(0 ..< data.count) { index in
+            ForEach(0 ..< data.count, id: \.self) { index in
                 LinearGradient(
                     gradient: .init(
                         stops: [
@@ -164,7 +164,7 @@ struct BarStack: View {
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                    .clipShape(BarPath(data: data[index], max: max, min: min , rounded: rounded))
+                .clipShape(BarPath(data: data[index], max: max, min: min , rounded: rounded))
             }
         }
         //    .shadow(color: .black, radius: 5, x: 1, y: 1)
@@ -188,7 +188,7 @@ struct NumberStack: View {
         
         
         VStack(alignment: .leading, spacing: spacing/2) {
-            ForEach(0 ..< data.count) { index in
+            ForEach(0 ..< data.count, id: \.self) { index in
                 
                 
                 //          Text("").frame(maxWidth: .infinity, maxHeight: .infinity).background(.red).font(.custom("Roboto SemiBold", size: 12)).offset(x:0,y:0).overlay(

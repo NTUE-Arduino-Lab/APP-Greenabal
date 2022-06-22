@@ -56,7 +56,7 @@ struct AchivementBlock: View {
                             .frame(width: outerView.size.width, height: outerView.size.height)
                             .offset(x: -CGFloat(self.currentIndex) * outerView.size.width)
                             .offset(x: self.dragOffset).animation(Animation.linear(duration:0.3),value: UUID())
-
+                        
                     }
                 }
                 //            }
@@ -103,7 +103,7 @@ struct AchivementBlock: View {
             
             
             HStack(spacing:5){
-                ForEach(0..<(medalDataArray.count / 6)+1){number in
+                ForEach(0..<(medalDataArray.count / 6)+1 , id: \.self){number in
                     if number == medalDataArray.count / 6  && medalDataArray.count%6 == 0 {
                         Text("")
                     }
