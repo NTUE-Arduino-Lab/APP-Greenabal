@@ -9,32 +9,35 @@ import SwiftUI
 
 @main
 struct GreenabalApp: App {
-    @StateObject private var backgroundViewModel = BackgroundViewModel()
-    @StateObject private var leafViewModel:LeafViewModel
-    @StateObject private var badgeViewModel:BadgeViewModel
-    @StateObject private var taskListViewModel:TaskListViewModel
-    @StateObject private var eTicketListViewModel:ETicketListViewModel
-    @StateObject private var barcodeListViewModel:BarcodeListViewModel
+    @StateObject private var backgroundVM = BackgroundViewModel()
+    @StateObject private var leafVM:LeafViewModel
+    @StateObject private var badgeVM:BadgeViewModel
+    @StateObject private var taskListVM:TaskListViewModel
+    @StateObject private var eTicketListVM:ETicketListViewModel
+    @StateObject private var barcodeListVM:BarcodeListViewModel
+    @StateObject private var islandVM: IslandViewModel
     
     init(){
         let lvm = LeafViewModel()
         let bvm = BadgeViewModel()
-        _leafViewModel = StateObject(wrappedValue: lvm)
-        _badgeViewModel = StateObject(wrappedValue: bvm)
-        _taskListViewModel = StateObject(wrappedValue: TaskListViewModel(leafViewModel: lvm, badgeViewModel: bvm))
-        _barcodeListViewModel = StateObject(wrappedValue: BarcodeListViewModel(leafViewModel: lvm, badgeViewModel: bvm))
-        _eTicketListViewModel = StateObject(wrappedValue: ETicketListViewModel(leafViewModel: lvm, badgeViewModel: bvm))
+        _leafVM = StateObject(wrappedValue: lvm)
+        _badgeVM = StateObject(wrappedValue: bvm)
+        _taskListVM = StateObject(wrappedValue: TaskListViewModel(leafVM: lvm, badgeVM: bvm))
+        _barcodeListVM = StateObject(wrappedValue: BarcodeListViewModel(leafVM: lvm, badgeVM: bvm))
+        _eTicketListVM = StateObject(wrappedValue: ETicketListViewModel(leafVM: lvm, badgeVM: bvm))
+        _islandVM =  StateObject(wrappedValue: IslandViewModel(leafVM: lvm))
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(backgroundViewModel)
-                .environmentObject(leafViewModel)
-                .environmentObject(badgeViewModel)
-                .environmentObject(taskListViewModel)
-                .environmentObject(eTicketListViewModel)
-                .environmentObject(barcodeListViewModel)
+                .environmentObject(backgroundVM)
+                .environmentObject(leafVM)
+                .environmentObject(badgeVM)
+                .environmentObject(taskListVM)
+                .environmentObject(eTicketListVM)
+                .environmentObject(barcodeListVM)
+                .environmentObject(islandVM)
         }
     }
 }

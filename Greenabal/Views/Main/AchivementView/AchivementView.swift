@@ -20,7 +20,6 @@ struct MedalListData:Identifiable
 
 struct AchivementView: View {
     //圖表作法參考自 https://www.appcoda.com.tw/swiftui-bar-chart/
-    @EnvironmentObject var background: BackgroundViewModel
     @State var medalDataArray:[MedalListData]=[
         MedalListData(rank:3,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
         MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次"),
@@ -43,7 +42,7 @@ struct AchivementView: View {
         MedalListData(rank:0,medalClass:"medal-bike",medalName:"YouBike 王",medalCondition:"騎行達 100 次")
         
     ]
-    private let title = "成就"
+    @State private var title = "成就"
     private let name = "Achivement"
     @State var data: [Double] = [0,12,1,2,15,13,22]
     @State var labels: [String] = ["0","6","12","18","24"]
@@ -54,15 +53,15 @@ struct AchivementView: View {
     let axisColor: Color = Color.blue
     let showGrid: Bool = true
     let gridColor: Color = Color(red: 204/255, green: 204/255,blue: 204/255)
-    let spacing: CGFloat = 15
+    let spacing: CGFloat = 15 //條狀圖間隔 15 以下基本上不會跑版 再更大要測試
     var body: some View {
         VStack{
-            Header(title: title, name: name)
+            Header(title: $title, name: name)
             VStack{
             ZStack(alignment: .bottom){
                 if tabTarget == 0 {
                     ScrollView(.vertical,showsIndicators:false){
-                        VStack(spacing: 20){
+                        VStack(spacing: 18){
                         
                         RecordBlock(data:$data,labels: $labels,accentColor1: accentColor1,accentColor2: accentColor2,axisColor: axisColor,showGrid: showGrid,gridColor: gridColor,spacing: spacing)
                         AchivementBlock(pageNum:medalDataArray.count,medalDataArray:$medalDataArray)
@@ -88,15 +87,12 @@ struct AchivementView: View {
                  maxHeight: .infinity,
                  alignment: .center)
         }
-        .background(background.color)
     }
 }
 
 struct AchivementView_Previews: PreviewProvider {
-    static let backgroundViewModel = BackgroundViewModel()
-    
     static var previews: some View {
-        TabBar(initSelectedTab: "Achivement").environmentObject(backgroundViewModel)
+        TabBar(initSelectedTab: "Achivement")
     }
 }
 

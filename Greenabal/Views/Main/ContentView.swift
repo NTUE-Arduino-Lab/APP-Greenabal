@@ -16,7 +16,7 @@ struct ContentView: View {
                 .animatableGradient(fromGradient: backgroundVM.gradients.0, toGradient: backgroundVM.gradients.1, progress: backgroundVM.progress, animateState: backgroundVM.animateState,canAnimate: backgroundVM.canAnimate, SetAnimate: backgroundVM.SetAnimate)
                 .ignoresSafeArea()
                 .onAppear {
-                    withAnimation(.linear(duration: 5.0).repeatForever(autoreverses: false)) {
+                    withAnimation(.linear(duration: backgroundVM.duration).repeatForever(autoreverses: false)) {
                         backgroundVM.progress = 1
                     }
                 }
@@ -27,11 +27,14 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static let backgroundViewModel = BackgroundViewModel()
-    static let leafViewModel = LeafViewModel()
+    static let backgroundVM = BackgroundViewModel()
+    static let leafVM = LeafViewModel()
+    static var islandVM = IslandViewModel(leafVM: leafVM)
     
     static var previews: some View {
         ContentView()
-            .environmentObject(backgroundViewModel).environmentObject(leafViewModel)
+            .environmentObject(backgroundVM)
+            .environmentObject(leafVM)
+            .environmentObject(islandVM)
     }
 }

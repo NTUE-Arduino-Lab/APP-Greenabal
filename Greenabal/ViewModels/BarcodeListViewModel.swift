@@ -9,12 +9,12 @@ import Foundation
 
 class BarcodeListViewModel: ObservableObject{
     @Published var buyList: [BuyList]
-    let leafViewModel: LeafViewModel
-    let badgeViewModel: BadgeViewModel
+    let leafVM: LeafViewModel
+    let badgeVM: BadgeViewModel
     
-    init(leafViewModel: LeafViewModel,badgeViewModel: BadgeViewModel){
-        self.leafViewModel = leafViewModel
-        self.badgeViewModel = badgeViewModel
+    init(leafVM: LeafViewModel,badgeVM: BadgeViewModel){
+        self.leafVM = leafVM
+        self.badgeVM = badgeVM
         
         let testList: [BuyList] = [
             BuyList(date: "2022/05/05", shop: "全聯實業", items: [
@@ -71,12 +71,12 @@ class BarcodeListViewModel: ObservableObject{
             switch item.gift {
             case is GiftLeaf:
                 let gift: GiftLeaf = item.gift as! GiftLeaf
-                leafViewModel.AddCount(num: gift.leaf, record: true)
+                leafVM.AddCount(num: gift.leaf, record: true)
             default:
                 break
             }
             
-            badgeViewModel.RefreshBadge(title: item.badge)
+            badgeVM.RefreshBadge(title: item.badge)
         }
     }
 }
