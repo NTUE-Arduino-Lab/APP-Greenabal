@@ -1,0 +1,86 @@
+//
+//  PopUpModalView.swift
+//  Greenabal
+//
+//  Created by Tony on 2022/6/21.
+//
+
+import SwiftUI
+
+struct PopUpModalView<Content: View>: View {
+    @ViewBuilder var content: Content
+    var modalHeader : String? = nil
+    var leaveNum : Int? = nil
+    @State var gotLeaf : Bool? = false
+    var body: some View {
+    
+        
+        VStack(spacing:0){
+            VStack(){
+                if modalHeader != nil{
+                    Text("\(modalHeader ?? " ")").frame(maxWidth: .infinity,
+                                                        maxHeight:50,alignment:.center).overlay(
+                                                            Rectangle()
+                                                                .frame(height: 2)
+                                                                .foregroundColor(Color(#colorLiteral(red: 241/255, green: 241/255, blue: 241/255, alpha: 1))),
+                                                            alignment: .bottom
+                                                        )
+                }else{
+                    
+                }
+                Spacer()
+                content
+                Spacer()
+                if leaveNum != nil{
+                    ZStack{
+                        
+                        Text("").frame(maxWidth: .infinity,
+                                       maxHeight:54,alignment:.center).overlay(
+                                        Rectangle()
+                                            .frame(height: 2)
+                                            .foregroundColor(Color(#colorLiteral(red: 241/255, green: 241/255, blue: 241/255, alpha: 1))),
+                                        alignment: .top
+                                       )
+                        Button{
+                            self.gotLeaf = true
+                        }label:{
+                            HStack(spacing:5){
+                                if gotLeaf == false{
+                                Text("\(leaveNum ?? 0)").font(.custom("Roboto Bold", size: 14)).tracking(0.56).multilineTextAlignment(.trailing).overlay {
+                                    LinearGradient(
+                                        colors: [Color(red: 18/255, green: 235/255,blue: 195/255),Color(red: 7/255, green: 215/255,blue: 66/255) ],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    ) .mask(
+                                        Text("\(leaveNum ?? 0)").font(.custom("Roboto Bold", size: 14))
+                                            .tracking(0.56).multilineTextAlignment(.trailing)
+                                    )
+                                }
+                                
+                                Image("leaf")
+                                }else{
+                                    Text("\(leaveNum ?? 0)").font(.custom("Roboto Bold", size: 14)).tracking(0.56).multilineTextAlignment(.trailing).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
+                                    
+                                    Image("icon-leaf-gray-2")
+                                }
+                            }.frame(width: 90, height: 36).background(.white).clipShape(Capsule()).shadow(
+                                color: Color(#colorLiteral(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)),
+                                radius: CGFloat(3),
+                                x: CGFloat(0), y: CGFloat(5))
+                        }
+                        
+                       
+                    }
+                }else{}
+            }.frame(maxWidth: .infinity,
+                    maxHeight:400,alignment:.center).background(Color(#colorLiteral(red: 0.9700000286102295, green: 0.9700000286102295, blue: 0.9700000286102295, alpha: 1))).cornerRadius(20).padding(.horizontal,30)
+            
+            
+            
+        }.frame(maxWidth: .infinity,
+                maxHeight: .infinity,
+                alignment: .center).background(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3)))
+    }
+}
+
+

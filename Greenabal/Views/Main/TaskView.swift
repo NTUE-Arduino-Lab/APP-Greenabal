@@ -146,7 +146,19 @@ struct TaskView: View {
         UITableViewCell.appearance().backgroundColor = .clear
         UITableView.appearance().backgroundColor = .clear
     }
+    struct SimpleView: View {
+        var body: some View {
+            PopUpModalView(content:{
+                ScrollView{
+                    Text("環保署統計臺灣每年塑膠吸管使用量約30億根，在這樣大量使用及其方便又隨手可得的情況下，造成龐大且難處理的塑膠垃圾，更是在淨灘廢棄物中排名前5名，可想而知也影響到了海洋生態，曾經有影片紀錄從海龜的呼吸道中拔出長長的吸管，想到就覺得好痛！\n目前環保署已有管制實施，但我們可以自動落實，大家可以尋找自己喜歡的環保吸管，與環保餐具一起帶出門，保護我們的生活環境也救救海龜！").font(.custom("Roboto Medium", size: 14)).tracking(0.56).lineSpacing(12)
+                }.padding(.horizontal,24).padding(.vertical,12)
+            },modalHeader:"aaaa",leaveNum:3)
+            
+            
+        }
+    }
     var body: some View {
+        ZStack{
         VStack(){
             Header(title: title, name: name)
             VStack{
@@ -180,7 +192,11 @@ struct TaskView: View {
 //            startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
 //            endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
 //        )
+            SimpleView()}
     }
+        
+    
+    
 }
 
 
@@ -319,3 +335,4 @@ struct TaskView_Previews: PreviewProvider {
             .environmentObject(taskListViewModel)
     }
 }
+

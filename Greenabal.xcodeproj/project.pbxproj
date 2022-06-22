@@ -43,6 +43,7 @@
 		EAAC84D0285C79220043F8C8 /* AchivementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC84CF285C79220043F8C8 /* AchivementView.swift */; };
 		EAAC84D2285C793C0043F8C8 /* IslandCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC84D1285C793C0043F8C8 /* IslandCollection.swift */; };
 		EAAC84D4285C794D0043F8C8 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC84D3285C794D0043F8C8 /* Record.swift */; };
+		EAAC84D62861F19B0043F8C8 /* PopUpModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAC84D52861F19B0043F8C8 /* PopUpModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		EAAC84CF285C79220043F8C8 /* AchivementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchivementView.swift; sourceTree = "<group>"; };
 		EAAC84D1285C793C0043F8C8 /* IslandCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandCollection.swift; sourceTree = "<group>"; };
 		EAAC84D3285C794D0043F8C8 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		EAAC84D52861F19B0043F8C8 /* PopUpModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +267,7 @@
 			children = (
 				6CA49D7F2851D694009A155F /* Header.swift */,
 				6CA49D8428533D53009A155F /* SubTabBar.swift */,
+				EAAC84D52861F19B0043F8C8 /* PopUpModalView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -273,8 +276,8 @@
 			isa = PBXGroup;
 			children = (
 				EAAC84CD285C790D0043F8C8 /* Achivement.swift */,
-				EAAC84CF285C79220043F8C8 /* AchivementView.swift */,
 				EAAC84D1285C793C0043F8C8 /* IslandCollection.swift */,
+				EAAC84CF285C79220043F8C8 /* AchivementView.swift */,
 				EAAC84D3285C794D0043F8C8 /* Record.swift */,
 			);
 			path = AchivementView;
@@ -440,6 +443,7 @@
 				EAAC84D2285C793C0043F8C8 /* IslandCollection.swift in Sources */,
 				6C6696492851CAA200ED62CA /* BackgroundViewModel.swift in Sources */,
 				6CD2E07128578308006F42D5 /* BudgeModel.swift in Sources */,
+				EAAC84D62861F19B0043F8C8 /* PopUpModalView.swift in Sources */,
 				6C27DAF428585CA800B58FE3 /* ETicketListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
