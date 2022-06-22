@@ -8,5 +8,12 @@
 		<string>Roboto-Bold.ttf</string>
 		<string>Roboto-Regular.ttf</string>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>white</string>
+		<key>UIImageName</key>
+		<string>launch</string>
+	</dict>
 </dict>
 </plist>
