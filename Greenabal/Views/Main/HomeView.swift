@@ -11,23 +11,54 @@ import SpriteKit
 
 class GameScene: SKScene, ObservableObject {
     @Published var level: Int = 1
+    let islandIdleImageCount: [Int] = [1,1,1,1,2]
+    let islandUpgradeImageCount: [Int] = [2,2,2,8]
+    let timePerFrame:TimeInterval = 0.2
     
     var island: SKSpriteNode!
+    var cloud: SKSpriteNode!
     
     private var islandAtlas: SKTextureAtlas {
         return SKTextureAtlas(named: "Island")
     }
     
+    private var cloudAtlas: SKTextureAtlas {
+        return SKTextureAtlas(named: "Cloud")
+    }
+    
     private var islandTexture: SKTexture {
-        return islandAtlas.textureNamed("Island_L\(level)")
+        return islandAtlas.textureNamed("Island_Idle_L\(level)_0")
+    }
+    
+    private var cloudTexture: SKTexture {
+        return cloudAtlas.textureNamed("cloud_1")
     }
     
     
     private var islandIdleTextures: [SKTexture] {
-        return [
-            islandAtlas.textureNamed("Island_L\(level)"),
-            islandAtlas.textureNamed("Island_L\(level)")
-        ]
+        var textures: [SKTexture] = []
+        for index in 0..<islandIdleImageCount[level-1] {
+            textures.append(islandAtlas.textureNamed("Island_Idle_L\(level)_\(index)"))
+        }
+        return textures
+    }
+    
+    
+    private var cloudIdleTextures: [SKTexture] {
+        var textures: [SKTexture] = []
+        for index in 0..<21 {
+            textures.append(cloudAtlas.textureNamed("cloud_\(index+1)"))
+        }
+        return textures
+    }
+    
+    
+    private var islandUpgradeTextures: [SKTexture] {
+        var textures: [SKTexture] = []
+        for index in 0..<islandUpgradeImageCount[level-1] {
+            textures.append(islandAtlas.textureNamed("Island_Upgrade_L\(level+1)_\(index)"))
+        }
+        return textures
     }
     
     private func setupIsland() {
@@ -36,34 +67,60 @@ class GameScene: SKScene, ObservableObject {
         island.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         island.size.width = CGFloat(380)
         island.size.height = CGFloat(380)
-        island.position = CGPoint(x: 0 , y: 80 )
+        island.position = CGPoint(x: 0 , y: 50 )
         
         addChild(island)
     }
     
-    private func updateIsland() {
-        island.texture = islandTexture
+    private func setupCloud() {
+        cloud = SKSpriteNode(texture: cloudTexture)
+        
+        cloud.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        cloud.size.width = CGFloat(375)
+        cloud.size.height = CGFloat(666.67)
+        cloud.position = CGPoint(x: 0 , y: 80 )
+        
+        addChild(cloud)
     }
     
-    func startIdleAnimation() {
-        let idleAnimation = SKAction.animate(with: islandIdleTextures, timePerFrame: 0.05)
-        
-        island.run(SKAction.repeatForever(idleAnimation), withKey: "playerIdleAnimation")
+    func idleAnimation() -> SKAction{
+        let idleAnimation = SKAction.animate(with: islandIdleTextures, timePerFrame: timePerFrame)
+        return SKAction.repeatForever(idleAnimation)
+    }
+    
+    func cloudIdleAnimation() -> SKAction{
+        let idleAnimation = SKAction.animate(with: cloudIdleTextures, timePerFrame: timePerFrame*1.25)
+        return SKAction.repeatForever(idleAnimation)
+    }
+    
+    func upgradeAnimation() -> SKAction{
+        let upgradeAnimation = SKAction.animate(with: islandUpgradeTextures, timePerFrame: timePerFrame)
+        return upgradeAnimation
+    }
+    
+    func runAnimation(actions: [SKAction]){
+        let sequence = SKAction.sequence(actions)
+        island.run(sequence)
     }
     
     override func didMove(to view: SKView) {
-        
         self.backgroundColor = .clear
         view.allowsTransparency = true
         
+        setupCloud()
+        cloud.run(cloudIdleAnimation())
+        
         setupIsland()
-        startIdleAnimation()
+        
+        let idleAnimation = idleAnimation()
+        runAnimation(actions:[idleAnimation])
     }
     
     func updateLevel(level: Int){
+        let upgradeAnimation = upgradeAnimation()
         self.level = level
-        updateIsland()
-        startIdleAnimation()
+        let idleAnimation = idleAnimation()
+        runAnimation(actions:[upgradeAnimation,idleAnimation])
     }
 }
 
@@ -92,7 +149,7 @@ struct HomeView: View {
             
             ZStack{
                 SpriteView(scene: self.scene , options: [.allowsTransparency])
-                    .colorMultiply(islandColor)
+//                    .colorMultiply(islandColor)
                     .onAppear{
                         islandColor = backgroundVM.maskColors.0
                     }
@@ -153,7 +210,7 @@ struct HomeView: View {
                                 Image("icon_leaf_gray")
                             }
                         })
-                        .disabled(leafVM.count >= islandVM.currentIsland.getLevelLeaf() ? false : true)
+                        .disabled(leafVM.count >= islandVM.currentIsland.getLevelLeaf() && islandVM.currentIsland.currentLevel <= islandVM.currentIsland.totalLevel - 1 ? false : true)
                         .buttonStyle(.borderless)
                         .frame(width: 143, height: 36)
                         .background(RoundedRectangle(cornerRadius: 26).fill(Color("gray-200")))

@@ -87,13 +87,13 @@ class BackgroundViewModel: ObservableObject {
         func GetMask(rawValue: Int) -> Color{
             switch rawValue {
             case BackgroundState.morning.rawValue:
-                return Color(#colorLiteral(red: 1, green: 0.8745099306106567, blue: 0.6745098233222961, alpha: 0.2))
+                return Color(#colorLiteral(red: 1, green: 0.9215686321258545, blue: 0.7450980544090271, alpha: 0.5))
             case BackgroundState.afternoon.rawValue:
                 return Color.white
             case BackgroundState.evening.rawValue:
-                return Color(#colorLiteral(red: 0.7208333611488342, green: 0.32893115282058716, blue: 0.20123261213302612, alpha: 0.3))
+                return Color(#colorLiteral(red: 0.9333333373069763, green: 0.545098066329956, blue: 0.4156862795352936, alpha: 1))
             case BackgroundState.night.rawValue:
-                return Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2))
+                return Color(#colorLiteral(red: 0.250980406999588, green: 0.32156863808631897, blue: 0.43529412150382996, alpha: 0.2))
             default:
                 return Color.white
             }
@@ -119,7 +119,7 @@ class BackgroundViewModel: ObservableObject {
             startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
             endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
         
-        state = BackgroundState.afternoon
+        state = BackgroundState.night
         gradients = state.GetGradients()
         progress = 0
         canAnimate = false
