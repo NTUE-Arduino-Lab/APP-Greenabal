@@ -16,13 +16,22 @@ class GameScene: SKScene, ObservableObject {
     let timePerFrame:TimeInterval = 0.2
     
     var island: SKSpriteNode!
+    var cloud: SKSpriteNode!
     
     private var islandAtlas: SKTextureAtlas {
         return SKTextureAtlas(named: "Island")
     }
     
+    private var cloudAtlas: SKTextureAtlas {
+        return SKTextureAtlas(named: "Cloud")
+    }
+    
     private var islandTexture: SKTexture {
         return islandAtlas.textureNamed("Island_Idle_L\(level)_0")
+    }
+    
+    private var cloudTexture: SKTexture {
+        return cloudAtlas.textureNamed("cloud_1")
     }
     
     
@@ -30,6 +39,15 @@ class GameScene: SKScene, ObservableObject {
         var textures: [SKTexture] = []
         for index in 0..<islandIdleImageCount[level-1] {
             textures.append(islandAtlas.textureNamed("Island_Idle_L\(level)_\(index)"))
+        }
+        return textures
+    }
+    
+    
+    private var cloudIdleTextures: [SKTexture] {
+        var textures: [SKTexture] = []
+        for index in 0..<21 {
+            textures.append(cloudAtlas.textureNamed("cloud_\(index+1)"))
         }
         return textures
     }
@@ -54,8 +72,24 @@ class GameScene: SKScene, ObservableObject {
         addChild(island)
     }
     
+    private func setupCloud() {
+        cloud = SKSpriteNode(texture: cloudTexture)
+        
+        cloud.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        cloud.size.width = CGFloat(375)
+        cloud.size.height = CGFloat(666.67)
+        cloud.position = CGPoint(x: 0 , y: 80 )
+        
+        addChild(cloud)
+    }
+    
     func idleAnimation() -> SKAction{
         let idleAnimation = SKAction.animate(with: islandIdleTextures, timePerFrame: timePerFrame)
+        return SKAction.repeatForever(idleAnimation)
+    }
+    
+    func cloudIdleAnimation() -> SKAction{
+        let idleAnimation = SKAction.animate(with: cloudIdleTextures, timePerFrame: timePerFrame*1.25)
         return SKAction.repeatForever(idleAnimation)
     }
     
@@ -72,6 +106,9 @@ class GameScene: SKScene, ObservableObject {
     override func didMove(to view: SKView) {
         self.backgroundColor = .clear
         view.allowsTransparency = true
+        
+        setupCloud()
+        cloud.run(cloudIdleAnimation())
         
         setupIsland()
         
@@ -112,7 +149,7 @@ struct HomeView: View {
             
             ZStack{
                 SpriteView(scene: self.scene , options: [.allowsTransparency])
-                    .colorMultiply(islandColor)
+//                    .colorMultiply(islandColor)
                     .onAppear{
                         islandColor = backgroundVM.maskColors.0
                     }
