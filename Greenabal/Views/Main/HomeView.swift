@@ -9,6 +9,15 @@ import SwiftUI
 
 import SpriteKit
 
+extension UIView {
+    func asImage(rect: CGRect) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: rect)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+}
+
 struct HomeView: View {
     @EnvironmentObject var backgroundVM: BackgroundViewModel
     @EnvironmentObject var leafVM: LeafViewModel
@@ -17,6 +26,9 @@ struct HomeView: View {
     private let name = "Home"
     @State private var islandColor: Color = Color.white
     @State private var maskColor: Color = Color.white
+    
+    @State private var image: UIImage! = nil
+    @State private var rect: CGRect = .zero
     
     @StateObject private var scene: GameScene =  {
         let scene = GameScene()
@@ -101,9 +113,14 @@ struct HomeView: View {
                         .foregroundColor(backgroundVM.state == .morning ? Color("black-font") : Color.white)
                         
                         Button(action: {
-                            islandVM.updateIsland()
-                            changeTitle()
-                            scene.updateLevel(level: islandVM.currentIsland.currentLevel)
+                            //                            islandVM.updateIsland()
+                            //                            changeTitle()
+                            //                            scene.updateLevel(level: islandVM.currentIsland.currentLevel)
+                            self.image = UIApplication.shared.windows[0].rootViewController?.view.asImage(rect: self.rect)
+                            if image != nil {
+                                takeScreenshot()
+                                saveAndShare(img: image!)
+                            }
                         }, label: {
                             HStack(alignment:.center, spacing: 2){
                                 Text("升級島嶼 \( islandVM.currentIsland.getLevelLeaf())")
@@ -134,10 +151,58 @@ struct HomeView: View {
             scene.level = islandVM.currentIsland.currentLevel
             changeTitle()
         }
+        .background(RectGetter(rect: $rect))
     }
     
     func changeTitle(){
         title = "No.\(islandVM.currentIsland.number) 初來乍島 Lv.\(islandVM.currentIsland.currentLevel)"
+    }
+    
+    func saveAndShare(img: UIImage) {
+        let fileManager = FileManager.default
+        let rootPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! as NSString
+        let filePath = "\(rootPath)/share.jpg"
+        let imageData = img.pngData()
+        fileManager.createFile(atPath: filePath, contents: imageData)
+        let url:URL = URL.init(fileURLWithPath: filePath)
+        let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController!.present(av, animated: true)
+    }
+    
+    func takeScreenshot() {
+        let bounds = scene.view?.bounds
+        let boundsCloud = sceneCloud.view?.bounds
+        
+        UIGraphicsBeginImageContextWithOptions(bounds!.size, true, UIScreen.main.scale)
+        
+        image.draw(at: CGPoint(x: 0, y: 0))
+        
+        sceneCloud.view?.drawHierarchy(in: boundsCloud!, afterScreenUpdates: true)
+        scene.view?.drawHierarchy(in: bounds!, afterScreenUpdates: true)
+        
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        image = screenshot
+    }
+}
+
+struct RectGetter: View {
+    @Binding var rect: CGRect
+    
+    var body: some View {
+        GeometryReader { proxy in
+            self.createView(proxy: proxy)
+        }
+    }
+    
+    func createView(proxy: GeometryProxy) -> some View {
+        DispatchQueue.main.async {
+            self.rect = proxy.frame(in: .global)
+        }
+        
+        return Rectangle().fill(Color.clear)
     }
 }
 
