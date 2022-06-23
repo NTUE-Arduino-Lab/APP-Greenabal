@@ -9,132 +9,25 @@ import SwiftUI
 
 import SpriteKit
 
-class GameScene: SKScene, ObservableObject {
-    @Published var level: Int = 1
-    let islandIdleImageCount: [Int] = [1,1,1,1,2]
-    let islandUpgradeImageCount: [Int] = [2,2,2,8]
-    let timePerFrame:TimeInterval = 0.2
-    
-    var island: SKSpriteNode!
-    var cloud: SKSpriteNode!
-    
-    private var islandAtlas: SKTextureAtlas {
-        return SKTextureAtlas(named: "Island")
-    }
-    
-    private var cloudAtlas: SKTextureAtlas {
-        return SKTextureAtlas(named: "Cloud")
-    }
-    
-    private var islandTexture: SKTexture {
-        return islandAtlas.textureNamed("Island_Idle_L\(level)_0")
-    }
-    
-    private var cloudTexture: SKTexture {
-        return cloudAtlas.textureNamed("cloud_1")
-    }
-    
-    
-    private var islandIdleTextures: [SKTexture] {
-        var textures: [SKTexture] = []
-        for index in 0..<islandIdleImageCount[level-1] {
-            textures.append(islandAtlas.textureNamed("Island_Idle_L\(level)_\(index)"))
-        }
-        return textures
-    }
-    
-    
-    private var cloudIdleTextures: [SKTexture] {
-        var textures: [SKTexture] = []
-        for index in 0..<21 {
-            textures.append(cloudAtlas.textureNamed("cloud_\(index+1)"))
-        }
-        return textures
-    }
-    
-    
-    private var islandUpgradeTextures: [SKTexture] {
-        var textures: [SKTexture] = []
-        for index in 0..<islandUpgradeImageCount[level-1] {
-            textures.append(islandAtlas.textureNamed("Island_Upgrade_L\(level+1)_\(index)"))
-        }
-        return textures
-    }
-    
-    private func setupIsland() {
-        island = SKSpriteNode(texture: islandTexture)
-        
-        island.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        island.size.width = CGFloat(380)
-        island.size.height = CGFloat(380)
-        island.position = CGPoint(x: 0 , y: 50 )
-        
-        addChild(island)
-    }
-    
-    private func setupCloud() {
-        cloud = SKSpriteNode(texture: cloudTexture)
-        
-        cloud.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        cloud.size.width = CGFloat(375)
-        cloud.size.height = CGFloat(666.67)
-        cloud.position = CGPoint(x: 0 , y: 80 )
-        
-        addChild(cloud)
-    }
-    
-    func idleAnimation() -> SKAction{
-        let idleAnimation = SKAction.animate(with: islandIdleTextures, timePerFrame: timePerFrame)
-        return SKAction.repeatForever(idleAnimation)
-    }
-    
-    func cloudIdleAnimation() -> SKAction{
-        let idleAnimation = SKAction.animate(with: cloudIdleTextures, timePerFrame: timePerFrame*1.25)
-        return SKAction.repeatForever(idleAnimation)
-    }
-    
-    func upgradeAnimation() -> SKAction{
-        let upgradeAnimation = SKAction.animate(with: islandUpgradeTextures, timePerFrame: timePerFrame)
-        return upgradeAnimation
-    }
-    
-    func runAnimation(actions: [SKAction]){
-        let sequence = SKAction.sequence(actions)
-        island.run(sequence)
-    }
-    
-    override func didMove(to view: SKView) {
-        self.backgroundColor = .clear
-        view.allowsTransparency = true
-        
-        setupCloud()
-        cloud.run(cloudIdleAnimation())
-        
-        setupIsland()
-        
-        let idleAnimation = idleAnimation()
-        runAnimation(actions:[idleAnimation])
-    }
-    
-    func updateLevel(level: Int){
-        let upgradeAnimation = upgradeAnimation()
-        self.level = level
-        let idleAnimation = idleAnimation()
-        runAnimation(actions:[upgradeAnimation,idleAnimation])
-    }
-}
-
 struct HomeView: View {
     @EnvironmentObject var backgroundVM: BackgroundViewModel
     @EnvironmentObject var leafVM: LeafViewModel
     @EnvironmentObject var islandVM: IslandViewModel
     @State private var title = "No.168 初來乍島 Lv.3"
     private let name = "Home"
-    @State private var islandColor: Color = Color.red
+    @State private var islandColor: Color = Color.white
     @State private var maskColor: Color = Color.white
     
     @StateObject private var scene: GameScene =  {
         let scene = GameScene()
+        scene.size = CGSize(width: 375, height: 812)
+        scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        scene.scaleMode = .aspectFill
+        return scene
+    }()
+    
+    @StateObject private var sceneCloud: CloudScene =  {
+        let scene = CloudScene()
         scene.size = CGSize(width: 375, height: 812)
         scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         scene.scaleMode = .aspectFill
@@ -148,18 +41,28 @@ struct HomeView: View {
                 .foregroundColor(backgroundVM.state == .morning ? Color("black-font") : Color.white)
             
             ZStack{
-                SpriteView(scene: self.scene , options: [.allowsTransparency])
-//                    .colorMultiply(islandColor)
-                    .onAppear{
-                        islandColor = backgroundVM.maskColors.0
+                ZStack{
+                    SpriteView(scene: self.sceneCloud , options: [.allowsTransparency])
+                    
+                    SpriteView(scene: self.scene , options: [.allowsTransparency])
+                }
+                .onAppear{
+                    islandColor = backgroundVM.maskColors.0
+                    scene.maskColor = UIColor(islandColor)
+                    scene.colorDuration = backgroundVM.duration
+                    sceneCloud.maskColor = UIColor(islandColor)
+                    sceneCloud.colorDuration = backgroundVM.duration
+                }
+                .onChange(of: backgroundVM.canAnimate, perform: { newValue in
+                    if backgroundVM.canAnimate {
+                        withAnimation(.linear(duration: backgroundVM.duration)) {
+                            islandColor = backgroundVM.maskColors.1                                }
                     }
-                    .onChange(of: backgroundVM.canAnimate, perform: { newValue in
-                        if backgroundVM.canAnimate {
-                            withAnimation(.linear(duration: backgroundVM.duration)) {
-                                islandColor = backgroundVM.maskColors.1
-                            }
-                        }
-                    })
+                })
+                .onChange(of: islandColor, perform: { newValue in
+                    scene.updateMaskColor(color: UIColor(newValue))
+                    sceneCloud.updateMaskColor(color: UIColor(newValue))
+                })
                 
                 VStack{
                     HStack(alignment: .center){
