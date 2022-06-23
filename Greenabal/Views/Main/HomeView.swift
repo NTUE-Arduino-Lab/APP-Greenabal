@@ -30,6 +30,8 @@ struct HomeView: View {
     @State private var image: UIImage! = nil
     @State private var rect: CGRect = .zero
     
+    @State private var shot: Bool = false
+    
     @StateObject private var scene: GameScene =  {
         let scene = GameScene()
         scene.size = CGSize(width: 375, height: 812)
@@ -58,6 +60,7 @@ struct HomeView: View {
                     
                     SpriteView(scene: self.scene , options: [.allowsTransparency])
                 }
+                .padding(.top, shot ? 50 : 0)
                 .onAppear{
                     islandColor = backgroundVM.maskColors.0
                     scene.maskColor = UIColor(islandColor)
@@ -152,6 +155,9 @@ struct HomeView: View {
             changeTitle()
         }
         .background(RectGetter(rect: $rect))
+        .if(shot) { view in
+            view.edgesIgnoringSafeArea(.vertical)
+        }
     }
     
     func changeTitle(){
@@ -173,7 +179,7 @@ struct HomeView: View {
         let bounds = scene.view?.bounds
         let boundsCloud = sceneCloud.view?.bounds
         
-        UIGraphicsBeginImageContextWithOptions(bounds!.size, true, UIScreen.main.scale)
+        UIGraphicsBeginImageContextWithOptions(image.size, true, UIScreen.main.scale)
         
         image.draw(at: CGPoint(x: 0, y: 0))
         
