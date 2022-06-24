@@ -15,13 +15,15 @@ struct PopUpModalView<Content: View>: View {
     @State var gotLeaf : Bool? = true
     @Binding var showModal:Bool
     var completeMethon: (Int) -> Void
+    var achivementCompleteMethon: (Int,Int) -> Void
     var methonInt:Int
     enum Modaltype {
         case knowledge
         case bagdge
     }
     var modaltype: Modaltype
-    
+    var achivementFakeData:[MedalListData]?=[
+        MedalListData(rank:1,medalClass:"medal-bike",medalName:"Youbike王",medalTitle:["見習騎士","城市漫遊者","熱血鐵騎仔"],goalCounts: [10,50,100],medalCondition:["騎行達 10 次","騎行達 50 次","騎行達 100 次"],medalReward: [3,6,12],medalRewardGot: [true,false,false])]
     var body: some View {
         
         
@@ -58,27 +60,43 @@ struct PopUpModalView<Content: View>: View {
                                                 .foregroundColor(Color(#colorLiteral(red: 241/255, green: 241/255, blue: 241/255, alpha: 1))),
                                             alignment: .top
                                            )
+                            
+                            switch modaltype{
+                            case .knowledge:
                             Button{
                                 self.gotLeaf = true
                                 completeMethon(methonInt)
                             }label:{
                                 HStack(spacing:5){
-                                    switch modaltype{
-                                    case .knowledge:
+                                    
                                         
                                         ButtonContents(gotLeaf:taskListViewModel.taskList[methonInt].isComplete,leaveNum:leaveNum)
-                                        
-                                    case .bagdge:
-                                        Text("bb")
-                                        
-                                        
-                                    }
+                                    
                                     
                                 }.frame(width: 90, height: 36).background(.white).clipShape(Capsule()).shadow(
                                     color: Color(#colorLiteral(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)),
                                     radius: CGFloat(3),
                                     x: CGFloat(0), y: CGFloat(5))
                             }.disabled(taskListViewModel.taskList[methonInt].isComplete)
+                        case .bagdge:
+                                Button{
+                                    self.gotLeaf = true
+                                    achivementCompleteMethon(methonInt,(achivementFakeData?[methonInt].rank)! )
+                                }label:{
+                                    HStack(spacing:5){
+                                        
+                                       
+                                                //不會執行
+                                        ButtonContents(gotLeaf:achivementFakeData?[methonInt].medalRewardGot[(achivementFakeData?[methonInt].rank)! - 1] ,leaveNum:leaveNum)
+                                       
+                                        
+                                        
+                                    }.frame(width: 90, height: 36).background(.white).clipShape(Capsule()).shadow(
+                                        color: Color(#colorLiteral(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)),
+                                        radius: CGFloat(3),
+                                        x: CGFloat(0), y: CGFloat(5))
+                                }.disabled((achivementFakeData?[methonInt].medalRewardGot[(achivementFakeData?[methonInt].rank)! - 1])!)
+                            }
                             
                             
                         }
