@@ -45,12 +45,15 @@ struct TaskView: View {
         var taskData:Task
         var completeTask: (Int) -> Void
         @Binding var taskModelIndex:Int
+        func fakeCompleteMethon(fake:Int,fake2:Int){
+            return
+        }
         var body: some View {
             PopUpModalView(content:{
                 ScrollView{
                     Text("\(TaskKnowledgeArticle)").font(.custom("Roboto Medium", size: 14)).tracking(0.56).lineSpacing(12)
                 }.padding(.horizontal,24).padding(.vertical,12)
-            },modalHeader:modalHeader,leaveNum:3,showModal:$showModal,completeMethon:completeTask,methonInt:taskModelIndex,modaltype:.knowledge)
+            },modalHeader:modalHeader,leaveNum:3,showModal:$showModal,completeMethon:completeTask,achivementCompleteMethon:fakeCompleteMethon,methonInt:taskModelIndex,modaltype:.knowledge)
             
             
         }

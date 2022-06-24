@@ -18,6 +18,8 @@ struct AchivementBlock: View {
     @State var currentIndex = 0
     @GestureState var dragOffset: CGFloat = 0
     @Binding var medalDataArray:[MedalListData]
+    @Binding var showModal:Bool
+    @Binding var achivementMedalIndex:Int
     var body: some View {
         VStack{
             HStack{
@@ -36,21 +38,29 @@ struct AchivementBlock: View {
                         let num = index*6
                         LazyVGrid(columns: gridItemLayout) {
                             ForEach((num..<num+6), id: \.self) { number in
-                                VStack(spacing:0){
+                                
                                     if number < medalDataArray.count{
                                         if medalDataArray[number].rank != 0{
-                                            Image("\(medalDataArray[number].medalClass)-\(medalDataArray[number].rank)").padding(.bottom,5)
-                                            Text("\(medalDataArray[number].medalName)").font(.custom("Roboto Regular", size: 14)).tracking(0.56).padding(.bottom,5)
-                                            Text("\(medalDataArray[number].medalCondition)").font(.custom("Roboto Regular", size: 10)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
+                                            VStack(spacing:0){
+                                            Image("\(medalDataArray[number].medalClass)-\(medalDataArray[number].rank)").resizable().scaledToFit().frame(width: 71, height: 71).padding(.bottom,5)
+                                            Text("\(medalDataArray[number].medalTitle[medalDataArray[number].rank - 1])").font(.custom("Roboto Regular", size: 14)).tracking(0.56).padding(.bottom,5)
+//                                            Text("\(medalDataArray[number].medalName)").font(.custom("Roboto Regular", size: 14)).tracking(0.56).padding(.bottom,5)
+                                            Text("\(medalDataArray[number].medalCondition[medalDataArray[number].rank - 1])").font(.custom("Roboto Regular", size: 10)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
+                                            }.frame(width: 80, height: 123).padding(.bottom,10).onTapGesture{
+                                                showModal = true
+                                                achivementMedalIndex = number
+                                            }
                                         }else{
+                                            VStack(spacing:0){
                                             Image("none").padding(.bottom,5)
                                             Text("???").font(.custom("Roboto Regular", size: 14)).tracking(0.56).padding(.bottom,5)
                                             Text("???").font(.custom("Roboto Regular", size: 10)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
+                                        }.frame(width: 80, height: 123).padding(.bottom,10)
                                         }
                                     }else{
-                                        
+                                        VStack(spacing:0){}.frame(width: 80, height: 123).padding(.bottom,10)
                                     }
-                                }.frame(width: 80, height: 123).padding(.bottom,10)
+                                
                             }
                         }.padding(.horizontal, 20)
                             .frame(width: outerView.size.width, height: outerView.size.height)
