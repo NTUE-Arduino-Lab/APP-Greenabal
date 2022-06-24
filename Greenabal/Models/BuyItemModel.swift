@@ -14,23 +14,29 @@ enum Seal: String{
     
 }
 
-struct BuyItem: Identifiable{
+class BuyItem: Identifiable{
     //    載具消費紀錄
     let id = UUID()
     let seal: String
     let name: String
     let gift: Any
     let badge: String
+    var openGift: Bool
     
     init(name: String, gift: Any, seal: String = Seal.環保標章.rawValue , badge: String = BadgeType.youbike.rawValue){
         self.name = name
         self.seal = seal
         self.badge = badge
         self.gift = gift
+        self.openGift = false
+    }
+    
+    func OpenGift(){
+        openGift = true
     }
 }
 
-struct BuyList: Identifiable{
+class BuyList: Identifiable{
     //    載具消費紀錄
     let id = UUID()
     let date: String
@@ -46,11 +52,15 @@ struct BuyList: Identifiable{
 
 
 enum GiftType{
-    case 葉子
-    
+    case leaf
+    case island
 }
 
 struct GiftLeaf{
     let leaf: Int
-    let type: GiftType = GiftType.葉子
+    let type: GiftType = GiftType.leaf
+}
+
+struct GiftIsland{
+    let type: GiftType = GiftType.island
 }
