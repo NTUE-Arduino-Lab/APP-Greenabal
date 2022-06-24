@@ -132,6 +132,6 @@ struct AchivementBlock: View {
             }.padding(.bottom,18).padding(.top,10)
             
             
-        }.frame(height: 360,alignment: .top).background( RoundedRectangle(cornerRadius: 10).fill(Color.white)).padding(.horizontal,16)
+        }.frame(height: 350,alignment: .top).background( RoundedRectangle(cornerRadius: 10).fill(Color.white)).padding(.horizontal,16)
     }
 }
