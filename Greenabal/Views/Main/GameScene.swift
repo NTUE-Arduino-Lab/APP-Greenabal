@@ -46,8 +46,8 @@ class GameScene: SKScene, ObservableObject {
         island = SKSpriteNode(texture: islandTexture)
         
         island.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        island.size.width = CGFloat(380)
-        island.size.height = CGFloat(380)
+        island.size.width = CGFloat(self.size.width)
+        island.size.height = CGFloat(self.size.width)
         island.position = CGPoint(x: 0 , y: 0 )
         
         mask = SKSpriteNode(color: maskColor, size: island.size)
@@ -130,8 +130,8 @@ class CloudScene: SKScene, ObservableObject {
         cloud = SKSpriteNode(texture: cloudTexture)
         
         cloud.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        cloud.size.width = CGFloat(375)
-        cloud.size.height = CGFloat(666.67)
+        cloud.size.width = CGFloat(self.size.width)
+        cloud.size.height = CGFloat(self.size.height)
         cloud.position = CGPoint(x: 0 , y: 0 )
         
         mask = SKSpriteNode(color: maskColor, size: cloud.size)
