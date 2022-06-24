@@ -23,6 +23,10 @@ struct MedalListData:Identifiable
 
 
 struct AchivementView: View {
+    @EnvironmentObject var badgeVM: BadgeViewModel
+    @EnvironmentObject var leafVM: LeafViewModel
+    var dateVM: DateViewModel = DateViewModel()
+    
     //圖表作法參考自 https://www.appcoda.com.tw/swiftui-bar-chart/
     @State var medalDataArray:[MedalListData]=[
         MedalListData(rank:1,medalClass:"medal-bike",medalName:"Youbike王",medalTitle:["見習騎士","城市漫遊者","熱血鐵騎仔"],goalCounts: [10,50,100],medalCondition:["騎行達 10 次","騎行達 50 次","騎行達 100 次"],medalReward: [3,6,12],medalRewardGot: [true,false,false]),
@@ -135,8 +139,13 @@ struct AchivementView: View {
 }
 
 struct AchivementView_Previews: PreviewProvider {
+    static var leafVM:LeafViewModel = LeafViewModel()
+    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    
     static var previews: some View {
         TabBar(initSelectedTab: "Achivement")
+            .environmentObject(leafVM)
+            .environmentObject(badgeVM)
     }
 }
 

@@ -18,8 +18,9 @@ class BadgeModel: Identifiable{
     var currentStar: Int
     let totalStar: Int
     let images: [String]
+    let leafRewards: [Int]
     
-    init(name: String, titles: [String], goalDiscriptions: [String], image: String, goalCounts: [Int], totalStar: Int = 3, currentCount: Int = 0, currentStar: Int = 0,getLeafStates: [Bool] = [false,false,false]){
+    init(name: String, titles: [String], goalDiscriptions: [String], image: String, goalCounts: [Int], leafRewards: [Int], totalStar: Int = 3, currentCount: Int = 0, currentStar: Int = 0,getLeafStates: [Bool] = [false,false,false]){
         self.name = name
         self.titles = titles
         self.goalDiscriptions = goalDiscriptions
@@ -29,6 +30,7 @@ class BadgeModel: Identifiable{
         self.currentCount = currentCount
         self.currentStar = currentStar
         self.getLeafStates = getLeafStates
+        self.leafRewards = leafRewards
     }
     
     func AddCount(){
@@ -63,7 +65,7 @@ enum BadgeType: String {
 
 extension BadgeModel {
     static let all: [BadgeModel] = [
-        BadgeModel(name: BadgeType.youbike.rawValue,titles: ["見習騎士","城市漫遊者","熱血鐵騎仔"], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "badge_bicycle", goalCounts: [10,20,50],currentStar: 2),
-        BadgeModel(name: BadgeType.bus.rawValue,titles: ["招手攔車","坐在靠窗座","司機都很熟"], goalDiscriptions: ["搭乘達10次","搭乘達20次","搭乘達50次"], image: "badge_bicycle", goalCounts: [10,20,50])
+        BadgeModel(name: BadgeType.youbike.rawValue,titles: ["見習騎士","城市漫遊者","熱血鐵騎仔"], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "badge_bicycle", goalCounts: [10,20,50],leafRewards: [10,20,50],currentStar: 2),
+        BadgeModel(name: BadgeType.bus.rawValue,titles: ["招手攔車","坐在靠窗座","司機都很熟"], goalDiscriptions: ["搭乘達10次","搭乘達20次","搭乘達50次"], image: "badge_bicycle", goalCounts: [10,20,50],leafRewards: [10,20,50])
     ]
 }
