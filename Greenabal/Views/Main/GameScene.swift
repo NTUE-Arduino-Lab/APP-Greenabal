@@ -50,9 +50,9 @@ class GameScene: SKScene, ObservableObject {
         island.size.height = CGFloat(self.size.width)
         island.position = CGPoint(x: 0 , y: 0 )
         
-        mask = SKSpriteNode(color: maskColor, size: island.size)
+        mask = SKSpriteNode(color: maskColor, size: self.size)
         mask.anchorPoint = island.anchorPoint
-        mask.position =  CGPoint(x: 0 , y: 70 )
+        mask.position =  CGPoint(x: 0 , y: 0 )
     }
     
     func idleAnimation() -> SKAction{
@@ -75,12 +75,16 @@ class GameScene: SKScene, ObservableObject {
         view.allowsTransparency = true
         
         setupIsland()
-        island.blendMode = .multiply
-        //        addChild(island)
 
-        mask.addChild(island)
+        island.blendMode = .multiply
         
-        addChild(mask)
+        let cropNode = SKCropNode()
+        cropNode.position = CGPoint(x: 0, y: 70)
+        cropNode.maskNode = island
+        cropNode.addChild(mask)
+        cropNode.addChild(island)
+        
+        addChild(cropNode)
         
         let idleAnimation = idleAnimation()
         runAnimation(actions:[idleAnimation])
@@ -136,7 +140,7 @@ class CloudScene: SKScene, ObservableObject {
         
         mask = SKSpriteNode(color: maskColor, size: cloud.size)
         mask.anchorPoint = cloud.anchorPoint
-        mask.position =  CGPoint(x: 0 , y: 90 )
+        mask.position =  CGPoint(x: 0 , y: 0 )
     }
     
     func cloudIdleAnimation() -> SKAction{
@@ -150,13 +154,19 @@ class CloudScene: SKScene, ObservableObject {
         
         setupCloud()
         cloud.blendMode = .multiply
-        //        addChild(cloud)
+        
         let cloudIdleAnimation = cloudIdleAnimation()
         cloud.run(cloudIdleAnimation)
         
-        mask.addChild(cloud)
+        cloud.blendMode = .multiply
         
-        addChild(mask)
+        let cropNode = SKCropNode()
+        cropNode.position = CGPoint(x: 0, y: 90)
+        cropNode.maskNode = cloud
+        cropNode.addChild(mask)
+        cropNode.addChild(cloud)
+        
+        addChild(cropNode)
     }
     
     func updateMaskColor(color: UIColor){
