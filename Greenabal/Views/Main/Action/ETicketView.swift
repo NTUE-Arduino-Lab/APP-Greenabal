@@ -22,7 +22,7 @@ struct TransportItemView: View {
                 .tracking(0.56)
             
             HStack(alignment:.center, spacing:4){
-
+                
                 Text(String(data.leaf))
                     .font(.custom("Roboto-Bold", size: 14))
                     .tracking(0.56)
@@ -90,10 +90,12 @@ struct ETicketItemView: View {
 struct ETicketView: View {
     @EnvironmentObject var eTicketListVM: ETicketListViewModel
     @State var list: [TransportList] = []
+    @Binding var selectedIndex: Int
+    let months: [MonthSelection]
     
     var body: some View {
         ScrollView(showsIndicators:false){
-            MonthSelector()
+            MonthSelector(months: months, selectedIndex: $selectedIndex)
             
             VStack(spacing:20){
                 ForEach(list.indices, id: \.self)  { index in
@@ -104,8 +106,11 @@ struct ETicketView: View {
             .padding(.bottom,80)
         }
         .onAppear {
-            list = eTicketListVM.GetList(year: 2022, startMonth: 5, endMonth: 6)
+            list = eTicketListVM.GetList(year: months[selectedIndex].year, startMonth: months[selectedIndex].month, endMonth: months[selectedIndex].month+1)
         }
+        .onChange(of: selectedIndex, perform: { newValue in
+            list = eTicketListVM.GetList(year: months[newValue].year, startMonth: months[newValue].month, endMonth: months[newValue].month+1)
+        })
     }
 }
 
@@ -113,9 +118,14 @@ struct ETicketView_Previews: PreviewProvider {
     static var leafVM:LeafViewModel = LeafViewModel()
     static var badgeVM:BadgeViewModel = BadgeViewModel()
     static var eTicketListVM:ETicketListViewModel = ETicketListViewModel(leafVM: leafVM, badgeVM: badgeVM)
+    @State static var selectedIndex: Int = 0
+    static let months: [MonthSelection] = [
+        MonthSelection(year: 2022, month: 5),
+        MonthSelection(year: 2022, month: 3),
+    ]
     
     static var previews: some View {
-        ETicketView()
+        ETicketView(selectedIndex: $selectedIndex,months: months)
             .environmentObject(eTicketListVM)
     }
 }
