@@ -31,7 +31,7 @@ class BuyItem: Identifiable{
         self.openGift = false
     }
     
-    mutating func OpenGift(){
+    func OpenGift(){
         openGift = true
     }
 }
