@@ -92,6 +92,17 @@ struct BarcodeView: View {
             }
             .frame(width: 320)
             .padding(.bottom,80)
+            
+            HStack(spacing: 20){
+                Button(action: {
+                    barcodeListVM.AddItem(date: "2022/05/20", shop: "gggg", items: [
+                        BuyItem(name: "冰箱", gift: GiftLeaf(leaf: 4), seal: Seal.省電標章.rawValue, badge: BadgeType.seal_環保.rawValue)
+                    ])
+                }, label: {
+                    Text("Add New Item")
+                })
+            }
+
         }
         .onAppear {
             list = barcodeListVM.GetList(year: 2022, startMonth: 5, endMonth: 6)
