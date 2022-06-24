@@ -76,7 +76,7 @@ class BarcodeListViewModel: ObservableObject{
                 break
             }
             
-            badgeVM.RefreshBadge(title: item.badge)
+            badgeVM.RefreshBadge(name: item.badge)
         }
     }
 }

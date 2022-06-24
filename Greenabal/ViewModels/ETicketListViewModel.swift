@@ -66,7 +66,7 @@ class ETicketListViewModel: ObservableObject{
         print(transportList)
         
         leafVM.AddCount(num: leaf, record: true)
-        badgeVM.RefreshBadge(title: badge)
+        badgeVM.RefreshBadge(name: badge)
     }
 }
 

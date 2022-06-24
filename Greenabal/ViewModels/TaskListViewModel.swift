@@ -38,9 +38,8 @@ class TaskListViewModel: ObservableObject{
             print("--------------complete task-----------------")
             print(taskList)
             
-            
             leafVM.AddCount(num: taskList[index].task.leaf, record: true)
-            badgeVM.RefreshBadge(title: taskList[index].task.bagdge)
+            badgeVM.RefreshBadge(name: taskList[index].task.bagdge)
         }
     }
     
