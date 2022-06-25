@@ -10,6 +10,7 @@ import SwiftUI
 struct TabBar: View {
     @State private var selectedTab: String = "Home"
     @State var shot: Bool = false
+    @State var showModal: Bool = true
     
     init(initSelectedTab: String = "Home"){
         if initSelectedTab != "Home" {
@@ -66,9 +67,11 @@ struct TabBar: View {
                         maxHeight: 60
                     )
                 }.transition(.opacity)
-
             }
-
+            
+            if showModal {
+                ModalView(type: ModalType.gift,show: $showModal)
+            }
         }
         .edgesIgnoringSafeArea(!shot ? .bottom : [.top,.bottom])
     }
