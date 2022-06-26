@@ -52,31 +52,26 @@ struct AchivementView: View {
         var completeMethon: (Int,Int) -> Void
         @Binding var achiveModelIndex:Int
         var leaveNum:Int=0
-        @Binding var fakeData:[MedalListData]
+        @Binding var achivementData:[BadgeModel]
         var body: some View {
             PopUpModalView(content:{
-                switch fakeData[achiveModelIndex].rank{
+                switch achivementData[achiveModelIndex].currentStar{
                 case 3:
                     Text("3")
                 case 2,1,0:
                     VStack(spacing:0){
-                    Image("\(fakeData[achiveModelIndex].medalClass)-\(fakeData[achiveModelIndex].rank)").resizable().scaledToFit().frame(width: 125, height: 125).padding(.bottom,5)
-                    Text("\(fakeData[achiveModelIndex].medalTitle[fakeData[achiveModelIndex].rank - 1])").font(.custom("Roboto Bold", size: 14)).tracking(0.56).padding(.bottom,5)
+                        Image("\(achivementData[achiveModelIndex].images[achivementData[achiveModelIndex].currentStar - 1])").resizable().scaledToFit().frame(width: 125, height: 125).padding(.bottom,5)
+                    Text("\(achivementData[achiveModelIndex].titles[achivementData[achiveModelIndex].currentStar - 1])").font(.custom("Roboto Bold", size: 14)).tracking(0.56).padding(.bottom,5)
 
-                    Text("\(fakeData[achiveModelIndex].medalCondition[fakeData[achiveModelIndex].rank - 1])").font(.custom("Roboto Regular", size: 14)).tracking(0.56)
+                    Text("\(achivementData[achiveModelIndex].goalDiscriptions[achivementData[achiveModelIndex].currentStar - 1])").font(.custom("Roboto Regular", size: 14)).tracking(0.56)
                     }.padding(.bottom,10)
                 default:Text("@@")
                 }
-//                VStack(spacing:0){
-//                Image("\(fakeData[achiveModelIndex].medalClass)-\(fakeData[achiveModelIndex].rank)").resizable().scaledToFit().frame(width: 125, height: 125).padding(.bottom,5)
-//                Text("\(fakeData[achiveModelIndex].medalTitle[fakeData[achiveModelIndex].rank - 1])").font(.custom("Roboto Bold", size: 14)).tracking(0.56).padding(.bottom,5)
-//
-//                Text("\(fakeData[achiveModelIndex].medalCondition[fakeData[achiveModelIndex].rank - 1])").font(.custom("Roboto Regular", size: 14)).tracking(0.56)
-//                }.padding(.bottom,10)
+
                
                 
-            },modalHeader:modalHeader,leaveNum:leaveNum,showModal:$showModal,completeMethon:fakeCompleteMethon,achivementCompleteMethon:completeMethon,methonInt:achiveModelIndex,modaltype:.bagdge,
-                           achivementFakeData: fakeData)
+            },modalHeader:modalHeader,leaveNum:leaveNum,showModal:$showModal,completeMethon:fakeCompleteMethon,achivementCompleteMethon:completeMethon,methonInt:achiveModelIndex,modaltype:.bagdge
+                           )
             
             
         }
@@ -107,7 +102,7 @@ struct AchivementView: View {
                                 VStack(spacing: 18){
                                     
                                     RecordBlock(data:$data,labels: $labels,accentColor1: accentColor1,accentColor2: accentColor2,axisColor: axisColor,showGrid: showGrid,gridColor: gridColor,spacing: spacing)
-                                    AchivementBlock(pageNum:medalDataArray.count,medalDataArray:$medalDataArray,showModal:$showModal,achivementMedalIndex:$achivementMedalIndex)
+                                    AchivementBlock(pageNum:badgeVM.badgeList.count,showModal:$showModal,achivementMedalIndex:$achivementMedalIndex)
                                 }
                                 Text("").frame(width: 200, height: 70).background(Color.clear)
                             }
@@ -131,7 +126,7 @@ struct AchivementView: View {
                          alignment: .center)
             }
             if showModal{
-                AchivementModalView(modalHeader:"成就勳章",showModal:$showModal,completeMethon:getLeafMethon,achiveModelIndex: $achivementMedalIndex,leaveNum: medalDataArray[achivementMedalIndex].medalReward[medalDataArray[achivementMedalIndex].rank-1],fakeData: $medalDataArray)
+                AchivementModalView(modalHeader:"成就勳章",showModal:$showModal,completeMethon:getLeafMethon,achiveModelIndex: $achivementMedalIndex,leaveNum: medalDataArray[achivementMedalIndex].medalReward[medalDataArray[achivementMedalIndex].rank-1],achivementData: $badgeVM.badgeList)
             }
         }
         

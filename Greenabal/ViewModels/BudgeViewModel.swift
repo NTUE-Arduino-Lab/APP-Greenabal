@@ -48,7 +48,9 @@ class BadgeViewModel: ObservableObject{
     
     func GetReward(name: String,star: Int){
         if let index = badgeList.firstIndex(where: { $0.name == name }){
+            
             badgeList[index].GetReward(star: star)
+            
         }
     }
 }

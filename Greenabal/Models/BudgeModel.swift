@@ -24,7 +24,7 @@ class BadgeModel: Identifiable{
         self.name = name
         self.titles = titles
         self.goalDiscriptions = goalDiscriptions
-        self.images = ["\(image)_1","\(image)_2","\((image))_3"]
+        self.images = ["\(image)-1","\(image)-2","\((image))-3"]
         self.goalCounts = goalCounts
         self.totalStar = totalStar
         self.currentCount = currentCount
@@ -65,7 +65,7 @@ enum BadgeType: String {
 
 extension BadgeModel {
     static let all: [BadgeModel] = [
-        BadgeModel(name: BadgeType.youbike.rawValue,titles: ["見習騎士","城市漫遊者","熱血鐵騎仔"], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "badge_bicycle", goalCounts: [10,20,50],leafRewards: [10,20,50],currentStar: 2),
-        BadgeModel(name: BadgeType.bus.rawValue,titles: ["招手攔車","坐在靠窗座","司機都很熟"], goalDiscriptions: ["搭乘達10次","搭乘達20次","搭乘達50次"], image: "badge_bicycle", goalCounts: [10,20,50],leafRewards: [10,20,50])
+        BadgeModel(name: BadgeType.youbike.rawValue,titles: ["見習騎士","城市漫遊者","熱血鐵騎仔"], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "medal-bike", goalCounts: [10,20,50],leafRewards: [10,20,50],currentStar: 2),
+        BadgeModel(name: BadgeType.bus.rawValue,titles: ["招手攔車","坐在靠窗座","司機都很熟"], goalDiscriptions: ["搭乘達10次","搭乘達20次","搭乘達50次"], image: "medal-bus", goalCounts: [10,20,50],leafRewards: [10,20,50],currentStar: 3)
     ]
 }
