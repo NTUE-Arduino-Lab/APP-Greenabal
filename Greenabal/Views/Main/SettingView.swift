@@ -65,7 +65,10 @@ struct SettingView: View {
 }
 
 struct SettingView_Previews: PreviewProvider {
+    static let modalVM = ModalViewModel()
+    
     static var previews: some View {
         TabBar(initSelectedTab: "Setting")
+            .environmentObject(modalVM)
     }
 }

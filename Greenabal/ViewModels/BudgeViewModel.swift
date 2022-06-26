@@ -10,9 +10,17 @@ import Foundation
 
 class BadgeViewModel: ObservableObject{
     @Published var badgeList: [BadgeModel]
+    let modalVM: ModalViewModel
+    let leafVM: LeafViewModel
     
-    init(){
+    init(leafVM: LeafViewModel,modalVM: ModalViewModel){
         badgeList = BadgeModel.all
+        
+        self.modalVM = modalVM
+        self.leafVM = leafVM
+        modalVM.medalData = badgeList[0]
+        
+        SortList()
         
         //        RefreshBadge(index:0)
         
@@ -24,8 +32,17 @@ class BadgeViewModel: ObservableObject{
     }
     
     func RefreshBadge(name: String){
-        if let index = badgeList.firstIndex(where: { $0.name == name }){
-            badgeList[index].AddCount()
+        var result: Bool = false
+        let index = badgeList.firstIndex(where: { $0.name == name })
+        
+        if index != nil {
+            result = badgeList[index!].AddCount()
+            
+            if result {
+                modalVM.showGetMedalModal(data: badgeList[index!])
+            }
+            
+            SortList()
         }
         
         print("-------------refresh badge------------------")
@@ -37,7 +54,12 @@ class BadgeViewModel: ObservableObject{
     
     func RefreshBadge(index: Int){
         let badge = badgeList[index]
-        badge.AddCount()
+        let result = badge.AddCount()
+        
+        if result {
+            modalVM.showGetMedalModal(data: badge)
+            SortList()
+        }
         
         print("---------------refresh badge----------------")
         badgeList.forEach{ item in
@@ -49,6 +71,16 @@ class BadgeViewModel: ObservableObject{
     func GetReward(name: String,star: Int){
         if let index = badgeList.firstIndex(where: { $0.name == name }){
             badgeList[index].GetReward(star: star)
+            
+            leafVM.AddCount(num: badgeList[index].items[star-1].leafReward, record: false)
+            
+            print("get badge reward")
         }
+    }
+    
+    func SortList(){
+        badgeList = badgeList.sorted(by: {
+            $0.currentStar > $1.currentStar
+        })
     }
 }

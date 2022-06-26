@@ -18,8 +18,10 @@ class TaskListViewModel: ObservableObject{
         self.badgeVM = badgeVM
         
         var testList:[Task] = []
+        var i = 0
         TaskData.all.forEach { item in
-            testList.append(Task(task: item))
+            testList.append(Task(task: item,index: i))
+            i += 1
         }
         
         self.taskList = testList
@@ -45,7 +47,7 @@ class TaskListViewModel: ObservableObject{
     
     func refreshTask(index: Int){
         //        刷新
-        taskList[index] = Task(task:TaskData.all[index])
+        taskList[index] = Task(task:TaskData.all[index],index: index)
         
         print("--------------refresh task-----------------")
         print(taskList)

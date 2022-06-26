@@ -308,6 +308,7 @@ struct RectGetter: View {
 struct HomeView_Previews: PreviewProvider {
     static let leafVM = LeafViewModel()
     static let backgroundVM = BackgroundViewModel()
+    static var modalVM: ModalViewModel = ModalViewModel()
     static var islandVM = IslandViewModel(leafVM: leafVM)
     
     static var previews: some View {
@@ -315,5 +316,6 @@ struct HomeView_Previews: PreviewProvider {
             .environmentObject(leafVM)
             .environmentObject(backgroundVM)
             .environmentObject(islandVM)
+            .environmentObject(modalVM)
     }
 }

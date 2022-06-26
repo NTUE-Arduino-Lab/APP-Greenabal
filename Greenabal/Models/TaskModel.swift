@@ -11,10 +11,12 @@ struct Task: Identifiable{
     let id = UUID()
     let task: TaskData
     var isComplete: Bool
+    let index: Int
     
-    init(task: TaskData, isComplete: Bool = false){
+    init(task: TaskData, isComplete: Bool = false, index: Int){
         self.task = task
         self.isComplete = isComplete
+        self.index = index
     }
     
     mutating func updateCompletion(){
