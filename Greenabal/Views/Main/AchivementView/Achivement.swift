@@ -17,7 +17,7 @@ struct AchivementBlock: View {
     var pageNum:Int
     @State var currentIndex = 0
     @GestureState var dragOffset: CGFloat = 0
-    @Binding var medalDataArray:[MedalListData]
+    @EnvironmentObject var badgeVM: BadgeViewModel
     @Binding var showModal:Bool
     @Binding var achivementMedalIndex:Int
     var body: some View {
@@ -32,20 +32,20 @@ struct AchivementBlock: View {
                 //                ScrollView(.horizontal, showsIndicators: false) {
                 
                 HStack(spacing:0){
-                    ForEach((0...medalDataArray.count/6), id: \.self){ index in
+                    ForEach((0...badgeVM.badgeList.count/6), id: \.self){ index in
                         
                         
                         let num = index*6
                         LazyVGrid(columns: gridItemLayout) {
                             ForEach((num..<num+6), id: \.self) { number in
                                 
-                                    if number < medalDataArray.count{
-                                        if medalDataArray[number].rank != 0{
+                                    if number < badgeVM.badgeList.count{
+                                        if badgeVM.badgeList[number].currentStar != 0{
                                             VStack(spacing:0){
-                                            Image("\(medalDataArray[number].medalClass)-\(medalDataArray[number].rank)").resizable().scaledToFit().frame(width: 71, height: 71).padding(.bottom,5)
-                                            Text("\(medalDataArray[number].medalTitle[medalDataArray[number].rank - 1])").font(.custom("Roboto Regular", size: 14)).tracking(0.56).padding(.bottom,5)
+                                                Image("\(badgeVM.badgeList[number].images[badgeVM.badgeList[number].currentStar - 1])").resizable().scaledToFit().frame(width: 71, height: 71).padding(.bottom,5)
+                                            Text("\(badgeVM.badgeList[number].titles[badgeVM.badgeList[number].currentStar - 1])").font(.custom("Roboto Regular", size: 14)).tracking(0.56).padding(.bottom,5)
 //                                            Text("\(medalDataArray[number].medalName)").font(.custom("Roboto Regular", size: 14)).tracking(0.56).padding(.bottom,5)
-                                            Text("\(medalDataArray[number].medalCondition[medalDataArray[number].rank - 1])").font(.custom("Roboto Regular", size: 10)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
+                                            Text("\(badgeVM.badgeList[number].goalDiscriptions[badgeVM.badgeList[number].currentStar - 1])").font(.custom("Roboto Regular", size: 10)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
                                             }.frame(width: 80, height: 123).padding(.bottom,10).onTapGesture{
                                                 showModal = true
                                                 achivementMedalIndex = number
@@ -76,7 +76,7 @@ struct AchivementBlock: View {
                         .updating(self.$dragOffset, body: { value, state, transaction in
                             if self.currentIndex == 0 && value.translation.width > 0
                             {}else{
-                                if medalDataArray.count > 6 * (currentIndex+1) {
+                                if badgeVM.badgeList.count > 6 * (currentIndex+1) {
                                     state = value.translation.width
                                 }else if value.translation.width > 0{
                                     state = value.translation.width
@@ -102,7 +102,7 @@ struct AchivementBlock: View {
                             }
                             if newIndex >= 0 {
                                 
-                                if medalDataArray.count > 6*(newIndex){
+                                if badgeVM.badgeList.count > 6*(newIndex){
                                     self.currentIndex = newIndex
                                 }
                             }
@@ -113,8 +113,8 @@ struct AchivementBlock: View {
             
             
             HStack(spacing:5){
-                ForEach(0..<(medalDataArray.count / 6)+1 , id: \.self){number in
-                    if number == medalDataArray.count / 6  && medalDataArray.count%6 == 0 {
+                ForEach(0..<(badgeVM.badgeList.count / 6)+1 , id: \.self){number in
+                    if number == badgeVM.badgeList.count / 6  && badgeVM.badgeList.count%6 == 0 {
                         Text("")
                     }
                     else if number == currentIndex{

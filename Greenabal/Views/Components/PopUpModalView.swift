@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct PopUpModalView<Content: View>: View {
+    @EnvironmentObject var badgeVM: BadgeViewModel
     @EnvironmentObject var taskListViewModel: TaskListViewModel
     @ViewBuilder var content: Content
     var modalHeader : String? = nil
     var leaveNum : Int? = nil
     @State var gotLeaf : Bool? = true
+    @State var achivementGotLeaf:Bool = false//@EnvironmentObject不會馬上re-render所以改用State控制
     @Binding var showModal:Bool
     var completeMethon: (Int) -> Void
     var achivementCompleteMethon: (Int,Int) -> Void
@@ -22,12 +24,13 @@ struct PopUpModalView<Content: View>: View {
         case bagdge
     }
     var modaltype: Modaltype
-    var achivementFakeData:[MedalListData]?=[
-        MedalListData(rank:1,medalClass:"medal-bike",medalName:"Youbike王",medalTitle:["見習騎士","城市漫遊者","熱血鐵騎仔"],goalCounts: [10,50,100],medalCondition:["騎行達 10 次","騎行達 50 次","騎行達 100 次"],medalReward: [3,6,12],medalRewardGot: [true,false,false])]
+//    var achivementFakeData:[BadgeModel]
+        
     var body: some View {
         
         
         VStack(spacing:0){
+            
             ZStack{
                 Text("").frame(maxWidth: .infinity,
                                maxHeight: .infinity,
@@ -70,7 +73,7 @@ struct PopUpModalView<Content: View>: View {
                                 HStack(spacing:5){
                                     
                                         
-                                        ButtonContents(gotLeaf:taskListViewModel.taskList[methonInt].isComplete,leaveNum:leaveNum)
+                                        ButtonContents(gotLeaf:$taskListViewModel.taskList[methonInt].isComplete,leaveNum:leaveNum)
                                     
                                     
                                 }.frame(width: 90, height: 36).background(.white).clipShape(Capsule()).shadow(
@@ -80,14 +83,15 @@ struct PopUpModalView<Content: View>: View {
                             }.disabled(taskListViewModel.taskList[methonInt].isComplete)
                         case .bagdge:
                                 Button{
-                                    self.gotLeaf = true
-                                    achivementCompleteMethon(methonInt,(achivementFakeData?[methonInt].rank)! )
+                                    self.achivementGotLeaf = true
+                                    print(badgeVM.badgeList[methonInt].getLeafStates[badgeVM.badgeList[methonInt].currentStar - 1])
+                                    badgeVM.GetReward(name:badgeVM.badgeList[methonInt].name,star:badgeVM.badgeList[methonInt].currentStar )
                                 }label:{
                                     HStack(spacing:5){
                                         
                                        
                                                 //不會執行
-                                        ButtonContents(gotLeaf:achivementFakeData?[methonInt].medalRewardGot[(achivementFakeData?[methonInt].rank)! - 1] ,leaveNum:leaveNum)
+                                        ButtonContents(gotLeaf:$achivementGotLeaf ,leaveNum:badgeVM.badgeList[methonInt].leafRewards[badgeVM.badgeList[methonInt].currentStar - 1])
                                        
                                         
                                         
@@ -95,7 +99,10 @@ struct PopUpModalView<Content: View>: View {
                                         color: Color(#colorLiteral(red: 220/255, green: 220/255, blue: 220/255, alpha: 1)),
                                         radius: CGFloat(3),
                                         x: CGFloat(0), y: CGFloat(5))
-                                }.disabled((achivementFakeData?[methonInt].medalRewardGot[(achivementFakeData?[methonInt].rank)! - 1])!)
+                                }.disabled(badgeVM.badgeList[methonInt].getLeafStates[badgeVM.badgeList[methonInt].currentStar - 1])
+                                    .onAppear {
+                                        self.achivementGotLeaf = badgeVM.badgeList[methonInt].getLeafStates[badgeVM.badgeList[methonInt].currentStar - 1]
+                                        }
                             }
                             
                             
@@ -117,16 +124,13 @@ struct PopUpModalView<Content: View>: View {
 }
 
 struct ButtonContents:View{
-    var gotLeaf:Bool?
-    var leaveNum:Int?
+    @Binding var gotLeaf:Bool
     
+    var leaveNum:Int?
+    @EnvironmentObject var badgeVM: BadgeViewModel
     var body:some View{
         
-        if gotLeaf == true{
-            Text("\(leaveNum ?? 0)").font(.custom("Roboto Bold", size: 14)).tracking(0.56).multilineTextAlignment(.trailing).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
-            
-            Image("icon-leaf-gray-2")
-        }else{
+        if gotLeaf == false{
             Text("\(leaveNum ?? 0)").font(.custom("Roboto Bold", size: 14)).tracking(0.56).multilineTextAlignment(.trailing).overlay {
                 LinearGradient(
                     colors: [Color(red: 18/255, green: 235/255,blue: 195/255),Color(red: 7/255, green: 215/255,blue: 66/255) ],
@@ -139,7 +143,11 @@ struct ButtonContents:View{
             }
             
             Image("leaf")
+        }else{
             
+            Text("\(leaveNum ?? 0)").font(.custom("Roboto Bold", size: 14)).tracking(0.56).multilineTextAlignment(.trailing).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
+            
+            Image("icon-leaf-gray-2")
         }
     }
 }
