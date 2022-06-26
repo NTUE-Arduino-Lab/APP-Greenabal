@@ -140,12 +140,14 @@ struct AchivementView: View {
 
 struct AchivementView_Previews: PreviewProvider {
     static var leafVM:LeafViewModel = LeafViewModel()
-    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var modalVM: ModalViewModel = ModalViewModel()
+    static var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM,modalVM: modalVM)
     
     static var previews: some View {
         TabBar(initSelectedTab: "Achivement")
             .environmentObject(leafVM)
             .environmentObject(badgeVM)
+            .environmentObject(modalVM)
     }
 }
 

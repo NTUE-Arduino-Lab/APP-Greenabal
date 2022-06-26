@@ -37,19 +37,24 @@ struct RewardItem: View {
 struct CarouselView<Content: View,T: Identifiable>: View {
     var content: (T) -> Content
     var list: [T]
+    var maxCount: Int
     
     var spacing: CGFloat
     var trailingSpace: CGFloat
     @Binding var index: Int
     var width: CGFloat
     
-    init(width: CGFloat = 300, spacing: CGFloat = 0, trailingSpace: CGFloat = 100, index: Binding<Int>, items: [T], @ViewBuilder content: @escaping (T) -> Content){
-        self.list = items
+    init(width: CGFloat = 300, spacing: CGFloat = 0, trailingSpace: CGFloat = 100,maxCount: Int, index: Binding<Int>, items: [T], @ViewBuilder content: @escaping (T) -> Content){
+        self.list = []
+        for index in 0..<maxCount {
+            self.list.append(items[index])
+        }
         self.spacing = spacing
         self.trailingSpace = trailingSpace
         self._index = index
         self.content = content
         self.width = width
+        self.maxCount = maxCount
     }
     
     @GestureState var offset: CGFloat = 0
@@ -76,8 +81,8 @@ struct CarouselView<Content: View,T: Identifiable>: View {
                         let roundIndex = progress.rounded()
                         
                         currentIndex += Int(roundIndex)
-                        if currentIndex >= 3 {
-                            currentIndex = 2
+                        if currentIndex >= maxCount {
+                            currentIndex = maxCount - 1
                         }
                         else if currentIndex < 0 {
                             currentIndex = 0
@@ -88,11 +93,6 @@ struct CarouselView<Content: View,T: Identifiable>: View {
         }
         .animation(.easeInOut, value: offset == 0)
     }
-}
-
-struct Post: Identifiable {
-    var id = UUID().uuidString
-    var postImage: String
 }
 
 struct ModalButton: View {
@@ -138,22 +138,40 @@ struct ModalButton: View {
 }
 
 struct MedalModalContent: View {
+    let type: ModalType
     @State var currentIndex: Int = 0
-    @Binding var posts: [Post]
+    @EnvironmentObject var modalVM: ModalViewModel
+    @EnvironmentObject var badgeVM: BadgeViewModel
+    @State var btnText: String = ""
     
     var body: some View {
         VStack{
-            CarouselView(index: $currentIndex, items: posts)
-            {
-                post in RewardItem(image: "medal-bike-1", title: "城市自遊俠", info: "騎行達10次")
+            if modalVM.medalData.currentStar == 1 {
+                RewardItem(image: modalVM.medalData.items[0].image, title: modalVM.medalData.items[0].title, info: modalVM.medalData.items[0].goalDiscription)
             }
-            .frame(width: 300, height: 200)
-            .clipped()
+            else {
+                CarouselView(maxCount: modalVM.medalData.currentStar, index: $currentIndex, items: modalVM.medalData.items)
+                {
+                    medal in RewardItem(image: medal.image, title: medal.title, info: medal.goalDiscription)
+                }
+                .frame(width: 300, height: 200)
+                .clipped()
+            }
             
-            Spacer().frame(height: 24)
-            
-            HStack(spacing: 5){
-                ForEach(posts.indices, id: \.self){ index in
+            if type == .getMedal{
+                
+                Spacer().frame(height: 17)
+                
+                Text("下一階段：\(modalVM.medalData.currentCount)/\(modalVM.medalData.items[modalVM.medalData.currentStar].goalCount)次")
+                    .font(.custom("Roboto Medium", size: 14))
+                    .tracking(0.56)
+            }
+            else {
+                
+                Spacer().frame(height: 24)
+                
+                HStack(spacing: 5){
+                ForEach(0..<modalVM.medalData.totalStar, id: \.self){ index in
                     if index == currentIndex {
                         Circle()
                             .fill(LinearGradient(
@@ -170,21 +188,59 @@ struct MedalModalContent: View {
                     }
                 }
             }
+            }
         }
         .padding(.top, 10)
+        
+        RoundedRectangle(cornerRadius: 10)
+            .fill(Color(red: 241/255, green: 241/255, blue: 241/255))
+            .frame(width: 300,height: 1)
+        
+        ModalButton(text: "\(modalVM.medalData.items[currentIndex].goalCount)", icon: "icon_leaf_green", action: BtnAction)
+    }
+    
+    func BtnAction(){
+        badgeVM.GetReward(name: modalVM.medalData.name, star: modalVM.medalData.currentStar)
+        modalVM.hideModal()
     }
 }
 
 struct GiftModalContent: View {
-    let title: String
-    let info: String
+    @EnvironmentObject var modalVM: ModalViewModel
+    @EnvironmentObject var barcodeVM: BarcodeListViewModel
     
     var body: some View {
         VStack{
-            RewardItem(image: "icon_big_gift", title: title, info: info)
+            
+            if modalVM.buyData.gift is GiftIsland {
+                let gift: GiftIsland = modalVM.buyData.gift as! GiftIsland
+                RewardItem(image: "icon_big_gift", title: "購買\(modalVM.buyData.seal)商品", info: "獲得\(gift.type.rawValue)")
+            }
+            else if modalVM.buyData.gift is GiftLeaf {
+                let gift: GiftLeaf = modalVM.buyData.gift as! GiftLeaf
+                RewardItem(image: "icon_big_gift", title: "購買\(modalVM.buyData.seal)商品", info: "獲得 \(gift.leaf) 片葉子")
+            }
+            
         }
         .padding(.top, 10)
         .padding(.bottom, 10)
+        
+        RoundedRectangle(cornerRadius: 10)
+            .fill(Color(red: 241/255, green: 241/255, blue: 241/255))
+            .frame(width: 300,height: 1)
+        
+        if modalVM.buyData.gift is GiftIsland {
+            ModalButton(text: "稀有島嶼", icon: "icon_gift_ticket", action: BtnAction)
+        }
+        else if modalVM.buyData.gift is GiftLeaf {
+            let item: GiftLeaf = modalVM.buyData.gift as! GiftLeaf
+            ModalButton(text: "\(item.leaf)", icon: "icon_leaf_green", action: BtnAction)
+        }
+    }
+    
+    func BtnAction(){
+        barcodeVM.OpenGift(item: modalVM.buyData)
+        modalVM.hideModal()
     }
 }
 
@@ -192,12 +248,12 @@ enum ModalType: String{
     case knowledge = "環保知識"
     case medal = "成就勳章"
     case gift = "獲得寶箱"
+    case getMedal = "獲得成就"
 }
 
 struct ModalView: View {
     let type: ModalType
     @Binding var show: Bool
-    @State var posts: [Post] = []
     
     var body: some View {
         ZStack{
@@ -221,22 +277,16 @@ struct ModalView: View {
                     .frame(width: 300,height: 1)
                 
                 if type == .gift{
-                    GiftModalContent(title: "購買環保標章商品", info: "獲得稀有島嶼兌換卷")
+                    GiftModalContent()
                 }
                 else if type == .medal {
-                    MedalModalContent(posts: $posts)
-                        .onAppear{
-                            for index in 1...3{
-                                posts.append(Post(postImage: "medal-bike-\(index)"))
-                            }
-                        }
+                    MedalModalContent(type: .medal)
                 }
+                else if type == .getMedal {
+                    MedalModalContent(type: .getMedal)
+                }
+
                 
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color(red: 241/255, green: 241/255, blue: 241/255))
-                    .frame(width: 300,height: 1)
-                
-                ModalButton(text: "稀有島嶼", icon: "icon_gift_ticket", action: GiftBtnAction)
             }
             .frame(alignment: .top)
             .padding(.bottom,20)
@@ -248,25 +298,16 @@ struct ModalView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
     }
-    
-    func MedalBtnAction(){
-        print("medal action")
-    }
-    
-    func GiftBtnAction(){
-        print("gift action")
-    }
 }
 
 struct ModalView_Previews: PreviewProvider {
-    static let leafVM = LeafViewModel()
-    static let backgroundVM = BackgroundViewModel()
-    static var islandVM = IslandViewModel(leafVM: leafVM)
+    static var leafVM: LeafViewModel = LeafViewModel()
+    static var modalVM: ModalViewModel = ModalViewModel()
+    @State static var show: Bool = true
+    @State var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM,modalVM: modalVM)
     
     static var previews: some View {
-        TabBar()
-            .environmentObject(leafVM)
-            .environmentObject(backgroundVM)
-            .environmentObject(islandVM)
+        ModalView(type: .medal, show: $show)
+            .environmentObject(modalVM)
     }
 }

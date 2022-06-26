@@ -6,49 +6,68 @@
 //
 
 import Foundation
+
 class BadgeModel: Identifiable{
     //    徽章
     let id = UUID()
     let name: String
-    let titles: [String]
-    let goalDiscriptions: [String]
+    var items: [BadgeItemModel]
     var currentCount: Int
-    var getLeafStates: [Bool]
-    var goalCounts: [Int]
     var currentStar: Int
     let totalStar: Int
-    let images: [String]
-    let leafRewards: [Int]
     
-    init(name: String, titles: [String], goalDiscriptions: [String], image: String, goalCounts: [Int], leafRewards: [Int], totalStar: Int = 3, currentCount: Int = 0, currentStar: Int = 0,getLeafStates: [Bool] = [false,false,false]){
+    init(name: String,items: [BadgeItemModel], totalStar: Int = 3, currentCount: Int = 0, currentStar: Int = 0){
         self.name = name
-        self.titles = titles
-        self.goalDiscriptions = goalDiscriptions
-        self.images = ["\(image)_1","\(image)_2","\((image))_3"]
-        self.goalCounts = goalCounts
+        self.items = items
         self.totalStar = totalStar
         self.currentCount = currentCount
         self.currentStar = currentStar
-        self.getLeafStates = getLeafStates
-        self.leafRewards = leafRewards
     }
     
-    func AddCount(){
+    func AddCount() -> Bool{
         currentCount += 1
-        if currentCount >= goalCounts[currentStar]{
-            AddStar()
+        let goalCount = items[currentStar].goalCount
+        if currentCount >= goalCount{
+            return AddStar()
         }
+        return false
     }
     
-    func AddStar(){
+    func AddStar() -> Bool{
         if currentStar < totalStar{
             currentStar += 1
+            return true
         }
+        return false
     }
     
     func GetReward(star: Int){
-        if !getLeafStates[star-1] {
-            getLeafStates[star-1] = true
+        items[star-1].GetReward()
+    }
+}
+
+class BadgeItemModel: Identifiable{
+    //    徽章
+    let id = UUID()
+    let title: String
+    let goalDiscription: String
+    var getLeafState: Bool
+    var goalCount: Int
+    let image: String
+    let leafReward: Int
+    
+    init(title: String, goalDiscription: String, image: String, goalCount: Int, leafReward: Int,getLeafState: Bool = false ){
+        self.title = title
+        self.goalDiscription = goalDiscription
+        self.image = image
+        self.goalCount = goalCount
+        self.getLeafState = getLeafState
+        self.leafReward = leafReward
+    }
+    
+    func GetReward(){
+        if !getLeafState {
+            getLeafState = true
         }
     }
 }
@@ -65,7 +84,19 @@ enum BadgeType: String {
 
 extension BadgeModel {
     static let all: [BadgeModel] = [
-        BadgeModel(name: BadgeType.youbike.rawValue,titles: ["見習騎士","城市漫遊者","熱血鐵騎仔"], goalDiscriptions: ["騎行達10次","騎行達20次","騎行達50次"], image: "badge_bicycle", goalCounts: [10,20,50],leafRewards: [10,20,50],currentStar: 2),
-        BadgeModel(name: BadgeType.bus.rawValue,titles: ["招手攔車","坐在靠窗座","司機都很熟"], goalDiscriptions: ["搭乘達10次","搭乘達20次","搭乘達50次"], image: "badge_bicycle", goalCounts: [10,20,50],leafRewards: [10,20,50])
+        BadgeModel(name: BadgeType.youbike.rawValue,
+                   items: [
+                    BadgeItemModel(title: "見習騎士", goalDiscription: "騎行達10次", image: "medal-bike-1", goalCount: 10, leafReward: 10),
+                    BadgeItemModel(title: "城市漫遊者", goalDiscription: "騎行達20次", image: "medal-bike-2", goalCount: 20, leafReward: 20),
+                    BadgeItemModel(title: "熱血鐵騎仔", goalDiscription: "騎行達50次", image: "medal-bike-3", goalCount: 50, leafReward: 50)
+                   ],
+                   currentCount: 9,currentStar:0),
+        BadgeModel(name: BadgeType.bus.rawValue,
+                   items: [
+                    BadgeItemModel(title: "招手攔車", goalDiscription: "搭乘達10次", image: "medal-bus-1", goalCount: 10, leafReward: 10),
+                    BadgeItemModel(title: "坐在靠窗座", goalDiscription: "搭乘達20次", image: "medal-bus-2", goalCount: 20, leafReward: 20),
+                    BadgeItemModel(title: "司機都很熟", goalDiscription: "搭乘達50次", image: "medal-bus-3", goalCount: 50, leafReward: 50)
+                   ],
+                   currentStar:2)
     ]
 }

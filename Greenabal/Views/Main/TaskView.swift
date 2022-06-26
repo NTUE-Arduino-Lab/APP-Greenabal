@@ -235,17 +235,6 @@ struct EachTaskView: View {
     }
 }
 
-struct TaskView_Previews: PreviewProvider {
-    static var leafVM:LeafViewModel = LeafViewModel()
-    static var badgeVM:BadgeViewModel = BadgeViewModel()
-    static var taskListVM:TaskListViewModel = TaskListViewModel(leafVM: leafVM, badgeVM: badgeVM)
-    
-    static var previews: some View {
-        TabBar(initSelectedTab: "Task")
-            .environmentObject(taskListVM)
-    }
-}
-
 struct DraggableModifier : ViewModifier {
     enum Direction {
         case vertical
@@ -361,4 +350,17 @@ struct DraggableModifier : ViewModifier {
         }
     }
     
+}
+
+struct TaskView_Previews: PreviewProvider {
+    static var modalVM: ModalViewModel = ModalViewModel()
+    static var leafVM: LeafViewModel = LeafViewModel()
+    static var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM, modalVM: modalVM)
+    static var taskListVM:TaskListViewModel = TaskListViewModel(leafVM: leafVM, badgeVM: badgeVM)
+    
+    static var previews: some View {
+        TabBar(initSelectedTab: "Task")
+            .environmentObject(taskListVM)
+            .environmentObject(modalVM)
+    }
 }

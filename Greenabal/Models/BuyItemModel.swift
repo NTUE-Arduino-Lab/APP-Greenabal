@@ -23,12 +23,12 @@ class BuyItem: Identifiable{
     let badge: String
     var openGift: Bool
     
-    init(name: String, gift: Any, seal: String = Seal.環保標章.rawValue , badge: String = BadgeType.youbike.rawValue){
+    init(name: String, gift: Any, seal: String = Seal.環保標章.rawValue , badge: String = BadgeType.youbike.rawValue, openGift: Bool = false){
         self.name = name
         self.seal = seal
         self.badge = badge
         self.gift = gift
-        self.openGift = false
+        self.openGift = openGift
     }
     
     func OpenGift(){
@@ -51,9 +51,9 @@ class BuyList: Identifiable{
 }
 
 
-enum GiftType{
-    case leaf
-    case island
+enum GiftType: String{
+    case leaf = "葉子"
+    case island = "稀有島嶼兌換卷"
 }
 
 struct GiftLeaf{

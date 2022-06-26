@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct TabBar: View {
+    @EnvironmentObject var modalVM: ModalViewModel
     @State private var selectedTab: String = "Home"
     @State var shot: Bool = false
-    @State var showModal: Bool = true
     
     init(initSelectedTab: String = "Home"){
         if initSelectedTab != "Home" {
@@ -69,8 +69,8 @@ struct TabBar: View {
                 }.transition(.opacity)
             }
             
-            if showModal {
-                ModalView(type: ModalType.gift,show: $showModal)
+            if modalVM.show {
+                ModalView(type: modalVM.type,show: $modalVM.show)
             }
         }
         .edgesIgnoringSafeArea(!shot ? .bottom : [.top,.bottom])
@@ -78,6 +78,7 @@ struct TabBar: View {
 }
 
 struct TabBar_Previews: PreviewProvider {
+    static let modalVM = ModalViewModel()
     static let leafVM = LeafViewModel()
     static let backgroundVM = BackgroundViewModel()
     static var islandVM = IslandViewModel(leafVM: leafVM)
@@ -87,5 +88,6 @@ struct TabBar_Previews: PreviewProvider {
             .environmentObject(leafVM)
             .environmentObject(backgroundVM)
             .environmentObject(islandVM)
+            .environmentObject(modalVM)
     }
 }

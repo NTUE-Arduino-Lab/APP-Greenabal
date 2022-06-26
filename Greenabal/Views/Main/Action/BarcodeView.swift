@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BuyItemView: View {
+    @EnvironmentObject var modalVM: ModalViewModel
     let data: BuyItem
     
     var body: some View {
@@ -28,7 +29,11 @@ struct BuyItemView: View {
                         .frame(height:21)
                 )
             
-            Image("icon_gift")
+            Button(action: {
+                modalVM.showGiftModal(data: data)
+            }, label: {
+                Image(!data.openGift ? "icon_gift_green" : "icon_gift_gray")
+            }).disabled(data.openGift)
         }
         .padding([.leading],15)
         .padding([.trailing],20)
@@ -106,7 +111,8 @@ struct BarcodeView: View {
 
 struct BarcodeView_Previews: PreviewProvider {
     static var leafVM:LeafViewModel = LeafViewModel()
-    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var modalVM: ModalViewModel = ModalViewModel()
+    static var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM,modalVM: modalVM)
     static var barcodeListVM:BarcodeListViewModel = BarcodeListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     @State static var selectedIndex: Int = 0
     static let months: [MonthSelection] = [
