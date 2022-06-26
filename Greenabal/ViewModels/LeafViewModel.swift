@@ -18,7 +18,10 @@ class LeafViewModel: ObservableObject{
         let dateViewModel: DateViewModel = DateViewModel()
         
         testRecordList = [
-            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date()), count: 5)
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date()), count: 2),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() + TimeInterval(5*24*60*60)), count: 3),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() + TimeInterval(5*24*60*60)), count: 2),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(3*24*60*60)), count: 1),
         ]
         
         count = 500
@@ -76,7 +79,7 @@ class LeafViewModel: ObservableObject{
         count -= num
     }
     
-    private func GetWeekRecord(startDate: Date,endDate: Date) -> [Int]{
+    func GetWeekRecord(startDate: Date,endDate: Date) -> [Int]{
         
         let dateViewModel: DateViewModel = DateViewModel()
         

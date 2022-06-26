@@ -97,6 +97,41 @@ extension BadgeModel {
                     BadgeItemModel(title: "坐在靠窗座", goalDiscription: "搭乘達20次", image: "medal-bus-2", goalCount: 20, leafReward: 20),
                     BadgeItemModel(title: "司機都很熟", goalDiscription: "搭乘達50次", image: "medal-bus-3", goalCount: 50, leafReward: 50)
                    ],
-                   currentStar:2)
+                   currentStar:2),
+        BadgeModel(name: BadgeType.knowledge.rawValue,
+                   items: [
+                    BadgeItemModel(title: "招手攔車", goalDiscription: "搭乘達10次", image: "medal-bus-1", goalCount: 10, leafReward: 10),
+                    BadgeItemModel(title: "坐在靠窗座", goalDiscription: "搭乘達20次", image: "medal-bus-2", goalCount: 20, leafReward: 20),
+                    BadgeItemModel(title: "司機都很熟", goalDiscription: "搭乘達50次", image: "medal-bus-3", goalCount: 50, leafReward: 50)
+                   ],
+                   currentStar:0),
+        BadgeModel(name: BadgeType.electricity.rawValue,
+                   items: [
+                    BadgeItemModel(title: "招手攔車", goalDiscription: "搭乘達10次", image: "medal-bus-1", goalCount: 10, leafReward: 10),
+                    BadgeItemModel(title: "坐在靠窗座", goalDiscription: "搭乘達20次", image: "medal-bus-2", goalCount: 20, leafReward: 20),
+                    BadgeItemModel(title: "司機都很熟", goalDiscription: "搭乘達50次", image: "medal-bus-3", goalCount: 50, leafReward: 50)
+                   ],
+                   currentStar:0),
+        BadgeModel(name: BadgeType.plastic.rawValue,
+                   items: [
+                    BadgeItemModel(title: "招手攔車", goalDiscription: "搭乘達10次", image: "medal-bus-1", goalCount: 10, leafReward: 10),
+                    BadgeItemModel(title: "坐在靠窗座", goalDiscription: "搭乘達20次", image: "medal-bus-2", goalCount: 20, leafReward: 20),
+                    BadgeItemModel(title: "司機都很熟", goalDiscription: "搭乘達50次", image: "medal-bus-3", goalCount: 50, leafReward: 50)
+                   ],
+                   currentStar:0),
+        BadgeModel(name: BadgeType.seal_環保.rawValue,
+                   items: [
+                    BadgeItemModel(title: "見習騎士", goalDiscription: "騎行達10次", image: "medal-bike-1", goalCount: 10, leafReward: 10),
+                    BadgeItemModel(title: "城市漫遊者", goalDiscription: "騎行達20次", image: "medal-bike-2", goalCount: 20, leafReward: 20),
+                    BadgeItemModel(title: "熱血鐵騎仔", goalDiscription: "騎行達50次", image: "medal-bike-3", goalCount: 50, leafReward: 50)
+                   ],
+                   currentCount: 0,currentStar:0),
+        BadgeModel(name: BadgeType.seal_有機.rawValue,
+                   items: [
+                    BadgeItemModel(title: "見習騎士", goalDiscription: "騎行達10次", image: "medal-bike-1", goalCount: 10, leafReward: 10),
+                    BadgeItemModel(title: "城市漫遊者", goalDiscription: "騎行達20次", image: "medal-bike-2", goalCount: 20, leafReward: 20),
+                    BadgeItemModel(title: "熱血鐵騎仔", goalDiscription: "騎行達50次", image: "medal-bike-3", goalCount: 50, leafReward: 50)
+                   ],
+                   currentCount: 0,currentStar:0),
     ]
 }

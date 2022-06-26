@@ -42,7 +42,9 @@ struct ModalButton: View {
     
     var body: some View {
         Button(action: {
-            action()
+            if !disabled{
+                action()
+            }
         }, label: {
             HStack(alignment:.center, spacing:4){
                 Text(text)

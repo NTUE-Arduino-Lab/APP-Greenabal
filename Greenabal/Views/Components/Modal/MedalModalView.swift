@@ -104,7 +104,7 @@ struct MedalModalContent: View {
                 
                 HStack(spacing: 5){
                 ForEach(0..<modalVM.medalData.totalStar, id: \.self){ index in
-                    if index == currentIndex {
+                    if index <= currentIndex {
                         Circle()
                             .fill(LinearGradient(
                                 gradient: Gradient(stops: [
@@ -128,14 +128,17 @@ struct MedalModalContent: View {
             .fill(Color(red: 241/255, green: 241/255, blue: 241/255))
             .frame(width: 300,height: 1)
         
-        ModalButton(text: "\(modalVM.medalData.items[currentIndex].goalCount)", icon: btnDisabled ? "icon_leaf_green" : "icon-leaf-gray-2", action: BtnAction, disabled: $btnDisabled)
+        ModalButton(text: "\(modalVM.medalData.items[currentIndex].goalCount)", icon: !btnDisabled ? "icon_leaf_green" : "icon-leaf-gray-2", action: BtnAction, disabled: $btnDisabled)
             .onChange(of: modalVM.medalData.items[currentIndex].getLeafState, perform: { newValue in
                 btnDisabled = newValue
             })
+            .onAppear(){
+                btnDisabled = modalVM.medalData.items[currentIndex].getLeafState
+            }
     }
     
     func BtnAction(){
-        badgeVM.GetReward(name: modalVM.medalData.name, star: modalVM.medalData.currentStar)
+        badgeVM.GetReward(name: modalVM.medalData.name, star: currentIndex + 1)
 //        modalVM.hideModal()
         btnDisabled = true
     }

@@ -5,15 +5,15 @@
 //  Created by Tony on 2022/6/17.
 //
 
-import Foundation
 import SwiftUI
 
 struct IslandCollection: View {
+    @EnvironmentObject var islandVM: IslandViewModel
     
     var body: some View {
         VStack{
-            Text("初來乍島").font(.custom("Roboto Bold", size: 18)).tracking(1.44)
-            Text("No. 168").font(.custom("Roboto Medium", size: 16)).tracking(0.64).padding(.top,10)
+            Text("\(islandVM.currentIsland.name)").font(.custom("Roboto Bold", size: 18)).tracking(1.44)
+            Text("No. \(islandVM.currentIsland.number)").font(.custom("Roboto Medium", size: 16)).tracking(0.64).padding(.top,10)
             
             GeometryReader { outerView in
                 Spacer()
@@ -28,12 +28,11 @@ struct IslandCollection: View {
                 }.frame(height: 300, alignment: .center)
                 
             }.frame(height: 300)
-            Text("Lv. 3").font(.custom("Roboto Medium", size: 18)).tracking(0.72).padding(.bottom,10)
-            Text("綠化天數：12 天").font(.custom("Roboto Medium", size: 18)).tracking(0.72)
+            Text("Lv. \(islandVM.currentIsland.currentLevel)").font(.custom("Roboto Medium", size: 18)).tracking(0.72).padding(.bottom,10)
+            Text("綠化天數：\(islandVM.currentIsland.costDay) 天").font(.custom("Roboto Medium", size: 18)).tracking(0.72)
             Text("").frame( height: 20).background(Color.clear)
         }.frame(maxWidth: .infinity,
                 maxHeight: .infinity,
                 alignment: .center)
     }
-    
 }

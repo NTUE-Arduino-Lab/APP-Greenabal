@@ -15,9 +15,12 @@ class BadgeViewModel: ObservableObject{
     
     init(leafVM: LeafViewModel,modalVM: ModalViewModel){
         badgeList = BadgeModel.all
+        
         self.modalVM = modalVM
         self.leafVM = leafVM
         modalVM.medalData = badgeList[0]
+        
+        SortList()
         
         //        RefreshBadge(index:0)
         
@@ -38,6 +41,8 @@ class BadgeViewModel: ObservableObject{
             if result {
                 modalVM.showGetMedalModal(data: badgeList[index!])
             }
+            
+            SortList()
         }
         
         print("-------------refresh badge------------------")
@@ -53,6 +58,7 @@ class BadgeViewModel: ObservableObject{
         
         if result {
             modalVM.showGetMedalModal(data: badge)
+            SortList()
         }
         
         print("---------------refresh badge----------------")
@@ -70,5 +76,11 @@ class BadgeViewModel: ObservableObject{
             
             print("get badge reward")
         }
+    }
+    
+    func SortList(){
+        badgeList = badgeList.sorted(by: {
+            $0.currentStar > $1.currentStar
+        })
     }
 }

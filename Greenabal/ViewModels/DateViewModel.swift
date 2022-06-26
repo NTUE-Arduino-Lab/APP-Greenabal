@@ -23,7 +23,7 @@ struct DateViewModel {
     }
     
     func GetWeekDay(fromNow: Int) -> (Date,Date,String){
-        let today = Date()
+        let today = Date() + TimeInterval(fromNow*7*24*60*60)
         let calendar = Calendar.current
         
         let todayWeekday = calendar.component(.weekday, from: today)
