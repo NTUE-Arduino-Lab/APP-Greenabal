@@ -10,6 +10,7 @@ import Foundation
 class ModalViewModel: ObservableObject{
     @Published var medalData: BadgeModel!
     @Published var buyData: BuyItem!
+    @Published var taskData: Task!
     @Published var show: Bool
     @Published var type: ModalType
     
@@ -23,11 +24,10 @@ class ModalViewModel: ObservableObject{
     }
     
     func setBuyData(data: BuyItem){
-        buyData = data
     }
     
     func showGiftModal(data: BuyItem){
-        setBuyData(data: data)
+        buyData = data
         type = .gift
         show = true
     }
@@ -41,6 +41,12 @@ class ModalViewModel: ObservableObject{
     func showGetMedalModal(data: BadgeModel){
         setMedalData(data: data)
         type = .getMedal
+        show = true
+    }
+    
+    func showKnowledgeModal(data: Task){
+        taskData = data
+        type = .knowledge
         show = true
     }
     

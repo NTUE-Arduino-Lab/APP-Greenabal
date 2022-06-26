@@ -22,6 +22,7 @@
 		6C14498D284F563900E8B933 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C14498C284F563900E8B933 /* SettingView.swift */; };
 		6C1B7EF128685B53002CDF07 /* MedalModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1B7EF028685B53002CDF07 /* MedalModalView.swift */; };
 		6C1B7EF328685BC1002CDF07 /* GiftModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1B7EF228685BC1002CDF07 /* GiftModalView.swift */; };
+		6C1B7EF728689835002CDF07 /* KnowledgeModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1B7EF628689834002CDF07 /* KnowledgeModalView.swift */; };
 		6C25277A2857AFFA001D4A5B /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2527792857AFFA001D4A5B /* TaskModel.swift */; };
 		6C25277C2857B607001D4A5B /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C25277B2857B607001D4A5B /* TaskListViewModel.swift */; };
 		6C27DAF428585CA800B58FE3 /* ETicketListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27DAF328585CA800B58FE3 /* ETicketListViewModel.swift */; };
@@ -90,6 +91,7 @@
 		6C14498C284F563900E8B933 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		6C1B7EF028685B53002CDF07 /* MedalModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalModalView.swift; sourceTree = "<group>"; };
 		6C1B7EF228685BC1002CDF07 /* GiftModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftModalView.swift; sourceTree = "<group>"; };
+		6C1B7EF628689834002CDF07 /* KnowledgeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeModalView.swift; sourceTree = "<group>"; };
 		6C2527792857AFFA001D4A5B /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		6C25277B2857B607001D4A5B /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		6C27DAF328585CA800B58FE3 /* ETicketListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETicketListViewModel.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				6C006C522866DC770024E799 /* ModalView.swift */,
 				6C1B7EF028685B53002CDF07 /* MedalModalView.swift */,
 				6C1B7EF228685BC1002CDF07 /* GiftModalView.swift */,
+				6C1B7EF628689834002CDF07 /* KnowledgeModalView.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 				6CD2E06B28570A89006F42D5 /* LeafRecordModel.swift in Sources */,
 				6C27DAFA285865B300B58FE3 /* BuyItemModel.swift in Sources */,
 				EAAC84CE285C790D0043F8C8 /* Achivement.swift in Sources */,
+				6C1B7EF728689835002CDF07 /* KnowledgeModalView.swift in Sources */,
 				6CA49D8528533D53009A155F /* SubTabBar.swift in Sources */,
 				6C1B7EF128685B53002CDF07 /* MedalModalView.swift in Sources */,
 				6CD2E06F28574F26006F42D5 /* DateViewModel.swift in Sources */,

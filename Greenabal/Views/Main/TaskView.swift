@@ -7,152 +7,84 @@
 
 import SwiftUI
 
-
-
-
-struct taskListData:Identifiable
-{
-    var id = UUID()
-    var finish:Bool
-    var taskClass:String
-    var taskDetail:String
-    var taskReward:Int
-}
-
 struct TaskView: View {
-    
-    @EnvironmentObject var taskListViewModel: TaskListViewModel
-    @State private var showModal:Bool = false;
-    @State private var taskModelIndex:Int = 0;
-    //    @State private var taskCount:Int = taskListDataArray.count
-    //    @State private var finishedTaskCount:Int = taskListDataArray.filter{$0.finish==true}.count
+    @EnvironmentObject var taskListVM: TaskListViewModel
     @State private var title = "每日任務"
     private let name = "Task"
-    private let modalHeader = "為什麼要用環保吸管？"
-    private let TaskKnowledgeArticle:String="環保署統計臺灣每年塑膠吸管使用量約30億根，在這樣大量使用及其方便又隨手可得的情況下，造成龐大且難處理的塑膠垃圾，更是在淨灘廢棄物中排名前5名，可想而知也影響到了海洋生態，曾經有影片紀錄從海龜的呼吸道中拔出長長的吸管，想到就覺得好痛！\n目前環保署已有管制實施，但我們可以自動落實，大家可以尋找自己喜歡的環保吸管，與環保餐具一起帶出門，保護我們的生活環境也救救海龜！"
-    init() {
-        UITableView.appearance().separatorStyle = .none
-        UITableViewCell.appearance().backgroundColor = .clear
-        UITableView.appearance().backgroundColor = .clear
-    }
-    func setTaskModelIndex(Index:Int) -> (Void) {
-        
-    }
-    struct TaskModalView: View {
-        var modalHeader:String=""
-        var TaskKnowledgeArticle:String=""
-        @Binding var showModal:Bool
-        var taskData:Task
-        var completeTask: (Int) -> Void
-        @Binding var taskModelIndex:Int
-        func fakeCompleteMethon(fake:Int,fake2:Int){
-            return
-        }
-        var body: some View {
-            PopUpModalView(content:{
-                ScrollView{
-                    Text("\(TaskKnowledgeArticle)").font(.custom("Roboto Medium", size: 14)).tracking(0.56).lineSpacing(12)
-                }.padding(.horizontal,24).padding(.vertical,12)
-            },modalHeader:modalHeader,leaveNum:3,showModal:$showModal,completeMethon:completeTask,achivementCompleteMethon:fakeCompleteMethon,methonInt:taskModelIndex,modaltype:.knowledge)
-            
-            
-        }
-    }
+    
     var body: some View {
         ZStack{
             VStack(){
                 Header(title: $title, name: name)
+                
                 VStack{
-                    
                     VStack(spacing:13){
                         HStack(alignment:.center ){
                             Spacer()
-                            Text("完成\(taskListViewModel.completeCount)/5")
+                            Text("完成\(taskListVM.completeCount)/5")
                                 .font(.custom("Roboto Medium", size: 14))
                                 .tracking(0.56)
-                            
-                        }.padding(EdgeInsets(top: 10, leading: 0, bottom: 5, trailing: 0))
+                        }
+                        .padding(EdgeInsets(top: 10, leading: 0, bottom: 5, trailing: 0))
                         
-                        ForEach(taskListViewModel.taskList.indices, id: \.self)  { index in
-                            EachTaskView(index: index, data: taskListViewModel.taskList[index], completeTask: taskListViewModel.completeTask ,showModal:$showModal,taskModelIndex:$taskModelIndex)
-                            
-                        }.listRowSeparator(.hidden)
+                        ForEach(taskListVM.taskList.indices, id: \.self)  { index in
+                            EachTaskView(index: index, data: taskListVM.taskList[index], completeTask: taskListVM.completeTask)
+                        }
+                        .listRowSeparator(.hidden)
                     }.padding(.horizontal,27)
                     
                     Spacer()
-                    
                 }
                 .frame(maxWidth: .infinity,
                        maxHeight: .infinity,
                        alignment: .center)
             }
-            //        .background(LinearGradient(
-            //            gradient: Gradient(stops: [
-            //                .init(color: Color(#colorLiteral(red: 0.6102343797683716, green: 0.7855484485626221, blue: 0.9125000238418579, alpha: 1)), location: 0),
-            //                .init(color: Color(#colorLiteral(red: 0.915928840637207, green: 0.9526067972183228, blue: 0.9791666865348816, alpha: 1)), location: 1)]),
-            //            startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
-            //            endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
-            //        )
-            if showModal {
-                TaskModalView(modalHeader:modalHeader,TaskKnowledgeArticle:TaskKnowledgeArticle,showModal:$showModal,taskData:taskListViewModel.taskList[0],completeTask: taskListViewModel.completeTask, taskModelIndex:$taskModelIndex)}
-            }
-            
+        }
     }
-    
-    
-    
 }
 
 
 
 struct EachTaskView: View {
-    
+    @EnvironmentObject var modalVM: ModalViewModel
     let index: Int
     var data: Task
     var completeTask: (Int) -> Void
-    @Binding var showModal:Bool
-    //     @State var reLoadWidth:CGFloat = CGFloat(0)
-//    var setTaskModelIndex:(Int) -> Void
-    @Binding var taskModelIndex:Int
     @State private var location: CGPoint = CGPoint(x: 50, y: 50)
-    //    var simpleDrag: some Gesture {
-    //            DragGesture()
-    //                .onChanged { value in
-    //                    print("aaa")
-    //                }
-    //        }
+    
     var body: some View {
         switch data.task.type{
         case TaskType.knowledge:
             HStack{
                 Button{
-                    showModal=true
-                    taskModelIndex=index
+                    modalVM.showKnowledgeModal(data: data)
                 }label:{
-                    
                     if data.isComplete{
-                        ZStack {
-                            Text("").frame(width: 48,
-                                           height: 48).background(Color.clear)
-                            Text("").frame(width: 16, height: 16).background(LinearGradient(
-                                colors: [Color(red: 18/255, green: 235/255,blue: 195/255),Color(red: 7/255, green: 215/255,blue: 66/255) ],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )).cornerRadius(8)
-                        }
+                        ZStack{
+                            Circle()
+                                .fill(LinearGradient(
+                                    gradient: Gradient(stops: [
+                                        .init(color: Color(#colorLiteral(red: 0.06906247138977051, green: 0.9208333492279053, blue: 0.7675145268440247, alpha: 1)), location: 0.15625),
+                                        .init(color: Color(#colorLiteral(red: 0.028055548667907715, green: 0.8416666388511658, blue: 0.2558666467666626, alpha: 1)), location: 1)]),
+                                    startPoint: UnitPoint(x: -1.3877787807814457e-15, y: -1.3877787807814457e-15),
+                                    endPoint: UnitPoint(x: 1.000000029802322, y: 1.000000029802322)))
+                                .frame(width: 16, height: 16)
+                        }.frame(width: 48, height: 48)
                     }else{
-                        
-                            Image("play-circle").frame(width: 48,
-                                                       height: 48)
-                        
-                        
+                        Image("play-circle")
+                            .frame(width: 48,height: 48)
                     }
                 }
+                
                 Text(data.task.name).font(.custom("Roboto Medium", size: 14))
+                
                 Spacer()
+                
                 if data.isComplete{
-                    Text("已領取").font(.custom("Roboto Medium", size: 14)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1))).tracking(0.56)
-                    
+                    Text("已領取")
+                        .font(.custom("Roboto Medium", size: 14))
+                        .foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
+                        .tracking(0.56)
                 }else{
                     Text("\(data.task.leaf)").font(.system(size: 14))
                         .overlay {
@@ -168,16 +100,16 @@ struct EachTaskView: View {
                         }
                     Image("leaf")
                 }
-                Spacer().frame(width: 15, height: 40)
-            }.background(.white).cornerRadius(10)
-        case TaskType.normal:
-            
-            HStack{
                 
+                Spacer().frame(width: 15, height: 40)
+                
+            }.background(.white).cornerRadius(10)
+            
+        case TaskType.normal:
+            HStack{
                 Button{
                     completeTask(index)
                 }label:{
-                    
                     ZStack {
                         Text("").frame(width: 48,
                                        height: 48).background(Color.clear)
@@ -197,24 +129,33 @@ struct EachTaskView: View {
                         
                     }
                 }
+                
                 if data.isComplete{
-                    Text(data.task.name).font(.custom("Roboto Medium", size: 14)).strikethrough().foregroundColor(Color(#colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.6))).tracking(0.56)
+                    Text(data.task.name)
+                        .font(.custom("Roboto Medium", size: 14))
+                        .strikethrough()
+                        .foregroundColor(Color(#colorLiteral(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.6))).tracking(0.56)
                 }else{
                     Text(data.task.name).font(.custom("Roboto Medium", size: 14))
                 }
                 
                 Spacer()
+                
                 if data.isComplete{
-                    Text("已領取").font(.custom("Roboto Medium", size: 14)).foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1))).tracking(0.56)
+                    Text("已領取")
+                        .font(.custom("Roboto Medium", size: 14))
+                        .foregroundColor(Color(#colorLiteral(red: 0.5, green: 0.5, blue: 0.5, alpha: 1)))
+                        .tracking(0.56)
                     
                 }else{
-                    Text("\(data.task.leaf)").font(.system(size: 14))
+                    Text("\(data.task.leaf)")
+                        .font(.system(size: 14))
                         .overlay {
                             LinearGradient(
                                 colors: [Color(red: 18/255, green: 235/255,blue: 195/255),Color(red: 7/255, green: 215/255,blue: 66/255) ],
                                 startPoint: .leading,
                                 endPoint: .trailing
-                            ) .mask(
+                            ).mask(
                                 Text("\(data.task.leaf)")
                                     .font(Font.system(size: 14))
                                     .multilineTextAlignment(.center)
@@ -223,14 +164,11 @@ struct EachTaskView: View {
                     Image("leaf")
                     
                 }
+                
                 Spacer().frame(width: 15, height: 40)
+                
             }.background(.white).cornerRadius(10)
                 .modifier(DraggableModifier(direction: .horizontal,finished:data.isComplete))
-            //                    .gesture(
-            //                                    simpleDrag
-            //                                )
-            //                Text("").frame(width: 48, height: 48 )
-            //                Text("").frame(width: self.reLoadWidth, height: 48 )
         }
     }
 }
@@ -249,7 +187,6 @@ struct DraggableModifier : ViewModifier {
     @State private var IconOpacity:Double = 0
     @State private var frameOpacity:Double = 0
     var finished:Bool
-    //    @State private var frameCornerR:Double = 0
     
     func body(content: Content) -> some View {
         HStack{
@@ -265,7 +202,6 @@ struct DraggableModifier : ViewModifier {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            //               if self.draggedOffset.width > CGFloat(-40) && self.draggedOffset.width <= CGFloat(0){
                             print(finished)
                             guard !finished else{
                                 return
@@ -279,7 +215,6 @@ struct DraggableModifier : ViewModifier {
                                     }
                                     if value.translation.width <= CGFloat(-32){
                                         self.IconOpacity =  ( -32 - value.translation.width )/20
-                                        //                            self.frameCornerR = (-32 - value.translation.width)/2
                                     }
                                 }
                                 
@@ -301,14 +236,6 @@ struct DraggableModifier : ViewModifier {
                                     }
                                 }
                             }
-                            
-                            
-                            
-                            //                print(value.translation)
-                            //                print(value.startLocation)
-                            //                    print(self.draggedOffset.width)
-                            
-                            //                }
                         }
                         .onEnded { value in
                             guard !finished else{
@@ -332,7 +259,6 @@ struct DraggableModifier : ViewModifier {
                                 self.reLoadWidth=CGFloat(0)
                                 self.IconOpacity=0
                                 self.frameOpacity = 0
-                                //                    isShowIcon.toggle()
                             }
                             
                         }
