@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BuyItemView: View {
+    @EnvironmentObject var modalVM: ModalViewModel
     let data: BuyItem
     
     var body: some View {
@@ -28,7 +29,11 @@ struct BuyItemView: View {
                         .frame(height:21)
                 )
             
-            Image("icon_gift")
+            Button(action: {
+                modalVM.showGiftModal(data: data)
+            }, label: {
+                Image(!data.openGift ? "icon_gift_green" : "icon_gift_gray")
+            }).disabled(data.openGift)
         }
         .padding([.leading],15)
         .padding([.trailing],20)
@@ -80,10 +85,12 @@ struct BarcodeItemView: View {
 struct BarcodeView: View {
     @EnvironmentObject var barcodeListVM: BarcodeListViewModel
     @State var list: [BuyList] = []
+    @Binding var selectedIndex: Int
+    let months: [MonthSelection]
     
     var body: some View {
         ScrollView(showsIndicators:false){
-            MonthSelector()
+            MonthSelector(months: months, selectedIndex: $selectedIndex)
             
             VStack(spacing:20){
                 ForEach(list.indices, id: \.self)  { index in
@@ -94,18 +101,28 @@ struct BarcodeView: View {
             .padding(.bottom,80)
         }
         .onAppear {
-            list = barcodeListVM.GetList(year: 2022, startMonth: 5, endMonth: 6)
+            list = barcodeListVM.GetList(year: months[selectedIndex].year, startMonth: months[selectedIndex].month, endMonth: months[selectedIndex].month+1)
         }
+        .onChange(of: selectedIndex, perform: { newValue in
+            list = barcodeListVM.GetList(year: months[newValue].year, startMonth: months[newValue].month, endMonth: months[newValue].month+1)
+        })
     }
 }
 
 struct BarcodeView_Previews: PreviewProvider {
     static var leafVM:LeafViewModel = LeafViewModel()
-    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var modalVM: ModalViewModel = ModalViewModel()
+    static var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM,modalVM: modalVM)
     static var barcodeListVM:BarcodeListViewModel = BarcodeListViewModel(leafVM: leafVM, badgeVM: badgeVM)
+    @State static var selectedIndex: Int = 0
+    static let months: [MonthSelection] = [
+        MonthSelection(year: 2022, month: 5),
+        MonthSelection(year: 2022, month: 3),
+    ]
+    
     
     static var previews: some View {
-        BarcodeView()
+        BarcodeView(selectedIndex: $selectedIndex,months: months)
             .environmentObject(barcodeListVM)
     }
 }

@@ -18,14 +18,18 @@ class BarcodeListViewModel: ObservableObject{
         
         let testList: [BuyList] = [
             BuyList(date: "2022/05/05", shop: "全聯實業", items: [
-                BuyItem(name: "蒲公英環保抽取衛生紙", gift: GiftLeaf(leaf: 3), seal: Seal.環保標章.rawValue, badge: BadgeType.seal_環保.rawValue)
+                BuyItem(name: "蒲公英環保抽取衛生紙", gift: GiftLeaf(leaf: 3), seal: Seal.環保標章.rawValue, badge: BadgeType.seal_環保.rawValue,openGift: true)
             ]
                    ),
             BuyList(date: "2022/05/19", shop: "全聯實業", items: [
                 BuyItem(name: "蒲公英環保抽取衛生紙", gift: GiftLeaf(leaf: 3), seal: Seal.環保標章.rawValue, badge: BadgeType.seal_環保.rawValue),
-                BuyItem(name: "部落小農系列高麗菜", gift: GiftLeaf(leaf: 3), seal: Seal.有機農產品標章.rawValue, badge: BadgeType.seal_有機.rawValue)
+                BuyItem(name: "部落小農系列高麗菜", gift: GiftIsland(), seal: Seal.有機農產品標章.rawValue, badge: BadgeType.seal_有機.rawValue)
             ]
-                   )
+                   ),
+            BuyList(date: "2022/03/05", shop: "全聯實業", items: [
+                    BuyItem(name: "蒲公英環保抽取衛生紙", gift: GiftLeaf(leaf: 3), seal: Seal.環保標章.rawValue, badge: BadgeType.seal_環保.rawValue)
+                ]
+                   ),
         ]
         
         self.buyList = testList
@@ -78,6 +82,21 @@ class BarcodeListViewModel: ObservableObject{
             
             badgeVM.RefreshBadge(name: item.badge)
         }
+    }
+    
+    func OpenGift(item: BuyItem){
+        switch item.gift {
+        case is GiftLeaf:
+            let gift: GiftLeaf = item.gift as! GiftLeaf
+            leafVM.AddCount(num: gift.leaf, record: true)
+        case is GiftIsland:
+            print("get island")
+        default:
+            break
+        }
+        item.OpenGift()
+        
+        print("open gift")
     }
 }
 

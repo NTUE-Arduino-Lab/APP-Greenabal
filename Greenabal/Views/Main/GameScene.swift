@@ -18,6 +18,9 @@ class GameScene: SKScene, ObservableObject {
     var island: SKSpriteNode!
     var mask: SKSpriteNode!
     
+    var cloud: SKSpriteNode!
+    var maskCloud: SKSpriteNode!
+    
     private var islandAtlas: SKTextureAtlas {
         return SKTextureAtlas(named: "Island")
     }
@@ -50,9 +53,9 @@ class GameScene: SKScene, ObservableObject {
         island.size.height = CGFloat(self.size.width)
         island.position = CGPoint(x: 0 , y: 0 )
         
-        mask = SKSpriteNode(color: maskColor, size: island.size)
+        mask = SKSpriteNode(color: maskColor, size: self.size)
         mask.anchorPoint = island.anchorPoint
-        mask.position =  CGPoint(x: 0 , y: 70 )
+        mask.position =  CGPoint(x: 0 , y: 0 )
     }
     
     func idleAnimation() -> SKAction{
@@ -69,46 +72,6 @@ class GameScene: SKScene, ObservableObject {
         let sequence = SKAction.sequence(actions)
         island.run(sequence)
     }
-    
-    override func didMove(to view: SKView) {
-        self.backgroundColor = .clear
-        view.allowsTransparency = true
-        
-        setupIsland()
-        island.blendMode = .multiply
-        //        addChild(island)
-
-        mask.addChild(island)
-        
-        addChild(mask)
-        
-        let idleAnimation = idleAnimation()
-        runAnimation(actions:[idleAnimation])
-    }
-    
-    func updateLevel(level: Int){
-        let upgradeAnimation = upgradeAnimation()
-        self.level = level
-        let idleAnimation = idleAnimation()
-        runAnimation(actions:[upgradeAnimation,idleAnimation])
-    }
-    
-    func updateMaskColor(color: UIColor){
-        if mask != nil{
-            maskColor = color
-            let action = SKAction.colorize(with: color, colorBlendFactor: 1, duration: colorDuration)
-                        mask.run(action)
-        }
-    }
-}
-
-class CloudScene: SKScene, ObservableObject {
-    @Published var maskColor: UIColor = UIColor.white
-    @Published var colorDuration: CGFloat = 0.5
-    let timePerFrame:TimeInterval = 0.2
-    
-    var cloud: SKSpriteNode!
-    var mask: SKSpriteNode!
     
     private var cloudAtlas: SKTextureAtlas {
         return SKTextureAtlas(named: "Cloud")
@@ -134,9 +97,9 @@ class CloudScene: SKScene, ObservableObject {
         cloud.size.height = CGFloat(self.size.height)
         cloud.position = CGPoint(x: 0 , y: 0 )
         
-        mask = SKSpriteNode(color: maskColor, size: cloud.size)
-        mask.anchorPoint = cloud.anchorPoint
-        mask.position =  CGPoint(x: 0 , y: 90 )
+        maskCloud = SKSpriteNode(color: maskColor, size: self.size)
+        maskCloud.anchorPoint = island.anchorPoint
+        maskCloud.position =  CGPoint(x: 0 , y: 0 )
     }
     
     func cloudIdleAnimation() -> SKAction{
@@ -148,22 +111,47 @@ class CloudScene: SKScene, ObservableObject {
         self.backgroundColor = .clear
         view.allowsTransparency = true
         
+        setupIsland()
+        island.blendMode = .multiply
+        
         setupCloud()
         cloud.blendMode = .multiply
-        //        addChild(cloud)
+        
+        let cropNode = SKCropNode()
+        cropNode.position = CGPoint(x: 0, y: 70)
+        cropNode.maskNode = island
+        cropNode.addChild(mask)
+        cropNode.addChild(island)
+        
+        let cropNodeCloud = SKCropNode()
+        cropNodeCloud.position = CGPoint(x: 0, y: 90)
+        cropNodeCloud.maskNode = cloud
+        cropNodeCloud.addChild(maskCloud)
+        cropNodeCloud.addChild(cloud)
+        
+        let idleAnimation = idleAnimation()
+        runAnimation(actions:[idleAnimation])
+        
         let cloudIdleAnimation = cloudIdleAnimation()
         cloud.run(cloudIdleAnimation)
         
-        mask.addChild(cloud)
-        
-        addChild(mask)
+        addChild(cropNodeCloud)
+        addChild(cropNode)
+    }
+    
+    func updateLevel(level: Int){
+        let upgradeAnimation = upgradeAnimation()
+        self.level = level
+        let idleAnimation = idleAnimation()
+        runAnimation(actions:[upgradeAnimation,idleAnimation])
     }
     
     func updateMaskColor(color: UIColor){
-        if mask != nil{
+        if mask != nil && maskCloud != nil{
             maskColor = color
             let action = SKAction.colorize(with: color, colorBlendFactor: 1, duration: colorDuration)
             mask.run(action)
+            maskCloud.run(action)
         }
     }
 }

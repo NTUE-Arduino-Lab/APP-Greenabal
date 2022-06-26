@@ -22,24 +22,51 @@ extension AnyTransition {
     }
 }
 
+struct MonthSelection {
+    let year: Int
+    let month: Int
+}
 
-
-struct MonthSelector: View{
+struct MonthSelector: View {
+    let months: [MonthSelection]
+    @Binding var selectedIndex: Int
+    
     var body: some View {
-        Text("111 年 5-6 月")
-            .font(.custom("Roboto-Medium", size: 14))
-            .tracking(0.56)
-            .padding(.top,25)
-            .padding(.bottom,10)
+        Menu(content: {
+            Picker(selection: $selectedIndex) {
+                ForEach(months.indices, id: \.self) { index in
+                    Text("\(String(months[index].year)) 年 \(months[index].month) - \(months[index].month+1) 月")
+                        .font(.custom("Roboto-Medium", size: 14))
+                        .tracking(0.56)
+                }
+            } label: {
+                Text("aa")
+                    .font(.custom("Roboto-Medium", size: 14))
+                    .tracking(0.56)
+            }
+        }, label: {
+            Text("\(String(months[selectedIndex].year)) 年 \(months[selectedIndex].month)-\(months[selectedIndex].month+1) 月")
+                .font(.custom("Roboto-Medium", size: 14))
+                .tracking(0.56)
+            Image("icon_dropdown")
+        })
+        .foregroundColor(Color.black)
+        .padding(.top,10)
+        .padding(.bottom,10)
     }
 }
 
+
 struct ActionView: View {
-    
+    let months: [MonthSelection] = [
+        MonthSelection(year: 2022, month: 5),
+        MonthSelection(year: 2022, month: 3),
+    ]
     @State private var title = "環保行動"
     private let name = "Action"
     private var tabs = ["手機載具","電子票證"]
-    @State var tabTarget: Int = 1
+    @State var tabTarget: Int = 0
+    @State var selectedIndex: Int = 0
     
     var body: some View {
         VStack(spacing:0){
@@ -47,30 +74,25 @@ struct ActionView: View {
             
             ZStack(alignment: .bottom){
                 if tabTarget == 0 {
-                    BarcodeView()
+                    BarcodeView(selectedIndex: $selectedIndex,months: months)
                 }
                 else{
-                    ETicketView()
+                    ETicketView(selectedIndex: $selectedIndex,months: months)
                 }
                 
                 SubTabBar(tabs:tabs,tabTarget: $tabTarget)
                 
             }
             .padding([.bottom],93)
+            .padding([.top],20)
         }
-//        .background(LinearGradient(
-//            gradient: Gradient(stops: [
-//                .init(color: Color(#colorLiteral(red: 0.6102343797683716, green: 0.7855484485626221, blue: 0.9125000238418579, alpha: 1)), location: 0),
-//                .init(color: Color(#colorLiteral(red: 0.915928840637207, green: 0.9526067972183228, blue: 0.9791666865348816, alpha: 1)), location: 1)]),
-//            startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
-//            endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
-//        )
     }
 }
 
 struct ActionView_Previews: PreviewProvider {
     static var leafVM:LeafViewModel = LeafViewModel()
-    static var badgeVM:BadgeViewModel = BadgeViewModel()
+    static var modalVM: ModalViewModel = ModalViewModel()
+    static var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM,modalVM: modalVM)
     static var barcodeListVM:BarcodeListViewModel = BarcodeListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     static var eTicketListVM: ETicketListViewModel = ETicketListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     
@@ -78,5 +100,6 @@ struct ActionView_Previews: PreviewProvider {
         TabBar(initSelectedTab: "Action")
             .environmentObject(barcodeListVM)
             .environmentObject(eTicketListVM)
+            .environmentObject(modalVM)
     }
 }

@@ -163,14 +163,6 @@ struct HomeView: View {
         return scene
     }()
     
-    @StateObject private var sceneCloud: CloudScene =  {
-        let scene = CloudScene()
-        scene.size = CGSize(width: UIScreen.main.bounds.width,height: UIScreen.main.bounds.height)
-        scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        scene.scaleMode = .aspectFill
-        return scene
-    }()
-    
     private var sceneShot: ShotScene {
         let scene = ShotScene(isShotting: $isShotting,shot: $shot)
         scene.size = CGSize(width: UIScreen.main.bounds.width,height: UIScreen.main.bounds.height)
@@ -188,8 +180,6 @@ struct HomeView: View {
             
             ZStack{
                 ZStack{
-                    SpriteView(scene: self.sceneCloud , options: [.allowsTransparency])
-                    
                     SpriteView(scene: self.scene , options: [.allowsTransparency])
                     
                     if shot {
@@ -201,8 +191,6 @@ struct HomeView: View {
                     islandColor = backgroundVM.maskColors.0
                     scene.maskColor = UIColor(islandColor)
                     scene.colorDuration = backgroundVM.duration
-                    sceneCloud.maskColor = UIColor(islandColor)
-                    sceneCloud.colorDuration = backgroundVM.duration
                 }
                 .onChange(of: backgroundVM.canAnimate, perform: { newValue in
                     if backgroundVM.canAnimate {
@@ -213,7 +201,6 @@ struct HomeView: View {
                 })
                 .onChange(of: islandColor, perform: { newValue in
                     scene.updateMaskColor(color: UIColor(newValue))
-                    sceneCloud.updateMaskColor(color: UIColor(newValue))
                 })
                 
                 if !shot {
@@ -265,10 +252,8 @@ struct HomeView: View {
     
     func takeScreenshot() {
         var bounds = scene.view?.bounds
-        var boundsCloud = sceneCloud.view?.bounds
         
         bounds = CGRect(x: 0, y: 105, width: bounds!.width, height: bounds!.height)
-        boundsCloud = CGRect(x: 0, y: 105, width: bounds!.width, height: bounds!.height)
         
         let keyWindow = UIApplication.shared.connectedScenes
             .map({ $0 as? UIWindowScene })
@@ -281,7 +266,6 @@ struct HomeView: View {
         
         image.draw(at: CGPoint(x: 0, y: 0))
         
-        sceneCloud.view?.drawHierarchy(in: boundsCloud!, afterScreenUpdates: false)
         scene.view?.drawHierarchy(in: bounds!, afterScreenUpdates: false)
         
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()
@@ -324,6 +308,7 @@ struct RectGetter: View {
 struct HomeView_Previews: PreviewProvider {
     static let leafVM = LeafViewModel()
     static let backgroundVM = BackgroundViewModel()
+    static var modalVM: ModalViewModel = ModalViewModel()
     static var islandVM = IslandViewModel(leafVM: leafVM)
     
     static var previews: some View {
@@ -331,5 +316,6 @@ struct HomeView_Previews: PreviewProvider {
             .environmentObject(leafVM)
             .environmentObject(backgroundVM)
             .environmentObject(islandVM)
+            .environmentObject(modalVM)
     }
 }
