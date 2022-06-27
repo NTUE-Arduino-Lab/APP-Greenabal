@@ -12,10 +12,12 @@ class ETicketListViewModel: ObservableObject{
     @Published var transportList: [TransportList]
     let leafVM: LeafViewModel
     let badgeVM: BadgeViewModel
+    let modalVM: ModalViewModel
     
-    init(leafVM: LeafViewModel,badgeVM: BadgeViewModel){
+    init(leafVM: LeafViewModel,badgeVM: BadgeViewModel,modalVM: ModalViewModel){
         self.leafVM = leafVM
         self.badgeVM = badgeVM
+        self.modalVM = modalVM
         
         let testList: [TransportList] = [
             TransportList(date: "2022/04/19", items: [TransportItem(title: "大都會", time: "19:43"),TransportItem(title: "首都客運", time: "08:12")]),
@@ -53,11 +55,7 @@ class ETicketListViewModel: ObservableObject{
     func AddItem(date: String, title: String, time: String, leaf: Int = 3, badge: String = BadgeType.youbike.rawValue){
         if let index = transportList.firstIndex(where: { $0.date == date }){
             transportList[index].AddItem(title: title, time: time, leaf: leaf, badge: badge)
-            //
-            //            var temp = transportList[index].items
-            //            temp.append(TransportItem(title: title, time: time,leaf: leaf,badge: badge))
-            //            print(temp)
-            //            transportList[index].items = temp
+            
         }
         else{
             transportList.append(TransportList(date: date, items: [(TransportItem(title: title, time: time, leaf: leaf, badge: badge))]))
@@ -68,6 +66,7 @@ class ETicketListViewModel: ObservableObject{
         
         leafVM.AddCount(num: leaf, record: true)
         badgeVM.RefreshBadge(name: badge)
+        modalVM.showTicketModal(data: TransportItem(title: title, time: time, leaf: leaf, badge: badge))
     }
 }
 

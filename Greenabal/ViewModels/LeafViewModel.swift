@@ -13,9 +13,11 @@ class LeafViewModel: ObservableObject{
     let autoIncreseCount: Int
     var timer: Timer?
     let testRecordList: [LeafRecordModel]
+    let modalVM: ModalViewModel
     
-    init(){
+    init(mvm: ModalViewModel){
         let dateViewModel: DateViewModel = DateViewModel()
+        self.modalVM = mvm
         
         testRecordList = [
             LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date()), count: 2),
@@ -73,6 +75,7 @@ class LeafViewModel: ObservableObject{
         }
         
         count += num
+        modalVM.showSmallModal(title: "獲取\(num)片葉子，目前共有\(count)片")
     }
     
     func ReduceCount(num:Int){

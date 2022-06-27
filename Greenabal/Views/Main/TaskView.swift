@@ -280,7 +280,7 @@ struct DraggableModifier : ViewModifier {
 
 struct TaskView_Previews: PreviewProvider {
     static var modalVM: ModalViewModel = ModalViewModel()
-    static var leafVM: LeafViewModel = LeafViewModel()
+    static var leafVM: LeafViewModel = LeafViewModel(mvm: modalVM)
     static var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM, modalVM: modalVM)
     static var taskListVM:TaskListViewModel = TaskListViewModel(leafVM: leafVM, badgeVM: badgeVM)
     

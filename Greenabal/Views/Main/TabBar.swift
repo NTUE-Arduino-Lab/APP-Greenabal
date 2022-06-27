@@ -72,6 +72,14 @@ struct TabBar: View {
             if modalVM.show {
                 ModalView(type: modalVM.type,show: $modalVM.show)
             }
+            
+            if modalVM.showSmall {
+                GeometryReader { geometry in
+                    LeafModalView()
+                        .position(x: geometry.size.width / 2, y: 50)
+                        .transition(.opacity)
+                }
+            }
         }
         .edgesIgnoringSafeArea(!shot ? .bottom : [.top,.bottom])
     }
@@ -79,7 +87,7 @@ struct TabBar: View {
 
 struct TabBar_Previews: PreviewProvider {
     static let modalVM = ModalViewModel()
-    static let leafVM = LeafViewModel()
+    static var leafVM: LeafViewModel = LeafViewModel(mvm: modalVM)
     static let backgroundVM = BackgroundViewModel()
     static var islandVM = IslandViewModel(leafVM: leafVM)
     
