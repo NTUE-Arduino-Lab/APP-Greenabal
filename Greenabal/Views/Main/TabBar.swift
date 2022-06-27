@@ -77,7 +77,6 @@ struct TabBar: View {
                 GeometryReader { geometry in
                     LeafModalView()
                         .position(x: geometry.size.width / 2, y: 55)
-                        .transition(.opacity)
                 }
             }
         }

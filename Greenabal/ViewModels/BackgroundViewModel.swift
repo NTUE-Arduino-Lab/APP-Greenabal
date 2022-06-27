@@ -119,7 +119,7 @@ class BackgroundViewModel: ObservableObject {
             startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
             endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
         
-        state = BackgroundState.night
+        state = BackgroundState.afternoon
         gradients = state.GetGradients()
         progress = 0
         canAnimate = false
@@ -128,7 +128,7 @@ class BackgroundViewModel: ObservableObject {
         
         maskColors = state.GetMasks()
         
-        timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(SetAnimateState), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 180.0, target: self, selector: #selector(SetAnimateState), userInfo: nil, repeats: true)
     }
     
     func SetBackground(){

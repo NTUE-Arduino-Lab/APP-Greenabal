@@ -18,6 +18,8 @@ struct GreenabalApp: App {
     @StateObject private var barcodeListVM:BarcodeListViewModel
     @StateObject private var islandVM: IslandViewModel
     
+    var timer: Timer?
+    
     init(){
         let mvm = ModalViewModel()
         let lvm = LeafViewModel(mvm: mvm)
@@ -43,10 +45,11 @@ struct GreenabalApp: App {
                 .environmentObject(islandVM)
                 .environmentObject(modalVM)
                 .onAppear(){
-                    barcodeListVM.AddItem(date: "2022/05/20", shop: "gggg", items: [
-                                            BuyItem(name: "冰箱", gift: GiftLeaf(leaf: 4), seal: Seal.省電標章.rawValue, badge: BadgeType.seal_環保.rawValue)
-                                        ])
-//                    eTicketListVM.AddItem(date: "2022/06/22", title: "youbike hihi", time: "20:22", leaf: 4, badge: BadgeType.youbike.rawValue)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+//                        barcodeListVM.AddItem(date: "2022/06/27", shop: "全聯實業",
+//                                              items: [BuyItem(name: "雪白菇", gift: GiftLeaf(leaf: 10), seal: Seal.有機農產品標章.rawValue, badge: BadgeType.seal_有機.rawValue)])
+                                //                    eTicketListVM.AddItem(date: "2022/06/22", title: "youbike hihi", time: "20:22", leaf: 4, badge: BadgeType.youbike.rawValue)        }
+                    }
                 }
         }
     }

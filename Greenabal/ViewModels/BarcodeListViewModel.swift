@@ -77,7 +77,7 @@ class BarcodeListViewModel: ObservableObject{
             badgeVM.RefreshBadge(name: item.badge)
         }
         
-        modalVM.setBuyData(data: items[0])
+        modalVM.showGiftModal(data: items[0])
     }
     
     func OpenGift(item: BuyItem){
