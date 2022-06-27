@@ -19,15 +19,15 @@ struct GreenabalApp: App {
     @StateObject private var islandVM: IslandViewModel
     
     init(){
-        let lvm = LeafViewModel()
         let mvm = ModalViewModel()
+        let lvm = LeafViewModel(mvm: mvm)
         let bvm = BadgeViewModel(leafVM: lvm,modalVM: mvm)
         _leafVM = StateObject(wrappedValue: lvm)
         _badgeVM = StateObject(wrappedValue: bvm)
         _modalVM = StateObject(wrappedValue: mvm)
         _taskListVM = StateObject(wrappedValue: TaskListViewModel(leafVM: lvm, badgeVM: bvm))
-        _barcodeListVM = StateObject(wrappedValue: BarcodeListViewModel(leafVM: lvm, badgeVM: bvm))
-        _eTicketListVM = StateObject(wrappedValue: ETicketListViewModel(leafVM: lvm, badgeVM: bvm))
+        _barcodeListVM = StateObject(wrappedValue: BarcodeListViewModel(leafVM: lvm, badgeVM: bvm, modalVM: mvm))
+        _eTicketListVM = StateObject(wrappedValue: ETicketListViewModel(leafVM: lvm, badgeVM: bvm, modalVM: mvm))
         _islandVM =  StateObject(wrappedValue: IslandViewModel(leafVM: lvm))
     }
     
@@ -43,6 +43,9 @@ struct GreenabalApp: App {
                 .environmentObject(islandVM)
                 .environmentObject(modalVM)
                 .onAppear(){
+                    barcodeListVM.AddItem(date: "2022/05/20", shop: "gggg", items: [
+                                            BuyItem(name: "冰箱", gift: GiftLeaf(leaf: 4), seal: Seal.省電標章.rawValue, badge: BadgeType.seal_環保.rawValue)
+                                        ])
 //                    eTicketListVM.AddItem(date: "2022/06/22", title: "youbike hihi", time: "20:22", leaf: 4, badge: BadgeType.youbike.rawValue)
                 }
         }

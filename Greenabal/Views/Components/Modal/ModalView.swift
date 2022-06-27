@@ -86,6 +86,7 @@ enum ModalType: String{
     case medal = "成就勳章"
     case gift = "獲得寶箱"
     case getMedal = "獲得成就"
+    case ticket = "獲得葉子"
 }
 
 struct ModalView: View {
@@ -125,6 +126,9 @@ struct ModalView: View {
                 else if type == .knowledge {
                     KnowledgeModalContent(content: "環保署統計臺灣每年塑膠吸管使用量約30億根，在這樣大量使用及其方便又隨手可得的情況下，造成龐大且難處理的塑膠垃圾，更是在淨灘廢棄物中排名前5名，可想而知也影響到了海洋生態，曾經有影片紀錄從海龜的呼吸道中拔出長長的吸管，想到就覺得好痛！\n\n目前環保署已有管制實施，但我們可以自動落實，大家可以尋找自己喜歡的環保吸管，與環保餐具一起帶出門，保護我們的生活環境也救救海龜！")
                 }
+                else if type == .ticket {
+                    TicketModalContent()
+                }
                 
             }
             .frame(alignment: .top)
@@ -140,8 +144,8 @@ struct ModalView: View {
 }
 
 struct ModalView_Previews: PreviewProvider {
-    static var leafVM: LeafViewModel = LeafViewModel()
     static var modalVM: ModalViewModel = ModalViewModel()
+    static var leafVM: LeafViewModel = LeafViewModel(mvm: modalVM)
     @State static var show: Bool = true
     @State var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM,modalVM: modalVM)
     

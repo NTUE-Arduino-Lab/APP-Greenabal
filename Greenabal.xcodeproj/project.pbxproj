@@ -34,6 +34,8 @@
 		6C38114B2854B4B500E2C614 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */; };
 		6C38114E28550EB700E2C614 /* ETicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C38114D28550EB700E2C614 /* ETicketView.swift */; };
 		6C38115128550F2800E2C614 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C38115028550F2800E2C614 /* BarcodeView.swift */; };
+		6C524C2A28698AC700A664E6 /* TicketModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C524C2928698AC700A664E6 /* TicketModalView.swift */; };
+		6C524C2C2869937600A664E6 /* LeafModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C524C2B2869937600A664E6 /* LeafModalView.swift */; };
 		6C6696462851C3E500ED62CA /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6696452851C3E500ED62CA /* TabModel.swift */; };
 		6C6696492851CAA200ED62CA /* BackgroundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6696482851CAA200ED62CA /* BackgroundViewModel.swift */; };
 		6CA49D802851D694009A155F /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA49D7F2851D694009A155F /* Header.swift */; };
@@ -104,6 +106,8 @@
 		6C3811482854B4B500E2C614 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		6C38114D28550EB700E2C614 /* ETicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETicketView.swift; sourceTree = "<group>"; };
 		6C38115028550F2800E2C614 /* BarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
+		6C524C2928698AC700A664E6 /* TicketModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketModalView.swift; sourceTree = "<group>"; };
+		6C524C2B2869937600A664E6 /* LeafModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafModalView.swift; sourceTree = "<group>"; };
 		6C6696452851C3E500ED62CA /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		6C6696482851CAA200ED62CA /* BackgroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewModel.swift; sourceTree = "<group>"; };
 		6CA49D7F2851D694009A155F /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
@@ -258,6 +262,8 @@
 				6C1B7EF028685B53002CDF07 /* MedalModalView.swift */,
 				6C1B7EF228685BC1002CDF07 /* GiftModalView.swift */,
 				6C1B7EF628689834002CDF07 /* KnowledgeModalView.swift */,
+				6C524C2928698AC700A664E6 /* TicketModalView.swift */,
+				6C524C2B2869937600A664E6 /* LeafModalView.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -465,10 +471,12 @@
 				6C38115128550F2800E2C614 /* BarcodeView.swift in Sources */,
 				EAAC84D4285C794D0043F8C8 /* Record.swift in Sources */,
 				6CD2E06D28570A9A006F42D5 /* LeafViewModel.swift in Sources */,
+				6C524C2C2869937600A664E6 /* LeafModalView.swift in Sources */,
 				6C14498B284F561300E8B933 /* TaskView.swift in Sources */,
 				6C38114E28550EB700E2C614 /* ETicketView.swift in Sources */,
 				6CE0A314284FC44100231F82 /* ActionView.swift in Sources */,
 				6C6696462851C3E500ED62CA /* TabModel.swift in Sources */,
+				6C524C2A28698AC700A664E6 /* TicketModalView.swift in Sources */,
 				6CD2E06B28570A89006F42D5 /* LeafRecordModel.swift in Sources */,
 				6C27DAFA285865B300B58FE3 /* BuyItemModel.swift in Sources */,
 				EAAC84CE285C790D0043F8C8 /* Achivement.swift in Sources */,

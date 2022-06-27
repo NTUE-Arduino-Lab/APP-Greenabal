@@ -115,10 +115,10 @@ struct ETicketView: View {
 }
 
 struct ETicketView_Previews: PreviewProvider {
-    static var leafVM: LeafViewModel = LeafViewModel()
     static var modalVM: ModalViewModel = ModalViewModel()
+    static var leafVM: LeafViewModel = LeafViewModel(mvm: modalVM)
     static var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM,modalVM: modalVM)
-    static var eTicketListVM:ETicketListViewModel = ETicketListViewModel(leafVM: leafVM, badgeVM: badgeVM)
+    static var eTicketListVM:ETicketListViewModel = ETicketListViewModel(leafVM: leafVM, badgeVM: badgeVM,modalVM: modalVM)
     @State static var selectedIndex: Int = 0
     static let months: [MonthSelection] = [
         MonthSelection(year: 2022, month: 5),

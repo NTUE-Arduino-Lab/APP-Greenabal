@@ -11,10 +11,12 @@ class BarcodeListViewModel: ObservableObject{
     @Published var buyList: [BuyList]
     let leafVM: LeafViewModel
     let badgeVM: BadgeViewModel
+    let modalVM: ModalViewModel
     
-    init(leafVM: LeafViewModel,badgeVM: BadgeViewModel){
+    init(leafVM: LeafViewModel,badgeVM: BadgeViewModel,modalVM: ModalViewModel){
         self.leafVM = leafVM
         self.badgeVM = badgeVM
+        self.modalVM = modalVM
         
         let testList: [BuyList] = [
             BuyList(date: "2022/05/05", shop: "全聯實業", items: [
@@ -72,16 +74,10 @@ class BarcodeListViewModel: ObservableObject{
         
         
         items.forEach { item in
-            switch item.gift {
-            case is GiftLeaf:
-                let gift: GiftLeaf = item.gift as! GiftLeaf
-                leafVM.AddCount(num: gift.leaf, record: true)
-            default:
-                break
-            }
-            
             badgeVM.RefreshBadge(name: item.badge)
         }
+        
+        modalVM.setBuyData(data: items[0])
     }
     
     func OpenGift(item: BuyItem){

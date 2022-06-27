@@ -141,7 +141,9 @@ struct DefaultHomeInterfaceView: View {
 }
 
 struct HomeView: View {
+    @EnvironmentObject var leafVM: LeafViewModel
     @EnvironmentObject var backgroundVM: BackgroundViewModel
+    @EnvironmentObject var modalVM: ModalViewModel
     @EnvironmentObject var islandVM: IslandViewModel
     @State private var title = "No.168 初來乍島 Lv.3"
     private let name = "Home"
@@ -227,6 +229,7 @@ struct HomeView: View {
         islandVM.updateIsland()
         changeTitle()
         scene.updateLevel(level: islandVM.currentIsland.currentLevel)
+//        modalVM.showSmallModal(title: "花費\(islandVM.currentIsland.getLevelLeaf())片葉子，目前共有\(leafVM.count)片")
     }
     
     func changeTitle(){
@@ -306,9 +309,9 @@ struct RectGetter: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
-    static let leafVM = LeafViewModel()
     static let backgroundVM = BackgroundViewModel()
     static var modalVM: ModalViewModel = ModalViewModel()
+    static var leafVM: LeafViewModel = LeafViewModel(mvm: modalVM)
     static var islandVM = IslandViewModel(leafVM: leafVM)
     
     static var previews: some View {

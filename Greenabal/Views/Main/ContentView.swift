@@ -28,9 +28,9 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static let backgroundVM = BackgroundViewModel()
-    static let leafVM = LeafViewModel()
     static var islandVM = IslandViewModel(leafVM: leafVM)
     static var modalVM: ModalViewModel = ModalViewModel()
+    static let leafVM = LeafViewModel(mvm: modalVM)
     
     static var previews: some View {
         ContentView()

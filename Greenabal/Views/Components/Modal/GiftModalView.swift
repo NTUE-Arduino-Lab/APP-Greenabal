@@ -52,8 +52,8 @@ struct GiftModalContent: View {
 }
 
 struct GiftModalView_Previews: PreviewProvider {
-    static var leafVM: LeafViewModel = LeafViewModel()
     static var modalVM: ModalViewModel = ModalViewModel()
+    static var leafVM: LeafViewModel = LeafViewModel(mvm: modalVM)
     @State static var show: Bool = true
     @State var badgeVM: BadgeViewModel = BadgeViewModel(leafVM: leafVM,modalVM: modalVM)
     

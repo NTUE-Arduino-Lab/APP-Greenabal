@@ -11,12 +11,19 @@ class ModalViewModel: ObservableObject{
     @Published var medalData: BadgeModel!
     @Published var buyData: BuyItem!
     @Published var taskData: Task!
+    @Published var ticketData: TransportItem!
     @Published var show: Bool
     @Published var type: ModalType
+    
+    @Published var showSmall: Bool
+    @Published var titleSmall: String = ""
+    
+    var timer: Timer?
     
     init(){
         self.show = false
         self.type = .gift
+        self.showSmall = false
     }
     
     func setMedalData(data: BadgeModel){
@@ -50,7 +57,24 @@ class ModalViewModel: ObservableObject{
         show = true
     }
     
+    func showTicketModal(data: TransportItem){
+        ticketData = data
+        type = .ticket
+        show = true
+    }
+    
+    func showSmallModal(title: String){
+        titleSmall = title
+        showSmall = true
+        
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(hideSmallModal), userInfo: nil, repeats: false)
+    }
+    
     func hideModal(){
         show = false
+    }
+    
+    @objc func hideSmallModal(){
+        showSmall = false
     }
 }
