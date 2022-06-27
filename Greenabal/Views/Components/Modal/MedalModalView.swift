@@ -103,8 +103,8 @@ struct MedalModalContent: View {
                 Spacer().frame(height: 24)
                 
                 HStack(spacing: 5){
-                ForEach(0..<modalVM.medalData.totalStar, id: \.self){ index in
-                    if index <= currentIndex {
+                ForEach(0..<modalVM.medalData.currentStar, id: \.self){ index in
+                    if index == currentIndex {
                         Circle()
                             .fill(LinearGradient(
                                 gradient: Gradient(stops: [
