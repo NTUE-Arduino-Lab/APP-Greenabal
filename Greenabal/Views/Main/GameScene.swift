@@ -13,7 +13,7 @@ class GameScene: SKScene, ObservableObject {
     @Published var colorDuration: CGFloat = 0.5
     let islandIdleImageCount: [Int] = [1,1,1,1,2]
     let islandUpgradeImageCount: [Int] = [2,2,2,8]
-    let timePerFrame:TimeInterval = 0.2
+    let timePerFrame:TimeInterval = 0.225
     
     var island: SKSpriteNode!
     var mask: SKSpriteNode!
