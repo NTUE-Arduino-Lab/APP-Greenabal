@@ -13,13 +13,18 @@ struct DateViewModel {
     init(){
         dateFormatter.locale = Locale(identifier: "zh_Hant_TW") // 設定地區(台灣)
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Taipei") // 設定時區(台灣)
-//        dateFormatter.calendar = Calendar(identifier: .chinese)
     }
     
     func FormatDateToString(date: Date) -> String{
         dateFormatter.dateFormat = "yyyy/MM/dd"
         
         return dateFormatter.string(from: date)
+    }
+    
+    func GetHour(date: Date) -> Int{
+        dateFormatter.dateFormat = "HH"
+        
+        return Int(dateFormatter.string(from: date))!
     }
     
     func GetWeekDay(fromNow: Int) -> (Date,Date,String){
