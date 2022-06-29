@@ -26,7 +26,7 @@ class LeafViewModel: ObservableObject{
             LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(3*24*60*60)), count: 1),
         ]
         
-        count = 90
+        count = 200
         recordList = testRecordList
         autoIncreseCount = 3
         
