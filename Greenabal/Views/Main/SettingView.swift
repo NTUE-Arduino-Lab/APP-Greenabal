@@ -17,7 +17,7 @@ struct SettingView: View {
     private let name = "Setting"
     let btns:[SettingBtn] = [
         SettingBtn(title: "個人資訊",info: ""),
-        SettingBtn(title: "電子載具",info: "/SWT9A4E"),
+        SettingBtn(title: "電子載具",info: "/SWT9A4B"),
         SettingBtn(title: "電子票證管理",info: "已綁定 1 張"),
         SettingBtn(title: "客戶服務",info: ""),
         SettingBtn(title: "使用條款",info: ""),

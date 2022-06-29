@@ -59,6 +59,7 @@ struct MonthSelector: View {
 
 struct ActionView: View {
     let months: [MonthSelection] = [
+        MonthSelection(year: 2022, month: 7),
         MonthSelection(year: 2022, month: 5),
         MonthSelection(year: 2022, month: 3),
     ]

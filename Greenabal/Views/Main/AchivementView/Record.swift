@@ -46,11 +46,14 @@ struct RecordBlock: View {
                             .multilineTextAlignment(.center)
                         
                         Button{
-                            weekIndex += 1
+                            if weekIndex != 0{
+                                weekIndex += 1
+                            }
                         }label: {
-                            Image("icon_polygon_right")
+                            Image(weekIndex == 0 ? "icon_polygon_right_gray" : "icon_polygon_right")
                                 .frame(width: 30, height: 30)
                         }
+                        .disabled(weekIndex == 0 ? true : false)
                         
                     }
                     HStack(spacing:0){

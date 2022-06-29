@@ -20,9 +20,10 @@ class ETicketListViewModel: ObservableObject{
         self.modalVM = modalVM
         
         let testList: [TransportList] = [
-            TransportList(date: "2022/04/19", items: [TransportItem(title: "大都會", time: "19:43"),TransportItem(title: "首都客運", time: "08:12")]),
-            TransportList(date: "2022/05/18", items: [TransportItem(title: "台北捷運", time: "20:00"),TransportItem(title: "Youbike", time: "20:20")]),
-            TransportList(date: "2022/06/19", items: [TransportItem(title: "大都會", time: "19:43"),TransportItem(title: "首都客運", time: "08:12")])
+            TransportList(date: "2022/03/19", items: [TransportItem(title: "台北捷運", time: "20:00"),TransportItem(title: "Youbike", time: "20:20")]),
+            TransportList(date: "2022/05/19", items: [TransportItem(title: "大都會", time: "19:43"),TransportItem(title: "首都客運", time: "08:12")]),
+            TransportList(date: "2022/07/01", items: [TransportItem(title: "台北捷運", time: "20:00"),TransportItem(title: "Youbike", time: "20:20")]),
+            TransportList(date: "2022/07/02", items: [TransportItem(title: "大都會", time: "19:43"),TransportItem(title: "首都客運", time: "08:12")])
         ]
         
         transportList = testList
