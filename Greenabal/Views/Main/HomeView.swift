@@ -129,7 +129,8 @@ struct DefaultHomeInterfaceView: View {
                 .disabled(leafVM.count >= islandVM.currentIsland.getLevelLeaf() && islandVM.currentIsland.currentLevel <= islandVM.currentIsland.totalLevel - 1 ? false : true)
                 .buttonStyle(.borderless)
                 .frame(width: 143, height: 36)
-                .background(RoundedRectangle(cornerRadius: 26).fill(Color("gray-200")))
+                .background(RoundedRectangle(cornerRadius: 26).fill(Color("gray-200"))
+                    .opacity(leafVM.count >= islandVM.currentIsland.getLevelLeaf() && islandVM.currentIsland.currentLevel <= islandVM.currentIsland.totalLevel - 1 ? 1 : 0.6))
             }
             .padding(.bottom, 210)
         }

@@ -119,7 +119,26 @@ class BackgroundViewModel: ObservableObject {
             startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
             endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
         
-        state = BackgroundState.afternoon
+        let dateVM = DateViewModel()
+        let nowHR = dateVM.GetHour(date: Date())
+        
+        
+        if nowHR >= 4 && nowHR < 8{
+            state = BackgroundState.morning
+        }
+        else if nowHR >= 8{
+            state = BackgroundState.afternoon
+        }
+        else if nowHR >= 17{
+            state = BackgroundState.evening
+        }
+        else if nowHR >= 19 || nowHR < 4{
+            state = BackgroundState.night
+        }
+        else{
+            state = BackgroundState.afternoon
+        }
+        
         gradients = state.GetGradients()
         progress = 0
         canAnimate = false
