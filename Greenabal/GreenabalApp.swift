@@ -44,13 +44,6 @@ struct GreenabalApp: App {
                 .environmentObject(barcodeListVM)
                 .environmentObject(islandVM)
                 .environmentObject(modalVM)
-                .onAppear(){
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-//                        barcodeListVM.AddItem(date: "2022/06/27", shop: "全聯實業",
-//                                              items: [BuyItem(name: "雪白菇", gift: GiftLeaf(leaf: 10), seal: Seal.有機農產品標章.rawValue, badge: BadgeType.seal_有機.rawValue)])
-                                //                    eTicketListVM.AddItem(date: "2022/06/22", title: "youbike hihi", time: "20:22", leaf: 4, badge: BadgeType.youbike.rawValue)        }
-                    }
-                }
         }
     }
 }

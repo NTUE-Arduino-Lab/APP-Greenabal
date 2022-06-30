@@ -18,7 +18,7 @@ class BackgroundViewModel: ObservableObject {
     @Published var duration: CGFloat
     
     var timer: Timer?
-    var state: BackgroundState
+    @Published var state: BackgroundState
     
     enum BackgroundState: Int {
         case morning = 0
@@ -119,17 +119,32 @@ class BackgroundViewModel: ObservableObject {
             startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17),
             endPoint: UnitPoint(x: 0.5, y: 0.9999999999999999))
         
+        state = BackgroundState.afternoon
+        progress = 0
+        canAnimate = false
+        animateState = false
+        duration = 5.0
+        
+        gradients = BackgroundState.afternoon.GetGradients()
+
+        maskColors = BackgroundState.afternoon.GetMasks()
+        
+        GetInitBackground()
+        
+        timer = Timer.scheduledTimer(timeInterval: 180.0, target: self, selector: #selector(SetAnimateState), userInfo: nil, repeats: true)
+    }
+    
+    func GetInitBackground(){
         let dateVM = DateViewModel()
         let nowHR = dateVM.GetHour(date: Date())
-        
         
         if nowHR >= 4 && nowHR < 8{
             state = BackgroundState.morning
         }
-        else if nowHR >= 8{
+        else if nowHR >= 8 && nowHR < 17{
             state = BackgroundState.afternoon
         }
-        else if nowHR >= 17{
+        else if nowHR >= 17 && nowHR < 19{
             state = BackgroundState.evening
         }
         else if nowHR >= 19 || nowHR < 4{
@@ -140,14 +155,7 @@ class BackgroundViewModel: ObservableObject {
         }
         
         gradients = state.GetGradients()
-        progress = 0
-        canAnimate = false
-        animateState = false
-        duration = 5.0
-        
         maskColors = state.GetMasks()
-        
-        timer = Timer.scheduledTimer(timeInterval: 180.0, target: self, selector: #selector(SetAnimateState), userInfo: nil, repeats: true)
     }
     
     func SetBackground(){
@@ -211,7 +219,7 @@ struct AnimatableGradientModifier: AnimatableModifier {
             SetAnimate(!canAnimate,animateState)
         }
         
-        return LinearGradient(gradient: fromGradient, startPoint: UnitPoint(x: 0.5, y: -3.0616171314629196e-17), endPoint: UnitPoint(x: 0.5, y: 1.0))
+        return LinearGradient(gradient: fromGradient, startPoint: .topLeading, endPoint: .bottomTrailing)
     }
     
     func colorMixer(fromColor: UIColor, toColor: UIColor, progress: CGFloat) -> Color {

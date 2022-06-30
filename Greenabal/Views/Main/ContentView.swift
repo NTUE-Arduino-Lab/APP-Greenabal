@@ -20,6 +20,9 @@ struct ContentView: View {
                         backgroundVM.progress = 1
                     }
                 }
+                .onAppear(){
+                    backgroundVM.GetInitBackground()
+                }
             
             TabBar()
         }
