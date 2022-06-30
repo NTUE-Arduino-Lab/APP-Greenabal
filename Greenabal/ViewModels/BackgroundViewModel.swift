@@ -131,7 +131,7 @@ class BackgroundViewModel: ObservableObject {
         
         GetInitBackground()
         
-        timer = Timer.scheduledTimer(timeInterval: 180.0, target: self, selector: #selector(SetAnimateState), userInfo: nil, repeats: true)
+//        timer = Timer.scheduledTimer(timeInterval: 180.0, target: self, selector: #selector(SetAnimateState), userInfo: nil, repeats: true)
     }
     
     func GetInitBackground(){
