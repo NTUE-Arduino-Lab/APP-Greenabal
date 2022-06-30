@@ -121,16 +121,16 @@ struct DefaultHomeInterfaceView: View {
                     HStack(alignment:.center, spacing: 2){
                         if islandVM.currentIsland.totalLevel == islandVM.currentIsland.currentLevel {
                             Text("升級完成")
-                                .foregroundColor(Color("gray-300"))
+                                .foregroundColor(Color("gray-400"))
                                 .font(.custom("Roboto Medium", size: 14))
                                 .tracking(0.64)
                         }
                         else {
                             Text("升級島嶼 \( islandVM.currentIsland.getLevelLeaf())")
-                                .foregroundColor(Color("gray-300"))
+                                .foregroundColor(Color("gray-400"))
                                 .font(.custom("Roboto Medium", size: 14))
                                 .tracking(0.64)
-                            Image("icon_leaf_gray")
+                            Image(leafVM.count >= islandVM.currentIsland.getLevelLeaf() && islandVM.currentIsland.currentLevel <= islandVM.currentIsland.totalLevel - 1 ? "icon_leaf_gray" : "icon_leaf_gray-1")
                         }
                     }
                 })
