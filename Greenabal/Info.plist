@@ -8,6 +8,8 @@
 		<string>Roboto-Bold.ttf</string>
 		<string>Roboto-Regular.ttf</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
