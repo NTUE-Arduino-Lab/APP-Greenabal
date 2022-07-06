@@ -21,9 +21,15 @@ class LeafViewModel: ObservableObject{
         
         testRecordList = [
             LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date()), count: 2),
-            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() + TimeInterval(5*24*60*60)), count: 3),
-            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() + TimeInterval(5*24*60*60)), count: 2),
-            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(3*24*60*60)), count: 1),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(1*24*60*60)), count: 9),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(2*24*60*60)), count: 6),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(3*24*60*60)), count: 8),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(4*24*60*60)), count: 10),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(5*24*60*60)), count: 5),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(6*24*60*60)), count: 7),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(8*24*60*60)), count: 6),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(10*24*60*60)), count: 12),
+            LeafRecordModel(date: dateViewModel.FormatDateToString(date: Date() - TimeInterval(12*24*60*60)), count: 5),
         ]
         
         count = 200
