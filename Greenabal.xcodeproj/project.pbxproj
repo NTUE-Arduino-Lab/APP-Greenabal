@@ -38,6 +38,7 @@
 		6C524C2C2869937600A664E6 /* LeafModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C524C2B2869937600A664E6 /* LeafModalView.swift */; };
 		6C6696462851C3E500ED62CA /* TabModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6696452851C3E500ED62CA /* TabModel.swift */; };
 		6C6696492851CAA200ED62CA /* BackgroundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6696482851CAA200ED62CA /* BackgroundViewModel.swift */; };
+		6C764F8B2875B68D00CB4E58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C764F8A2875B68D00CB4E58 /* LaunchScreen.storyboard */; };
 		6CA49D802851D694009A155F /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA49D7F2851D694009A155F /* Header.swift */; };
 		6CA49D8528533D53009A155F /* SubTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA49D8428533D53009A155F /* SubTabBar.swift */; };
 		6CA6622D2862020F00814955 /* IslandModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6622C2862020F00814955 /* IslandModel.swift */; };
@@ -110,6 +111,7 @@
 		6C524C2B2869937600A664E6 /* LeafModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafModalView.swift; sourceTree = "<group>"; };
 		6C6696452851C3E500ED62CA /* TabModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabModel.swift; sourceTree = "<group>"; };
 		6C6696482851CAA200ED62CA /* BackgroundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewModel.swift; sourceTree = "<group>"; };
+		6C764F8A2875B68D00CB4E58 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6CA49D7F2851D694009A155F /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		6CA49D8428533D53009A155F /* SubTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTabBar.swift; sourceTree = "<group>"; };
 		6CA6622C2862020F00814955 /* IslandModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandModel.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				6C14498A284F561300E8B933 /* TaskView.swift */,
 				6C144988284F47E700E8B933 /* TabBar.swift */,
 				6C14498C284F563900E8B933 /* SettingView.swift */,
+				6C764F8A2875B68D00CB4E58 /* LaunchScreen.storyboard */,
 				6CD3880828645FC400668991 /* GameScene.swift */,
 			);
 			path = Main;
@@ -439,6 +442,7 @@
 				6C38114A2854B4B500E2C614 /* Roboto-Medium.ttf in Resources */,
 				6C3811492854B4B500E2C614 /* Roboto-Regular.ttf in Resources */,
 				6C38114B2854B4B500E2C614 /* Roboto-Bold.ttf in Resources */,
+				6C764F8B2875B68D00CB4E58 /* LaunchScreen.storyboard in Resources */,
 				6C144958284F364300E8B933 /* Preview Assets.xcassets in Resources */,
 				6C144955284F364300E8B933 /* Assets.xcassets in Resources */,
 			);
@@ -673,8 +677,10 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "save screenshots to photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = NO;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -707,8 +713,10 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "save screenshots to photos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = NO;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

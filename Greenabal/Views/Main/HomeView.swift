@@ -238,6 +238,9 @@ struct HomeView: View {
         islandVM.updateIsland()
         changeTitle()
         scene.updateLevel(level: islandVM.currentIsland.currentLevel)
+        if islandVM.currentIsland.currentLevel == islandVM.currentIsland.totalLevel{
+            backgroundVM.StartBackgroundProcess()
+        }
 //        modalVM.showSmallModal(title: "花費\(islandVM.currentIsland.getLevelLeaf())片葉子，目前共有\(leafVM.count)片")
     }
     
